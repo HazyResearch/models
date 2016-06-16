@@ -47,6 +47,14 @@ py_library(
 )
 
 py_library(
+    name = "compute_group_optimizer",
+    srcs = [
+        "compute_group_optimizer.py",
+    ],
+)
+
+
+py_library(
     name = "inception",
     srcs = [
         "inception_model.py",
@@ -110,6 +118,7 @@ py_binary(
     deps = [
         ":imagenet_data",
         ":inception_distributed_train",
+        ":compute_group_optimizer",
     ],
 )
 

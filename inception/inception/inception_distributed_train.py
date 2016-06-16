@@ -27,7 +27,7 @@ import time
 import numpy as np
 import tensorflow as tf
 
-from inception import image_processing
+from inception import image_processing, compute_group_optimizer
 from inception import inception_model as inception
 from inception.slim import slim
 
@@ -136,10 +136,12 @@ def train(target, dataset, cluster_spec):
       tf.scalar_summary('learning_rate', lr)
 
       # Create an optimizer that performs gradient descent.
-      opt = tf.train.RMSPropOptimizer(lr,
-                                      RMSPROP_DECAY,
-                                      momentum=RMSPROP_MOMENTUM,
-                                      epsilon=RMSPROP_EPSILON)
+      #opt = tf.train.RMSPropOptimizer(lr,
+    #                                  RMSPROP_DECAY,
+#                                      momentum=RMSPROP_MOMENTUM,
+    #                                  epsilon=RMSPROP_EPSILON)
+
+      opt = tf.train.MomentumOptimizer(lr,0.9) # Tuning done for these!
 
       images, labels = image_processing.distorted_inputs(
           dataset,
@@ -194,7 +196,7 @@ def train(target, dataset, cluster_spec):
         tf.histogram_summary(var.op.name, var)
 
       # Create synchronous replica optimizer.
-      opt = tf.train.SyncReplicasOptimizer(
+      opt = compute_group_optimizer.ComputeGroupOptimizer(
           opt,
           replicas_to_aggregate=num_replicas_to_aggregate,
           replica_id=FLAGS.task_id,
@@ -282,7 +284,7 @@ def train(target, dataset, cluster_spec):
             break
           duration = time.time() - start_time
 
-          if step % 30 == 0:
+          if step % 3 == 0:
             examples_per_sec = FLAGS.batch_size / float(duration)
             format_str = ('Worker %d: %s: step %d, loss = %.2f'
                           '(%.1f examples/sec; %.3f  sec/batch)')

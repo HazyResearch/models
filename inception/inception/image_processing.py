@@ -42,6 +42,8 @@ from __future__ import print_function
 
 import tensorflow as tf
 
+HACK=True
+
 FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_integer('batch_size', 32,
@@ -152,7 +154,6 @@ def decode_jpeg(image_buffer, scope=None):
     # that is set dynamically by decode_jpeg. In other words, the height
     # and width of image is unknown at compile-time.
     image = tf.image.decode_jpeg(image_buffer, channels=3)
-
     # After this point, all image pixels reside in [0,1)
     # until the very end, when they're rescaled to (-1, 1).  The various
     # adjust_* ops all require this range for dtype float.
@@ -315,23 +316,51 @@ def image_preprocessing(image_buffer, bbox, train, thread_id=0):
   Raises:
     ValueError: if user does not provide bounding box
   """
-  if bbox is None:
-    raise ValueError('Please supply a bounding box.')
+  if not HACK:
+      if bbox is None:
+        raise ValueError('Please supply a bounding box.')
+  if HACK:
+      image = image_buffer
+      #image = image.reshape([256, 256, 3])
 
-  image = decode_jpeg(image_buffer)
+  else:
+      image = decode_jpeg(image_buffer)
   height = FLAGS.image_size
   width = FLAGS.image_size
 
-  if train:
-    image = distort_image(image, height, width, bbox, thread_id)
-  else:
-    image = eval_image(image, height, width)
+  if not HACK:
+      if train:
+        image = distort_image(image, height, width, bbox, thread_id)
+      else:
+        image = eval_image(image, height, width)
 
   # Finally, rescale to [-1,1] instead of [0, 1)
   image = tf.sub(image, 0.5)
   image = tf.mul(image, 2.0)
   return image
 
+def parse_daniter_example(example_serialized):
+  # Dense features in Example proto.
+  feature_map = {
+      'height': tf.FixedLenFeature([], dtype=tf.int64,
+                                          default_value=0),
+      'width': tf.FixedLenFeature([1], dtype=tf.int64,
+                                              default_value=0),
+      'depth': tf.FixedLenFeature([], dtype=tf.int64,
+                                             default_value=0),
+      'label': tf.FixedLenFeature([], dtype=tf.int64,
+                                           default_value=-1),
+      'image_raw': tf.FixedLenFeature([], dtype=tf.string,
+                                          default_value=''),
+  }
+  features = tf.parse_single_example(example_serialized, feature_map)
+  label = tf.cast(features['label'], dtype=tf.int32)
+  image = tf.decode_raw(features['image_raw'], tf.uint8)
+  image = tf.reshape(image, [256, 256, 3])
+  image = tf.image.resize_image_with_crop_or_pad(image, FLAGS.image_size, FLAGS.image_size)
+  image = tf.cast(image, tf.float32) * (1. / 255) - 0.5
+
+  return image, label
 
 def parse_example_proto(example_serialized):
   """Parses an Example proto containing a training example of an image.
@@ -484,12 +513,19 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
       _, example_serialized = reader.read(filename_queue)
 
     images_and_labels = []
-    for thread_id in range(num_preprocess_threads):
-      # Parse a serialized Example proto to extract the image and metadata.
-      image_buffer, label_index, bbox, _ = parse_example_proto(
-          example_serialized)
-      image = image_preprocessing(image_buffer, bbox, train, thread_id)
-      images_and_labels.append([image, label_index])
+    if HACK:
+        for thread_id in range(num_preprocess_threads):
+          # Parse a serialized Example proto to extract the image and metadata.
+          image_buffer, label_index = parse_daniter_example(example_serialized)
+          image = image_preprocessing(image_buffer, None, train, thread_id)
+          images_and_labels.append([image, label_index])
+    else:
+        for thread_id in range(num_preprocess_threads):
+          # Parse a serialized Example proto to extract the image and metadata.
+          image_buffer, label_index, bbox, _ = parse_example_proto(
+              example_serialized)
+          image = image_preprocessing(image_buffer, bbox, train, thread_id)
+          images_and_labels.append([image, label_index])
 
     images, label_index_batch = tf.train.batch_join(
         images_and_labels,

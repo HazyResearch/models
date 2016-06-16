@@ -21,7 +21,7 @@ from __future__ import print_function
 
 
 from inception.dataset import Dataset
-
+HACK = True
 
 class ImagenetData(Dataset):
   """ImageNet data set."""
@@ -31,14 +31,18 @@ class ImagenetData(Dataset):
 
   def num_classes(self):
     """Returns the number of classes in the data set."""
-    return 1000
+    return 8
 
   def num_examples_per_epoch(self):
     """Returns the number of examples in the data set."""
     # Bounding box data consists of 615299 bounding boxes for 544546 images.
     if self.subset == 'train':
+      if HACK:
+          return 10400
       return 1281167
     if self.subset == 'validation':
+      if HACK:
+          return 0
       return 50000
 
   def download_message(self):
