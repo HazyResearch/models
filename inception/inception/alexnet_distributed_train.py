@@ -28,11 +28,11 @@ import numpy as np
 import tensorflow as tf
 
 from inception import image_processing, compute_group_optimizer
-from inception import inception_model as inception
+from inception import alexnet_model as alexnet
 from inception.slim import slim
 
 FLAGS = tf.app.flags.FLAGS
-
+'''
 tf.app.flags.DEFINE_string('job_name', '', 'One of "ps", "worker"')
 tf.app.flags.DEFINE_string('ps_hosts', '',
                            """Comma-separated list of hostname:port for the """
@@ -43,21 +43,26 @@ tf.app.flags.DEFINE_string('worker_hosts', '',
                            """worker jobs. e.g. """
                            """'machine1:2222,machine2:1111,machine2:2222'""")
 
-tf.app.flags.DEFINE_string('train_dir', '/tmp/imagenet_train-deleteme',
+tf.app.flags.DEFINE_string('train_dir', '/tmp/imagenet_train',
                            """Directory where to write event logs """
                            """and checkpoint.""")
-tf.app.flags.DEFINE_integer('max_steps', 3000, 'Number of batches to run.')
+tf.app.flags.DEFINE_integer('max_steps', 1000000, 'Number of batches to run.')
 tf.app.flags.DEFINE_string('subset', 'train', 'Either "train" or "validation".')
 tf.app.flags.DEFINE_boolean('log_device_placement', False,
                             'Whether to log device placement.')
+'''
+tf.app.flags.DEFINE_boolean('alexnet', False, 'Use alexnet')
 
 # Task ID is used to select the chief and also to access the local_step for
 # each replica to check staleness of the gradients in sync_replicas_optimizer.
+'''
 tf.app.flags.DEFINE_integer(
     'task_id', 0, 'Task ID of the worker/replica running the training.')
+'''
 
 # More details can be found in the sync_replicas_optimizer class:
 # tensorflow/python/training/sync_replicas_optimizer.py
+'''
 tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """Number of gradients to collect before """
                             """updating the parameters.""")
@@ -65,6 +70,7 @@ tf.app.flags.DEFINE_integer('save_interval_secs', 10 * 60,
                             'Save interval seconds.')
 tf.app.flags.DEFINE_integer('save_summaries_secs', 180,
                             'Save summaries interval seconds.')
+'''
 
 # **IMPORTANT**
 # Please note that this learning rate schedule is heavily dependent on the
@@ -74,12 +80,14 @@ tf.app.flags.DEFINE_integer('save_summaries_secs', 180,
 # more guidance and discussion.
 #
 # Learning rate decay factor selected from https://arxiv.org/abs/1604.00981
-tf.app.flags.DEFINE_float('initial_learning_rate', 0.01,#0.045,
+'''
+tf.app.flags.DEFINE_float('initial_learning_rate', 0.045,
                           'Initial learning rate.')
 tf.app.flags.DEFINE_float('num_epochs_per_decay', 2.0,
                           'Epochs after which learning rate decays.')
 tf.app.flags.DEFINE_float('learning_rate_decay_factor', 0.94,
                           'Learning rate decay factor.')
+'''
 
 # Constants dictating the learning rate schedule.
 RMSPROP_DECAY = 0.9                # Decay term for RMSProp.
@@ -151,9 +159,9 @@ def train(target, dataset, cluster_spec):
       # Number of classes in the Dataset label set plus 1.
       # Label 0 is reserved for an (unused) background class.
       num_classes = dataset.num_classes() + 1
-      logits = inception.inference(images, num_classes, for_training=True)
+      logits = alexnet.inference(images, num_classes, for_training=True)
       # Add classification loss.
-      inception.loss(logits, labels)
+      alexnet.loss(logits, labels)
 
       #Accuracy
       correct_prediction = tf.nn.in_top_k(logits[0], labels, 1)
@@ -190,7 +198,7 @@ def train(target, dataset, cluster_spec):
       # This is not needed when the number of replicas are small but important
       # for synchronous distributed training with tens of workers/replicas.
       exp_moving_averager = tf.train.ExponentialMovingAverage(
-          inception.MOVING_AVERAGE_DECAY, global_step)
+          alexnet.MOVING_AVERAGE_DECAY, global_step)
 
       variables_to_average = (
           tf.trainable_variables() + tf.moving_average_variables())
@@ -215,6 +223,7 @@ def train(target, dataset, cluster_spec):
       with tf.control_dependencies([batchnorm_updates_op]):
         total_loss = tf.identity(total_loss)
 
+
       # Compute gradients with respect to the loss.
       grads = opt.compute_gradients(total_loss)
 
@@ -236,7 +245,7 @@ def train(target, dataset, cluster_spec):
       clean_up_op = opt.get_clean_up_op()
 
       # Create a saver.
-      saver = tf.train.Saver(max_to_keep=24)
+      saver = tf.train.Saver()
 
       # Build the summary operation based on the TF collection of Summaries.
       summary_op = tf.merge_all_summaries()
@@ -289,7 +298,7 @@ def train(target, dataset, cluster_spec):
           duration = time.time() - start_time
 
           #Print Accuracy
-          tf.logging.info("Step: %d, Accuracy: %f, Loss: %f" %(step, sess.run(accuracy), loss_value))
+          print(sess.run(accuracy))
 
           if step % 3 == 0:
             examples_per_sec = FLAGS.batch_size / float(duration)

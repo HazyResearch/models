@@ -364,7 +364,8 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
       # sync_op will be assigned to the same device as the global step.
       with ops.device(global_step.device), ops.name_scope(""):
-        update_op = self._opt.apply_gradients(aggregated_grads_and_vars,
+        with tf.control_dependencies([tf.Print(global_step, [global_step], "~~~~~ daniter~~~ GLobalstep:")]):
+            update_op = self._opt.apply_gradients(aggregated_grads_and_vars,
                                               global_step)
 
       # Create token queue.
@@ -415,13 +416,13 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                                               self._replica_id, token)
 
         with ops.control_dependencies(clear_queue_ops):
-          with ops.control_dependencies([tf.Print(tf.constant(2), [tf.constant(2)], "~~~~~ daniter~~~~~~ sync")]):
+          #with ops.control_dependencies([tf.Print(tf.constant(2), [tf.constant(2)], "~~~~~ daniter~~~~~~ sync")]):
               # Sync_op needs to insert tokens to the token queue at the end of the
               # step so the replicas can fetch them to start the next step.
               # Note that ref() is used to avoid reading from the identity with old
               # the step.
-              tokens = array_ops.fill([self._tokens_per_step], global_step.ref())
-              sync_op = sync_token_queue.enqueue_many((tokens,))
+          tokens = array_ops.fill([self._tokens_per_step], global_step.ref())
+          sync_op = sync_token_queue.enqueue_many((tokens,))
 
 
         if self._variable_averages is not None:

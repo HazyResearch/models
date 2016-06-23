@@ -24,6 +24,7 @@ from __future__ import print_function
 import tensorflow as tf
 
 from inception import inception_distributed_train
+from inception import alexnet_distributed_train
 from inception.imagenet_data import ImagenetData
 
 FLAGS = tf.app.flags.FLAGS
@@ -58,7 +59,10 @@ def main(unused_args):
     if FLAGS.task_id == 0:
       if not tf.gfile.Exists(FLAGS.train_dir):
         tf.gfile.MakeDirs(FLAGS.train_dir)
-    inception_distributed_train.train(server.target, dataset, cluster_spec)
+    if FLAGS.alexnet:
+        alexnet_distributed_train.train(server.target, dataset, cluster_spec)
+    else:
+        inception_distributed_train.train(server.target, dataset, cluster_spec)
 
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
