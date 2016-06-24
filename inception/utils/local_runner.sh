@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$#" -ne 3 ]; then
+  echo "Illegal number of parameters"
+  echo "Usage: sh local_runner.sh <learning_rate> <momentum> <sync{True, False}>"
+  exit
+fi
+
+echo "Running=> Sync: $3 lr: $1 momentum: $2"
+
+OUTPUT="output-$1-$2-$3"
+WORKDIR="tf/models/inception/utils/"
+mkdir -p ${OUTPUT}
+ssh raiders5 "mkdir -p tf/models/inception/utils/${OUTPUT}"
+
+
+sh run-ps.sh $1 $2 $3 &> ${OUTPUT}/ps.out &
+sh run-expr.sh 0 0 $1 $2 $3 &> ${OUTPUT}/w1.out &
+sh run-expr.sh 1 1 $1 $2 $3 &> ${OUTPUT}/w2.out &
+ssh raiders5 "cd ${WORKDIR}; sh run-expr.sh 0 2 $1 $2 $3" &> ${OUTPUT}/w3.out &
+ssh raiders5 "cd ${WORKDIR}; sh run-expr.sh 1 3 $1 $2 $3" &> ${OUTPUT}/w4.out &

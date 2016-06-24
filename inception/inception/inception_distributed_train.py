@@ -43,7 +43,7 @@ tf.app.flags.DEFINE_string('worker_hosts', '',
                            """worker jobs. e.g. """
                            """'machine1:2222,machine2:1111,machine2:2222'""")
 
-tf.app.flags.DEFINE_string('train_dir', '/tmp/imagenet_train-deleteme',
+tf.app.flags.DEFINE_string('train_dir', '/lfs/local/0/daniter/4-node-snapshot',
                            """Directory where to write event logs """
                            """and checkpoint.""")
 tf.app.flags.DEFINE_integer('max_steps', 3000, 'Number of batches to run.')
@@ -61,7 +61,7 @@ tf.app.flags.DEFINE_integer(
 tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """Number of gradients to collect before """
                             """updating the parameters.""")
-tf.app.flags.DEFINE_integer('save_interval_secs', 10 * 60,
+tf.app.flags.DEFINE_integer('save_interval_secs', 10*60,
                             'Save interval seconds.')
 tf.app.flags.DEFINE_integer('save_summaries_secs', 180,
                             'Save summaries interval seconds.')
@@ -80,6 +80,8 @@ tf.app.flags.DEFINE_float('num_epochs_per_decay', 2.0,
                           'Epochs after which learning rate decays.')
 tf.app.flags.DEFINE_float('learning_rate_decay_factor', 0.94,
                           'Learning rate decay factor.')
+tf.app.flags.DEFINE_float('momentum', 0.9,'Momentum term')
+tf.app.flags.DEFINE_boolean('sync', True, "Async Mode")
 
 # Constants dictating the learning rate schedule.
 RMSPROP_DECAY = 0.9                # Decay term for RMSProp.
@@ -141,7 +143,8 @@ def train(target, dataset, cluster_spec):
 #                                      momentum=RMSPROP_MOMENTUM,
     #                                  epsilon=RMSPROP_EPSILON)
 
-      opt = tf.train.MomentumOptimizer(lr,0.9) # Tuning done for these!
+      opt = tf.train.MomentumOptimizer(lr,FLAGS.momentum) # Tuning done for these!
+      tf.logging.info("Learning rate: %f, momentum: %f" % (FLAGS.initial_learning_rate, FLAGS.momentum))
 
       images, labels = image_processing.distorted_inputs(
           dataset,
@@ -200,13 +203,15 @@ def train(target, dataset, cluster_spec):
         tf.histogram_summary(var.op.name, var)
 
       # Create synchronous replica optimizer.
-      opt = compute_group_optimizer.ComputeGroupOptimizer(
-          opt,
-          replicas_to_aggregate=num_replicas_to_aggregate,
-          replica_id=FLAGS.task_id,
-          total_num_replicas=num_workers,
-          variable_averages=exp_moving_averager,
-          variables_to_average=variables_to_average)
+      if FLAGS.sync:
+          print("Sync mode!!!!!!")
+          opt = compute_group_optimizer.ComputeGroupOptimizer(
+              opt,
+              replicas_to_aggregate=num_replicas_to_aggregate,
+              replica_id=FLAGS.task_id,
+              total_num_replicas=num_workers,
+              variable_averages=exp_moving_averager,
+              variables_to_average=variables_to_average)
 
       batchnorm_updates = tf.get_collection(slim.ops.UPDATE_OPS_COLLECTION)
       assert batchnorm_updates, 'Batchnorm updates are missing'
@@ -231,9 +236,10 @@ def train(target, dataset, cluster_spec):
       # Get chief queue_runners, init_tokens and clean_up_op, which is used to
       # synchronize replicas.
       # More details can be found in sync_replicas_optimizer.
-      chief_queue_runners = [opt.get_chief_queue_runner()]
-      init_tokens_op = opt.get_init_tokens_op()
-      clean_up_op = opt.get_clean_up_op()
+      if FLAGS.sync:
+          chief_queue_runners = [opt.get_chief_queue_runner()]
+          init_tokens_op = opt.get_init_tokens_op()
+          clean_up_op = opt.get_clean_up_op()
 
       # Create a saver.
       saver = tf.train.Saver(max_to_keep=24)
@@ -271,7 +277,7 @@ def train(target, dataset, cluster_spec):
       tf.logging.info('Started %d queues for processing input data.',
                       len(queue_runners))
 
-      if is_chief:
+      if is_chief and FLAGS.sync:
         sv.start_queue_runners(sess, chief_queue_runners)
         sess.run(init_tokens_op)
 
@@ -318,7 +324,7 @@ def train(target, dataset, cluster_spec):
       sv.stop()
 
       # Save after the training ends.
-      if is_chief:
-        saver.save(sess,
-                   os.path.join(FLAGS.train_dir, 'model.ckpt'),
-                   global_step=global_step)
+      #if is_chief:
+    #    saver.save(sess,
+    #               os.path.join(FLAGS.train_dir, 'model.ckpt'),
+    #               global_step=global_step)
