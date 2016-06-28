@@ -61,9 +61,9 @@ tf.app.flags.DEFINE_integer(
 tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """Number of gradients to collect before """
                             """updating the parameters.""")
-tf.app.flags.DEFINE_integer('save_interval_secs', 10*60,
+tf.app.flags.DEFINE_integer('save_interval_secs', 1000000,#10*60,
                             'Save interval seconds.')
-tf.app.flags.DEFINE_integer('save_summaries_secs', 180,
+tf.app.flags.DEFINE_integer('save_summaries_secs', 180000000,#180,
                             'Save summaries interval seconds.')
 
 # **IMPORTANT**
@@ -76,7 +76,7 @@ tf.app.flags.DEFINE_integer('save_summaries_secs', 180,
 # Learning rate decay factor selected from https://arxiv.org/abs/1604.00981
 tf.app.flags.DEFINE_float('initial_learning_rate', 0.01,#0.045,
                           'Initial learning rate.')
-tf.app.flags.DEFINE_float('num_epochs_per_decay', 2.0,
+tf.app.flags.DEFINE_float('num_epochs_per_decay', 100,#2.0,
                           'Epochs after which learning rate decays.')
 tf.app.flags.DEFINE_float('learning_rate_decay_factor', 0.94,
                           'Learning rate decay factor.')
@@ -204,7 +204,7 @@ def train(target, dataset, cluster_spec):
 
       # Create synchronous replica optimizer.
       if FLAGS.sync:
-          print("Sync mode!!!!!!")
+          tf.logging.info("Sync mode!!!!!!")
           opt = compute_group_optimizer.ComputeGroupOptimizer(
               opt,
               replicas_to_aggregate=num_replicas_to_aggregate,
@@ -260,7 +260,7 @@ def train(target, dataset, cluster_spec):
                                summary_op=None,
                                global_step=global_step,
                                saver=saver,
-                               save_model_secs=FLAGS.save_interval_secs)
+                               save_model_secs=0)#FLAGS.save_interval_secs)
 
       tf.logging.info('%s Supervisor' % datetime.now())
 

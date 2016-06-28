@@ -1,6 +1,6 @@
 #!/bin/python
 
-from subprocess import call
+from subprocess import call, Popen
 import time
 
 import signal
@@ -8,7 +8,7 @@ import sys, os
 
 def kill_exp():
     call(["pkill", "-u", "daniter", "-f","imagenet_distributed_train"])
-    call(["ssh", "raiders5","pkill -u daniter -f imagenet_distributed_train"])
+    call(["ssh", "raiders3","pkill -u daniter -f imagenet_distributed_train"])
     #call(["pkill", "-f","test-runner.sh"])
 
 def signal_handler(signal, frame):
@@ -21,11 +21,13 @@ lr = [0.01, 0.05, 0.1, 0.005]
 
 SYNC = "True"
 ASYNC = "False"
-exe = "local_runner.sh"
+exe = "./local_runner.sh"
 
 def run(m,l, sync):
     print("Testing (%s) momentum: %f, learning rate: %f" % (sync,m,l))
-    call(["sh", exe, str(l), str(m), sync])
+    cmd = [exe, str(l), str(m), sync]
+    print " ".join(cmd)
+    call(cmd)
     time.sleep(15*60) # change to 15 min
     kill_exp()
 
@@ -42,5 +44,4 @@ if __name__=='__main__':
             if os.path.exists(sync_dir_name):
                 print("Skipping " + sync_dir_name)
             else:
-                pass
-                #run(m,l, SYNC)
+                run(m,l, SYNC)
