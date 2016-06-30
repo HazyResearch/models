@@ -53,7 +53,7 @@ tf.app.flags.DEFINE_integer('image_size', 256,#299,
 tf.app.flags.DEFINE_integer('num_preprocess_threads', 4,
                             """Number of preprocessing threads per tower. """
                             """Please make this a multiple of 4.""")
-tf.app.flags.DEFINE_integer('num_readers', 4,
+tf.app.flags.DEFINE_integer('num_readers', 1,#4,
                             """Number of parallel readers during train.""")
 
 # Images are preprocessed asynchronously using multiple threads specified by
@@ -215,6 +215,7 @@ def distort_image(image, height, width, bbox, thread_id=0, scope=None):
     3-D float Tensor of distorted image used for training.
   """
   with tf.op_scope([image, height, width, bbox], scope, 'distort_image'):
+    tf.set_random_seed(1)
     # Each bounding box has shape [1, num_boxes, box coords] and
     # the coordinates are ordered [ymin, xmin, ymax, xmax].
 
@@ -454,6 +455,7 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     ValueError: if data is not found
   """
   with tf.name_scope('batch_processing'):
+    tf.set_random_seed(1)
     data_files = dataset.data_files()
     if data_files is None:
       raise ValueError('No data files found for this dataset')
@@ -461,12 +463,14 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     # Create filename_queue
     if train:
       filename_queue = tf.train.string_input_producer(data_files,
-                                                      shuffle=True,
-                                                      capacity=16)
+                                                      shuffle=False,
+                                                      capacity=16,
+                                                      seed=1)
     else:
       filename_queue = tf.train.string_input_producer(data_files,
                                                       shuffle=False,
-                                                      capacity=1)
+                                                      capacity=1,
+                                                      seed=1)
     if num_preprocess_threads is None:
       num_preprocess_threads = FLAGS.num_preprocess_threads
 
@@ -489,10 +493,13 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     # size: examples_per_shard * 16 * 1MB = 17.6GB
     min_queue_examples = examples_per_shard * FLAGS.input_queue_memory_factor
     if train:
-      examples_queue = tf.RandomShuffleQueue(
-          capacity=min_queue_examples + 3 * batch_size,
-          min_after_dequeue=min_queue_examples,
-          dtypes=[tf.string])
+    #   examples_queue = tf.RandomShuffleQueue(
+    #       capacity=min_queue_examples + 3 * batch_size,
+    #       min_after_dequeue=min_queue_examples,
+    #       dtypes=[tf.string], seed=1)
+        examples_queue = tf.FIFOQueue(
+            capacity=examples_per_shard + 3 * batch_size,
+            dtypes=[tf.string])
     else:
       examples_queue = tf.FIFOQueue(
           capacity=examples_per_shard + 3 * batch_size,

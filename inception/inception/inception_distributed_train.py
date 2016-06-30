@@ -113,6 +113,7 @@ def train(target, dataset, cluster_spec):
 
   # Ops are assigned to worker by default.
   with tf.device('/job:worker/task:%d' % FLAGS.task_id):
+    tf.set_random_seed(1)
     # Variables and its related init/assign ops are assigned to ps.
     with slim.scopes.arg_scope(
         [slim.variables.variable, slim.variables.global_step],
@@ -284,6 +285,7 @@ def train(target, dataset, cluster_spec):
       # Train, checking for Nans. Concurrently run the summary operation at a
       # specified interval. Note that the summary_op and train_op never run
       # simultaneously in order to prevent running out of GPU memory.
+      tf.set_random_seed(1)
       next_summary_time = time.time() + FLAGS.save_summaries_secs
       while not sv.should_stop():
         try:

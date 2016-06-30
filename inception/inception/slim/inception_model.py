@@ -78,6 +78,7 @@ def inception_v3(inputs,
   # summaries or losses.
   end_points = {}
   with tf.op_scope([inputs], scope, 'inception_v3'):
+    tf.set_random_seed(1)
     with scopes.arg_scope([ops.conv2d, ops.fc, ops.batch_norm, ops.dropout],
                           is_training=is_training):
       with scopes.arg_scope([ops.conv2d, ops.max_pool, ops.avg_pool],
@@ -319,7 +320,7 @@ def inception_v3(inputs,
           shape = net.get_shape()
           net = ops.avg_pool(net, shape[1:3], padding='VALID', scope='pool')
           # 1 x 1 x 2048
-          net = ops.dropout(net, dropout_keep_prob, scope='dropout')
+          net = ops.dropout(net, dropout_keep_prob, scope='dropout', seed=1)
           net = ops.flatten(net, scope='flatten')
           # 2048
           logits = ops.fc(net, num_classes, activation=None, scope='logits',
@@ -350,6 +351,7 @@ def inception_v3_parameters(weight_decay=0.00004, stddev=0.1,
     with scopes.arg_scope([ops.conv2d],
                           stddev=stddev,
                           activation=tf.nn.relu,
+                          seed=1,
                           batch_norm_params={
                               'decay': batch_norm_decay,
                               'epsilon': batch_norm_epsilon}) as arg_scope:

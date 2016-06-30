@@ -401,7 +401,7 @@ def avg_pool(inputs, kernel_size, stride=2, padding='VALID', scope=None):
 
 
 @scopes.add_arg_scope
-def dropout(inputs, keep_prob=0.5, is_training=True, scope=None):
+def dropout(inputs, keep_prob=0.5, is_training=True, scope=None, seed=1):
   """Returns a dropout layer applied to the input.
 
   Args:
@@ -416,7 +416,7 @@ def dropout(inputs, keep_prob=0.5, is_training=True, scope=None):
   """
   if is_training and keep_prob > 0:
     with tf.op_scope([inputs], scope, 'Dropout'):
-      return tf.nn.dropout(inputs, keep_prob)
+      return tf.nn.dropout(inputs, keep_prob, seed=1)
   else:
     return inputs
 
