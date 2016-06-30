@@ -8,10 +8,10 @@ fi
 
 echo "Running=> Sync: $3 lr: $1 momentum: $2"
 
-OUTPUT="output-$1-$2-$3"
+OUTPUT="expr2-$1-$2-$3"
 WORKDIR="tf/models/inception/utils/"
 mkdir -p ${OUTPUT}
-ssh raiders5 "mkdir -p tf/models/inception/utils/${OUTPUT}"
+#ssh raiders3 "mkdir -p tf/models/inception/utils/${OUTPUT}"
 
 
 sh run-ps.sh $1 $2 $3 &> ${OUTPUT}/ps.out &
