@@ -142,8 +142,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                replica_id=None,
                total_num_replicas=0,
                use_locking=False,
-               name="sync_replicas",
-               num_groups=2):
+               name="sync_replicas"):
     """Construct a sync_replicas optimizer.
 
     Args:
@@ -211,12 +210,6 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     # removed as they are computed from potentially different variables.
     # Currently this is not done.
     self._clean_up_op = None
-
-    # set the number of compute groups
-    self.num_compute_groups = num_groups
-    self.group_grad_queues = []
-    for i in xrange(self.num_compute_groups):
-        self.group_grad_queues.append([])
 
 
   def compute_gradients(self, *args, **kwargs):
@@ -349,20 +342,15 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
         var_list.append(var)
         with ops.device(var.device):
           if isinstance(grad, ops.Tensor):
-            queue_list = []
-            for group in xrange(self.num_compute_groups):
-                gradient_queue = (data_flow_ops.FIFOQueue(self._tokens_per_step * 2,
+            gradient_queue = (data_flow_ops.FIFOQueue(self._tokens_per_step * 2,
                                                       grad.dtype,
                                                       shapes=var.get_shape(),
-                                                      shared_name=var.name+str(group)))
-                self._one_element_queue_list.append((gradient_queue, var.device))
-                queue_list.append(gradient_queue)
-            with ops.control_dependencies([tf.Print(tf.constant(2), [queue_list[self._replica_id].name, grad.device, grad.name],
-                "~~~~~ daniter~~~~~~ enqueuing" + vars(train_ops))]):
-                train_ops.append(queue_list[self._replica_id].enqueue([grad]))
+                                                      shared_name=var.name))
+            self._one_element_queue_list.append((gradient_queue, var.device))
+            train_ops.append(gradient_queue.enqueue([grad]))
 
             # Aggregate all gradients
-            gradients = queue_list[self._replica_id].dequeue_many(
+            gradients = gradient_queue.dequeue_many(
                 self._replicas_to_aggregate)
             aggregated_grad.append(math_ops.reduce_sum(gradients, [0]))
           elif grad is None:
