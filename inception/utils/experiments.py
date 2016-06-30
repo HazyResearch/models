@@ -16,8 +16,8 @@ def signal_handler(signal, frame):
         sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
-momentum = [0.9, 0.75, 0.6, 0.45, 0.3, 0.15, 0.0]
-lr = [0.001, 0.0025, 0.005, 0.01, 0.025, 0.05, 0.1]
+momentum = [0.9, 0.6, 0.3, 0.0]
+lr = [0.001, 0.005, 0.01, 0.05, 0.1]
 
 SYNC = "True"
 ASYNC = "False"
@@ -35,8 +35,8 @@ if __name__=='__main__':
     print("Starting experiments:")
     for m in momentum:
         for l in lr:
-            async_dir_name = "expr2-%s-%s-%s" % (str(l), str(m), ASYNC)
-            sync_dir_name = "expr2-%s-%s-%s" % (str(l), str(m), SYNC)
+            async_dir_name = "expr3-%s-%s-%s" % (str(l), str(m), ASYNC)
+            sync_dir_name = "expr3-%s-%s-%s" % (str(l), str(m), SYNC)
             if os.path.exists(async_dir_name):
                 print("Skipping " + async_dir_name)
             else:
