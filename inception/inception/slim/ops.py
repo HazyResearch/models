@@ -416,7 +416,7 @@ def dropout(inputs, keep_prob=0.5, is_training=True, scope=None, seed=1):
   """
   if is_training and keep_prob > 0:
     with tf.op_scope([inputs], scope, 'Dropout'):
-      return tf.nn.dropout(inputs, keep_prob, seed=1)
+      return tf.nn.dropout(inputs, keep_prob, seed=seed)
   else:
     return inputs
 

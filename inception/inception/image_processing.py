@@ -72,6 +72,7 @@ tf.app.flags.DEFINE_integer('input_queue_memory_factor', 16,
                             """4, 2 or 1, if host memory is constrained. See """
                             """comments in code for more details.""")
 
+tf.app.flags.DEFINE_integer('DANITER_SEED', 3291, 'random seed')
 
 def inputs(dataset, batch_size=None, num_preprocess_threads=None):
   """Generate batches of ImageNet images for evaluation.
@@ -215,7 +216,7 @@ def distort_image(image, height, width, bbox, thread_id=0, scope=None):
     3-D float Tensor of distorted image used for training.
   """
   with tf.op_scope([image, height, width, bbox], scope, 'distort_image'):
-    tf.set_random_seed(1)
+    tf.set_random_seed(FLAGS.DANITER_SEED)
     # Each bounding box has shape [1, num_boxes, box coords] and
     # the coordinates are ordered [ymin, xmin, ymax, xmax].
 
@@ -455,7 +456,7 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     ValueError: if data is not found
   """
   with tf.name_scope('batch_processing'):
-    tf.set_random_seed(1)
+    tf.set_random_seed(FLAGS.DANITER_SEED)
     data_files = dataset.data_files()
     if data_files is None:
       raise ValueError('No data files found for this dataset')
@@ -465,12 +466,12 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
       filename_queue = tf.train.string_input_producer(data_files,
                                                       shuffle=False,
                                                       capacity=16,
-                                                      seed=1)
+                                                      seed=FLAGS.DANITER_SEED)
     else:
       filename_queue = tf.train.string_input_producer(data_files,
                                                       shuffle=False,
                                                       capacity=1,
-                                                      seed=1)
+                                                      seed=FLAGS.DANITER_SEED)
     if num_preprocess_threads is None:
       num_preprocess_threads = FLAGS.num_preprocess_threads
 

@@ -39,10 +39,10 @@ TOWER_NAME = 'tower'
 
 # Batch normalization. Constant governing the exponential moving average of
 # the 'global' mean and variance for all activations.
-BATCHNORM_MOVING_AVERAGE_DECAY = 0.9997
+BATCHNORM_MOVING_AVERAGE_DECAY = 1.0#0.9997
 
 # The decay to use for the moving average.
-MOVING_AVERAGE_DECAY = 0.9999
+MOVING_AVERAGE_DECAY = 1.0#0.9999
 
 
 def inference(images, num_classes, for_training=False, restore_logits=True,
@@ -73,7 +73,7 @@ def inference(images, num_classes, for_training=False, restore_logits=True,
       'epsilon': 0.001,
   }
   # Set weight_decay for weights in Conv and FC layers.
-  with slim.arg_scope([slim.ops.conv2d, slim.ops.fc], weight_decay=0.00004):
+  with slim.arg_scope([slim.ops.conv2d, slim.ops.fc], weight_decay=0):#0.00004):
     with slim.arg_scope([slim.ops.conv2d],
                         stddev=0.1,
                         activation=tf.nn.relu,

@@ -76,9 +76,9 @@ tf.app.flags.DEFINE_integer('save_summaries_secs', 180000000,#180,
 # Learning rate decay factor selected from https://arxiv.org/abs/1604.00981
 tf.app.flags.DEFINE_float('initial_learning_rate', 0.01,#0.045,
                           'Initial learning rate.')
-tf.app.flags.DEFINE_float('num_epochs_per_decay', 100,#2.0,
+tf.app.flags.DEFINE_float('num_epochs_per_decay', 10000.0,#2.0,
                           'Epochs after which learning rate decays.')
-tf.app.flags.DEFINE_float('learning_rate_decay_factor', 0.94,
+tf.app.flags.DEFINE_float('learning_rate_decay_factor', 1.0,#0.94,
                           'Learning rate decay factor.')
 tf.app.flags.DEFINE_float('momentum', 0.9,'Momentum term')
 tf.app.flags.DEFINE_boolean('sync', True, "Async Mode")
@@ -113,7 +113,7 @@ def train(target, dataset, cluster_spec):
 
   # Ops are assigned to worker by default.
   with tf.device('/job:worker/task:%d' % FLAGS.task_id):
-    tf.set_random_seed(1)
+    tf.set_random_seed(FLAGS.DANITER_SEED)
     # Variables and its related init/assign ops are assigned to ps.
     with slim.scopes.arg_scope(
         [slim.variables.variable, slim.variables.global_step],
@@ -165,7 +165,7 @@ def train(target, dataset, cluster_spec):
 
       # Gather all of the losses including regularization losses.
       losses = tf.get_collection(slim.losses.LOSSES_COLLECTION)
-      losses += tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
+      #losses += tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
 
       total_loss = tf.add_n(losses, name='total_loss')
 
@@ -285,7 +285,7 @@ def train(target, dataset, cluster_spec):
       # Train, checking for Nans. Concurrently run the summary operation at a
       # specified interval. Note that the summary_op and train_op never run
       # simultaneously in order to prevent running out of GPU memory.
-      tf.set_random_seed(1)
+      tf.set_random_seed(FLAGS.DANITER_SEED)
       next_summary_time = time.time() + FLAGS.save_summaries_secs
       while not sv.should_stop():
         try:
