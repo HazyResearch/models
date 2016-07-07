@@ -155,9 +155,11 @@ def train(target, dataset, cluster_spec):
       # Number of classes in the Dataset label set plus 1.
       # Label 0 is reserved for an (unused) background class.
       num_classes = dataset.num_classes() + 1
-      logits = inception.inference(images, num_classes, for_training=True)
 
-      with tf.control_dependencies([tf.Print(logits[0], [logits[0]], "logits")]):  
+      with tf.control_dependencies([tf.Print(images, tf.split(0, 16, images), "images:", summarize=5)]):
+          logits = inception.inference(images, num_classes, for_training=True)
+
+      with tf.control_dependencies([tf.Print(logits[0], [logits[0]], "logits", summarize=10)]):
         # Add classification loss.
         inception.loss(logits, labels)
 
