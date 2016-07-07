@@ -63,7 +63,7 @@ tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """updating the parameters.""")
 tf.app.flags.DEFINE_integer('save_interval_secs', 1000000,#10*60,
                             'Save interval seconds.')
-tf.app.flags.DEFINE_integer('save_summaries_secs', 180000000,#180,
+tf.app.flags.DEFINE_integer('save_summaries_secs', 30,
                             'Save summaries interval seconds.')
 
 # **IMPORTANT**
@@ -156,8 +156,10 @@ def train(target, dataset, cluster_spec):
       # Label 0 is reserved for an (unused) background class.
       num_classes = dataset.num_classes() + 1
       logits = inception.inference(images, num_classes, for_training=True)
-      # Add classification loss.
-      inception.loss(logits, labels)
+
+      with tf.control_dependencies([tf.Print(logits[0], [logits[0]], "logits")]):  
+        # Add classification loss.
+        inception.loss(logits, labels)
 
       #Accuracy
       correct_prediction = tf.nn.in_top_k(logits[0], labels, 1)

@@ -50,7 +50,7 @@ tf.app.flags.DEFINE_integer('batch_size', 32,
                             """Number of images to process in a batch.""")
 tf.app.flags.DEFINE_integer('image_size', 256,#299,
                             """Provide square images of this size.""")
-tf.app.flags.DEFINE_integer('num_preprocess_threads', 4,
+tf.app.flags.DEFINE_integer('num_preprocess_threads', 1, #4,
                             """Number of preprocessing threads per tower. """
                             """Please make this a multiple of 4.""")
 tf.app.flags.DEFINE_integer('num_readers', 4,
@@ -72,7 +72,7 @@ tf.app.flags.DEFINE_integer('input_queue_memory_factor', 16,
                             """4, 2 or 1, if host memory is constrained. See """
                             """comments in code for more details.""")
 
-tf.app.flags.DEFINE_integer('DANITER_SEED', 3291, 'random seed')
+tf.app.flags.DEFINE_integer('DANITER_SEED', 3487, 'random seed')
 
 def inputs(dataset, batch_size=None, num_preprocess_threads=None):
   """Generate batches of ImageNet images for evaluation.
@@ -475,9 +475,9 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     if num_preprocess_threads is None:
       num_preprocess_threads = FLAGS.num_preprocess_threads
 
-    if num_preprocess_threads % 4:
-      raise ValueError('Please make num_preprocess_threads a multiple '
-                       'of 4 (%d % 4 != 0).', num_preprocess_threads)
+    #if num_preprocess_threads % 4:
+    #  raise ValueError('Please make num_preprocess_threads a multiple '
+    #                   'of 4 (%d % 4 != 0).', num_preprocess_threads)
 
     if num_readers is None:
       num_readers = FLAGS.num_readers
