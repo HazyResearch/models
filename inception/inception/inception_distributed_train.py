@@ -61,7 +61,7 @@ tf.app.flags.DEFINE_integer(
 tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """Number of gradients to collect before """
                             """updating the parameters.""")
-tf.app.flags.DEFINE_integer('save_interval_secs', 1000000,#10*60,
+tf.app.flags.DEFINE_integer('save_interval_secs', 10*60,
                             'Save interval seconds.')
 tf.app.flags.DEFINE_integer('save_summaries_secs', 30,
                             'Save summaries interval seconds.')
@@ -156,12 +156,12 @@ def train(target, dataset, cluster_spec):
       # Label 0 is reserved for an (unused) background class.
       num_classes = dataset.num_classes() + 1
 
-      with tf.control_dependencies([tf.Print(images, tf.split(0, 16, images), "images:", summarize=5)]):
-          logits = inception.inference(images, num_classes, for_training=True)
+      #with tf.control_dependencies([tf.Print(images, tf.split(0, 16, images), "images:", summarize=2)]):
+      logits = inception.inference(images, num_classes, for_training=True)
 
-      with tf.control_dependencies([tf.Print(logits[0], [logits[0]], "logits", summarize=10)]):
+      #with tf.control_dependencies([tf.Print(logits[0], [logits[0]], "logits", summarize=10)]):
         # Add classification loss.
-        inception.loss(logits, labels)
+      inception.loss(logits, labels)
 
       #Accuracy
       correct_prediction = tf.nn.in_top_k(logits[0], labels, 1)

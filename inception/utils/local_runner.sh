@@ -8,7 +8,7 @@ fi
 
 echo "Running=> Sync: $3 lr: $1 momentum: $2"
 
-OUTPUT="expr3-$1-$2-$3"
+OUTPUT="SameBatchGap-consistent-reading-$1-$2-$3"
 WORKDIR="tf/models/inception/utils/"
 mkdir -p ${OUTPUT}
 #ssh raiders3 "mkdir -p tf/models/inception/utils/${OUTPUT}"
