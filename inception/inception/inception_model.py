@@ -80,7 +80,7 @@ def inference(images, num_classes, for_training=False, restore_logits=True,
                         batch_norm_params=batch_norm_params):
       logits, endpoints = slim.inception.inception_v3(
           images,
-          dropout_keep_prob=1.0, #0.8,
+          dropout_keep_prob=0.8,
           num_classes=num_classes,
           is_training=for_training,
           restore_logits=restore_logits,

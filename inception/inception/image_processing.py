@@ -72,7 +72,7 @@ tf.app.flags.DEFINE_integer('input_queue_memory_factor', 16,
                             """4, 2 or 1, if host memory is constrained. See """
                             """comments in code for more details.""")
 
-tf.app.flags.DEFINE_integer('DANITER_SEED', 3487, 'random seed')
+tf.app.flags.DEFINE_integer('DANITER_SEED', 48203, 'random seed')
 
 def inputs(dataset, batch_size=None, num_preprocess_threads=None):
   """Generate batches of ImageNet images for evaluation.
@@ -464,7 +464,7 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     # Create filename_queue
     if train:
       filename_queue = tf.train.string_input_producer(data_files,
-                                                      shuffle=False,
+                                                      shuffle=True,
                                                       capacity=16,
                                                       seed=FLAGS.DANITER_SEED)
     else:

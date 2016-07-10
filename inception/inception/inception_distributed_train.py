@@ -43,10 +43,10 @@ tf.app.flags.DEFINE_string('worker_hosts', '',
                            """worker jobs. e.g. """
                            """'machine1:2222,machine2:1111,machine2:2222'""")
 
-tf.app.flags.DEFINE_string('train_dir', '/lfs/local/0/daniter/4-node-snapshot',
+tf.app.flags.DEFINE_string('train_dir', '/lfs/local/0/daniter/16-node-snapshot',
                            """Directory where to write event logs """
                            """and checkpoint.""")
-tf.app.flags.DEFINE_integer('max_steps', 3000, 'Number of batches to run.')
+tf.app.flags.DEFINE_integer('max_steps', 1000000, 'Number of batches to run.')
 tf.app.flags.DEFINE_string('subset', 'train', 'Either "train" or "validation".')
 tf.app.flags.DEFINE_boolean('log_device_placement', False,
                             'Whether to log device placement.')
@@ -61,9 +61,9 @@ tf.app.flags.DEFINE_integer(
 tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """Number of gradients to collect before """
                             """updating the parameters.""")
-tf.app.flags.DEFINE_integer('save_interval_secs', 10*60,
+tf.app.flags.DEFINE_integer('save_interval_secs', 25*60,
                             'Save interval seconds.')
-tf.app.flags.DEFINE_integer('save_summaries_secs', 30,
+tf.app.flags.DEFINE_integer('save_summaries_secs', 300,
                             'Save summaries interval seconds.')
 
 # **IMPORTANT**
@@ -169,7 +169,7 @@ def train(target, dataset, cluster_spec):
 
       # Gather all of the losses including regularization losses.
       losses = tf.get_collection(slim.losses.LOSSES_COLLECTION)
-      #losses += tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
+      losses += tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
 
       total_loss = tf.add_n(losses, name='total_loss')
 
