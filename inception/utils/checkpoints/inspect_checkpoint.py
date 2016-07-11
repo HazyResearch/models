@@ -42,7 +42,7 @@ def print_tensors_in_checkpoint_file(file_name, tensor_name):
   try:
     reader = tf.train.NewCheckpointReader(file_name)
     for k,v in reader.get_variable_to_shape_map().items():
-        if "local_steps" in k:
+        if "Queue" in k:
             print(k, v)
     exit()
     if not tensor_name:

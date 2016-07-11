@@ -53,7 +53,7 @@ tf.app.flags.DEFINE_integer('image_size', 256,#299,
 tf.app.flags.DEFINE_integer('num_preprocess_threads', 1, #4,
                             """Number of preprocessing threads per tower. """
                             """Please make this a multiple of 4.""")
-tf.app.flags.DEFINE_integer('num_readers', 4,
+tf.app.flags.DEFINE_integer('num_readers', 1,#4,
                             """Number of parallel readers during train.""")
 
 # Images are preprocessed asynchronously using multiple threads specified by
@@ -72,7 +72,7 @@ tf.app.flags.DEFINE_integer('input_queue_memory_factor', 16,
                             """4, 2 or 1, if host memory is constrained. See """
                             """comments in code for more details.""")
 
-tf.app.flags.DEFINE_integer('DANITER_SEED', 3487, 'random seed')
+tf.app.flags.DEFINE_integer('DANITER_SEED', 48203, 'random seed')
 
 def inputs(dataset, batch_size=None, num_preprocess_threads=None):
   """Generate batches of ImageNet images for evaluation.
@@ -464,7 +464,7 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     # Create filename_queue
     if train:
       filename_queue = tf.train.string_input_producer(data_files,
-                                                      shuffle=False,
+                                                      shuffle=True,
                                                       capacity=16,
                                                       seed=FLAGS.DANITER_SEED)
     else:
