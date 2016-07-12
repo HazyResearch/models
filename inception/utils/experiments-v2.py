@@ -22,19 +22,20 @@ lr = [0.001, 0.005, 0.0005]
 SYNC = "True"
 ASYNC = "False"
 exe = "./local_runner.sh"
-prefix = "LongRun-16-v2"
+prefix = "LongRun-16-2hr"
 
 
-runs = [(ASYNC, 0.01, 0.3), (ASYNC, 0.01, 0.0), (ASYNC, 0.01, -0.3),
-        (ASYNC, 0.001, 0.6), (ASYNC, 0.005, 0.6), (SYNC, 0.001, 0.0), 
-        (SYNC, 0.005, 0.0)]
+runs = [(SYNC, 0.001, 0.6)]
+
+
+
 
 def run(m,l, sync):
     print("Testing (%s) momentum: %f, learning rate: %f" % (sync,m,l))
     cmd = [exe, str(l), str(m), sync, prefix]
     print " ".join(cmd)
     call(cmd)
-    time.sleep(30*60) 
+    time.sleep(120*60) 
     kill_exp()
 
 if __name__=='__main__':
@@ -44,9 +45,8 @@ if __name__=='__main__':
         l = r[1]
         m = r[2]
         async_dir_name = "%s-%s-%s-%s" % (prefix, str(l), str(m), ASYNC)
-        sync_dir_name = "%s-%s-%s-%s" % (prefix, str(l), str(m+0.6), SYNC)
+        sync_dir_name = "%s-%s-%s-%s" % (prefix, str(l), str(m), SYNC)
         if sync == ASYNC:
-
             if os.path.exists(async_dir_name):
                 print("Skipping " + async_dir_name)
             else:
