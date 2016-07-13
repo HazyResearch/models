@@ -243,7 +243,7 @@ def plot_winners_snr(loss_results, window):
     plt.plot(a,'--g',linewidth=4)
 
     plt.xlabel('Number of steps after snapshot')
-    plt.ylabel('Smoothed loss')
+    plt.ylabel('Training loss')
     plt.legend(['Best Sync: measurement', 'Best Sync: smoothed','Best Async: measurement', 'Best Async: smoothed'], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
     plt.title('Measured losses, smoothed signals used in SE plotting')
     plt.grid()
@@ -429,6 +429,8 @@ def params_from_folder_name(folder):
             field_zero = 1
     elif folderParts[0]=='LongRun':
         if folderParts[2]=='v2':
+            field_zero = 3
+        elif folderParts[2]=='2hr':
             field_zero = 3
         else:
             field_zero = 2
