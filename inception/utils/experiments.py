@@ -21,7 +21,7 @@ lr = [0.001, 0.005, 0.0005]
 SYNC = "True"
 ASYNC = "False"
 exe = "./local_runner.sh"
-prefix = "LongRun-16-seed-3477"
+prefix = "LongRun-16-seed-32345"
 
 def isFailed(folder):
     for log in os.listdir(folder):
