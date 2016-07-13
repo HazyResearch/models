@@ -211,6 +211,8 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     # Currently this is not done.
     self._clean_up_op = None
 
+    self._cg_queue_runner = None # compute group queue
+
 
   def compute_gradients(self, *args, **kwargs):
     """Compute gradients of "loss" for the variables in "var_list".
@@ -427,14 +429,18 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
 
         if self._variable_averages is not None:
-          with ops.control_dependencies([sync_op]), ops.name_scope(""):
-            sync_op = self._variable_averages.apply(
-                self._variables_to_average)
+          with ops.control_dependencies([tf.Print(tf.constant(1), [tokens], "Sync op running")]):
+            with ops.control_dependencies([sync_op]), ops.name_scope(""):
+              sync_op = self._variable_averages.apply(
+                  self._variables_to_average)
+
+        with ops.control_dependencies([sync_op]):
+          print_op = tf.Print(tf.constant(2), [tf.constant(2)], "prin_op")
 
         self._chief_queue_runner = queue_runner.QueueRunner(dummy_queue,
-                                                            [sync_op])
+                                                            [print_op])
         self._gradients_applied = True
-        #train_op = tf.Print(train_op, [train_op], "~~~~~ daniter for the love of god1")
+
         return train_op
 
   def get_chief_queue_runner(self):
@@ -547,3 +553,20 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
       init_tokens = control_flow_ops.no_op(name="no_init_tokens")
 
     return init_tokens
+
+  def get_cg_queue_runner(self):
+    print("Daniter~~~~~~~~~~~ setting up cg~~~~~~~~~~~~~")
+    if self._cg_queue_runner != None:
+      return self._cg_queue_runner
+
+    cg_queue = (data_flow_ops.FIFOQueue(-1,
+                                    types_pb2.DT_INT32,
+                                    shapes=(),
+                                    shared_name="cg_queue"))
+    cg_ops = []
+    for i in range(2):
+      cg_ops.append(tf.Print(tf.Variable(i), [tf.Variable(i)], "Task id: %d" % self._replica_id)) 
+
+    self._cg_queue_runner = queue_runner.QueueRunner(cg_queue, cg_ops)
+    return self._cg_queue_runner
+
