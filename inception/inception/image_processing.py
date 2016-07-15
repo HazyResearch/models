@@ -465,8 +465,8 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     if train:
       filename_queue = tf.train.string_input_producer(data_files,
                                                       shuffle=True,
-                                                      capacity=16,
-                                                      seed=FLAGS.DANITER_SEED)
+                                                      capacity=16)#,
+                                                      #seed=FLAGS.DANITER_SEED)
     else:
       filename_queue = tf.train.string_input_producer(data_files,
                                                       shuffle=False,
@@ -494,13 +494,13 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     # size: examples_per_shard * 16 * 1MB = 17.6GB
     min_queue_examples = examples_per_shard * FLAGS.input_queue_memory_factor
     if train:
-    #   examples_queue = tf.RandomShuffleQueue(
-    #       capacity=min_queue_examples + 3 * batch_size,
-    #       min_after_dequeue=min_queue_examples,
-    #       dtypes=[tf.string], seed=1)
-        examples_queue = tf.FIFOQueue(
-            capacity=examples_per_shard + 3 * batch_size,
-            dtypes=[tf.string])
+       examples_queue = tf.RandomShuffleQueue(
+           capacity=min_queue_examples + 3 * batch_size,
+           min_after_dequeue=min_queue_examples,
+           dtypes=[tf.string], seed=1)
+    #    examples_queue = tf.FIFOQueue(
+    #        capacity=examples_per_shard + 3 * batch_size,
+     #       dtypes=[tf.string])
     else:
       examples_queue = tf.FIFOQueue(
           capacity=examples_per_shard + 3 * batch_size,

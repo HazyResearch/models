@@ -7,5 +7,5 @@ CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train \
 --job_name='ps' \
 --task_id=0 \
 --ps_hosts='localhost:4228' \
---worker_hosts='raiders8:4226,raiders8:4227' \
+--worker_hosts='raiders8:4221,raiders8:4222,raiders8:4223,raiders8:4224' \
 --sync=True

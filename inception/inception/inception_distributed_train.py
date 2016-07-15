@@ -63,8 +63,10 @@ tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """updating the parameters.""")
 tf.app.flags.DEFINE_integer('save_interval_secs', 25*60,
                             'Save interval seconds.')
-tf.app.flags.DEFINE_integer('save_summaries_secs', 300,
+tf.app.flags.DEFINE_integer('save_summaries_secs', 30000,
                             'Save summaries interval seconds.')
+tf.app.flags.DEFINE_integer('compute_groups', 2,
+                            'Number of compute groups. Worers are divided equally.')
 
 # **IMPORTANT**
 # Please note that this learning rate schedule is heavily dependent on the
@@ -110,6 +112,11 @@ def train(target, dataset, cluster_spec):
   # Choose worker 0 as the chief. Note that any worker could be the chief
   # but there should be only one chief.
   is_chief = (FLAGS.task_id == 0)
+
+  # daniter - compute groups:
+  assert num_workers % FLAGS.compute_groups == 0, ("Number of workers msut be divisible by compute groups")
+  is_chief = (FLAGS.task_id % (num_workers / FLAGS.compute_groups) == 0)
+
 
   # Ops are assigned to worker by default.
   with tf.device('/job:worker/task:%d' % FLAGS.task_id):
@@ -242,7 +249,7 @@ def train(target, dataset, cluster_spec):
       # synchronize replicas.
       # More details can be found in sync_replicas_optimizer.
       if FLAGS.sync:
-          cg_queue_runner = opt.get_cg_queue_runner()
+          #cg_queue_runner = opt.get_cg_queue_runner()
           chief_queue_runners = [opt.get_chief_queue_runner()]
           init_tokens_op = opt.get_init_tokens_op()
           clean_up_op = opt.get_clean_up_op()
@@ -277,6 +284,8 @@ def train(target, dataset, cluster_spec):
       # Get a session.
       sess = sv.prepare_or_wait_for_session(target, config=sess_config)
 
+      tf.logging.info("got sessions!")
+
       # Start the queue runners.
       queue_runners = tf.get_collection(tf.GraphKeys.QUEUE_RUNNERS)
       sv.start_queue_runners(sess, queue_runners)
@@ -285,7 +294,7 @@ def train(target, dataset, cluster_spec):
 
       if is_chief and FLAGS.sync:
         sv.start_queue_runners(sess, chief_queue_runners)
-        sv.start_queue_runners(sess, [cg_queue_runner])
+        #sv.start_queue_runners(sess, [cg_queue_runner])
         sess.run(init_tokens_op)
 
       # Train, checking for Nans. Concurrently run the summary operation at a
@@ -294,6 +303,8 @@ def train(target, dataset, cluster_spec):
       tf.set_random_seed(FLAGS.DANITER_SEED)
       next_summary_time = time.time() + FLAGS.save_summaries_secs
       while not sv.should_stop():
+        tf.logging.info("I'm starting loop!!!!!")
+
         try:
           start_time = time.time()
           loss_value, step = sess.run([train_op, global_step])
@@ -301,6 +312,8 @@ def train(target, dataset, cluster_spec):
           if step > FLAGS.max_steps:
             break
           duration = time.time() - start_time
+
+          tf.logging.info("I'm running Something!!!!!")
 
           #Print Accuracy
           tf.logging.info("Step: %d, Accuracy: %f, Loss: %f" %(step, sess.run(accuracy), loss_value))
@@ -314,14 +327,14 @@ def train(target, dataset, cluster_spec):
                              examples_per_sec, duration))
 
           # Determine if the summary_op should be run on the chief worker.
-          if is_chief and next_summary_time < time.time():
-            tf.logging.info('Running Summary operation on the chief.')
-            summary_str = sess.run(summary_op)
-            sv.summary_computed(sess, summary_str)
-            tf.logging.info('Finished running Summary operation.')
+          #if is_chief and next_summary_time < time.time():
+          #  tf.logging.info('Running Summary operation on the chief.')
+          #  summary_str = sess.run(summary_op)
+          #  sv.summary_computed(sess, summary_str)
+          #  tf.logging.info('Finished running Summary operation.')
 
             # Determine the next time for running the summary.
-            next_summary_time += FLAGS.save_summaries_secs
+           # next_summary_time += FLAGS.save_summaries_secs
         except:
           if is_chief:
             tf.logging.info('About to execute sync_clean_up_op!')

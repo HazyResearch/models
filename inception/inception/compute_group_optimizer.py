@@ -32,6 +32,9 @@ from tensorflow.python.training import queue_runner
 import tensorflow as tf
 
 
+FLAGS = tf.app.flags.FLAGS
+
+
 class ComputeGroupOptimizer(optimizer.Optimizer):
   """Class to synchronize, aggregate gradients and pass them to the optimizer.
 
@@ -181,7 +184,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     self._variables_to_average = variables_to_average
     self._replica_id = replica_id
     self._total_num_replicas = total_num_replicas
-    self._tokens_per_step = max(total_num_replicas, replicas_to_aggregate)
+    self._tokens_per_step = int(max(total_num_replicas, replicas_to_aggregate) / FLAGS.compute_groups)
     self._global_step = None
     self._sync_token_queue = None
 
@@ -212,6 +215,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     self._clean_up_op = None
 
     self._cg_queue_runner = None # compute group queue
+    self._max_size = 128
 
 
   def compute_gradients(self, *args, **kwargs):
@@ -325,7 +329,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     with ops.device(global_step.device):
       self._local_steps = variables.Variable(
           array_ops.zeros(
-              [self._total_num_replicas],
+              [self._max_size],
               dtype=global_step.dtype),
           trainable=False,
           name="local_steps")
@@ -337,24 +341,34 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                                  [1],
                                  name="get_local_step")
     local_step = array_ops.reshape(local_step, ())
-    is_stale = math_ops.less(local_step, global_step)
+    is_stale = math_ops.less(local_step, local_step)#global_step)
 
     with ops.op_scope(inputs, None, self._name):
       for grad, var in grads_and_vars:
         var_list.append(var)
-        with ops.device(var.device):
+        with ops.device(var.device), ops.name_scope("CG-"+str(int(self._replica_id / FLAGS.compute_groups))):
           if isinstance(grad, ops.Tensor):
+            tf.logging.info("making gradient queue : %s" % var.name+str(int(self._replica_id / FLAGS.compute_groups)) )
             gradient_queue = (data_flow_ops.FIFOQueue(self._tokens_per_step * 2,
                                                       grad.dtype,
                                                       shapes=var.get_shape(),
-                                                      shared_name=var.name))
+                                                      shared_name=var.name+str(int(self._replica_id / FLAGS.compute_groups))))
             self._one_element_queue_list.append((gradient_queue, var.device))
-            train_ops.append(gradient_queue.enqueue([grad]))
+            if not train_ops:
+              with ops.control_dependencies([tf.Print(tf.constant(1), [grad], "grad: %d" % self._replica_id, summarize=2)]):
+                train_ops.append(gradient_queue.enqueue([grad]))
+            else:
+                train_ops.append(gradient_queue.enqueue([grad]))
 
             # Aggregate all gradients
             gradients = gradient_queue.dequeue_many(
-                self._replicas_to_aggregate)
-            aggregated_grad.append(math_ops.reduce_sum(gradients, [0]))
+                int(self._replicas_to_aggregate / FLAGS.compute_groups))
+            if len(train_ops) == 1:
+              with ops.control_dependencies([tf.Print(tf.constant(1), [gradients[0,:,:,:,:], gradients[1,:,:,:,:]], "Gradients in update: " + str(gradients.get_shape()), summarize=2)]):
+                aggregated_grad.append(math_ops.reduce_sum(gradients, [0]))
+            else:
+                aggregated_grad.append(math_ops.reduce_sum(gradients, [0]))
+
           elif grad is None:
             aggregated_grad.append(None)  # pass-through.
           else:
@@ -367,27 +381,29 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
       # sync_op will be assigned to the same device as the global step.
       with ops.device(global_step.device), ops.name_scope(""):
-        with tf.control_dependencies([tf.Print(global_step, [global_step], "~~~~~ daniter~~~ GLobalstep:")]):
+        with tf.control_dependencies([tf.Print(global_step, [global_step, aggregated_grads_and_vars[0][0]], "~~~~~ daniter~~~ GLobalstep:", summarize=2)]):
             update_op = self._opt.apply_gradients(aggregated_grads_and_vars,
                                               global_step)
 
       # Create token queue.
-      with ops.device(global_step.device), ops.name_scope(""):
+      with ops.device(global_step.device), ops.name_scope("CG-"+str(int(self._replica_id / FLAGS.compute_groups))):
+        tf.logging.info("making sync token queue : %s" % "sync_token_q"+str(int(self._replica_id / FLAGS.compute_groups)) )
         sync_token_queue = (
             data_flow_ops.FIFOQueue(-1,
                                     global_step.dtype.base_dtype,
                                     shapes=(),
-                                    shared_name="sync_token_q"))
+                                    shared_name="sync_token_q"+str(int(self._replica_id / FLAGS.compute_groups))))
         self._sync_token_queue = sync_token_queue
 
         # dummy_queue is passed to the queue runner. Don't use the real queues
         # because the queue runner doesn't automatically reopen it once it
         # closed queues in PS devices.
+        tf.logging.info("making dummy_queue queue : %s" % "dummy_queue"+str(int(self._replica_id / FLAGS.compute_groups)) )        
         dummy_queue = (
             data_flow_ops.FIFOQueue(1,
                                     types_pb2.DT_INT32,
                                     shapes=(),
-                                    shared_name="dummy_queue"))
+                                    shared_name="dummy_queue"+str(int(self._replica_id / FLAGS.compute_groups))))
       # Clear all the gradients queues in case there are stale gradients.
       clear_queue_ops = []
       with ops.control_dependencies([update_op]):
@@ -428,17 +444,15 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
           sync_op = sync_token_queue.enqueue_many((tokens,))
 
 
+
         if self._variable_averages is not None:
-          with ops.control_dependencies([tf.Print(tf.constant(1), [tokens], "Sync op running")]):
+          with ops.control_dependencies([tf.Print(tf.constant(1), [tokens], "Sync op running: %s" % sync_token_queue.name)]):
             with ops.control_dependencies([sync_op]), ops.name_scope(""):
               sync_op = self._variable_averages.apply(
                   self._variables_to_average)
 
-        with ops.control_dependencies([sync_op]):
-          print_op = tf.Print(tf.constant(2), [tf.constant(2)], "prin_op")
-
         self._chief_queue_runner = queue_runner.QueueRunner(dummy_queue,
-                                                            [print_op])
+                                                            [sync_op])
         self._gradients_applied = True
 
         return train_op
@@ -559,13 +573,15 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     if self._cg_queue_runner != None:
       return self._cg_queue_runner
 
-    cg_queue = (data_flow_ops.FIFOQueue(-1,
+    cg_queue = (data_flow_ops.FIFOQueue(1,
                                     types_pb2.DT_INT32,
                                     shapes=(),
                                     shared_name="cg_queue"))
     cg_ops = []
-    for i in range(2):
-      cg_ops.append(tf.Print(tf.Variable(i), [tf.Variable(i)], "Task id: %d" % self._replica_id)) 
+    # TODO : Don't use total_num replicas, this may change in the future
+    for i in range(int(self._total_num_replicas/ FLAGS.compute_groups)):
+      tmp = self._replica_id + i
+      cg_ops.append(tf.Print(tf.Variable(tmp), [tf.Variable(tmp)], "Task id: %d" % self._replica_id)) 
 
     self._cg_queue_runner = queue_runner.QueueRunner(cg_queue, cg_ops)
     return self._cg_queue_runner
