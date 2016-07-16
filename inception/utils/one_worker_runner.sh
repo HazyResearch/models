@@ -16,4 +16,4 @@ mkdir -p ${OUTPUT}
 
 
 sh run-ps-1.sh 0.0 0.0 False $2 &> ${OUTPUT}/ps.out &
-sh run-expr-1.sh 0 ${GPU} 0.0 0.0 False $2 &> ${OUTPUT}/w1.out &
+sh run-expr-1.sh ${GPU} 0 0.0 0.0 False $2 &> ${OUTPUT}/w1.out &

@@ -216,6 +216,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
     self._cg_queue_runner = None # compute group queue
     self._max_size = 128
+    self._cg_steps = None
 
 
   def compute_gradients(self, *args, **kwargs):
@@ -334,6 +335,13 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
           trainable=False,
           name="local_steps")
 
+      self._cg_steps = variables.Variable(
+          array_ops.zeros(
+              [self._max_size],
+              dtype=global_step.dtype),
+          trainable=False,
+          name="cg_steps")
+
     # Check staleness. Note that this has to be ref(), otherwise identity will
     # be accessed and it will be old values.
     local_step = array_ops.slice(self._local_steps.ref(),
@@ -341,7 +349,14 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                                  [1],
                                  name="get_local_step")
     local_step = array_ops.reshape(local_step, ())
-    is_stale = math_ops.less(local_step, local_step)#global_step)
+
+    cg_step = array_ops.slice(self._cg_steps.ref(),
+                                 array_ops.reshape(int(self._replica_id / FLAGS.compute_groups) , (1,)),
+                                 [1],
+                                 name="get_cg_step")
+    cg_step = array_ops.reshape(cg_step, ())
+
+    is_stale = math_ops.less(local_step, cg_step)#global_step)
 
     with ops.op_scope(inputs, None, self._name):
       for grad, var in grads_and_vars:
@@ -385,6 +400,9 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
             update_op = self._opt.apply_gradients(aggregated_grads_and_vars,
                                               global_step)
 
+        cg_update_op = state_ops.scatter_update(self._cg_steps,
+                                              int(self._replica_id / FLAGS.compute_groups), global_step)
+
       # Create token queue.
       with ops.device(global_step.device), ops.name_scope("CG-"+str(int(self._replica_id / FLAGS.compute_groups))):
         tf.logging.info("making sync token queue : %s" % "sync_token_q"+str(int(self._replica_id / FLAGS.compute_groups)) )
@@ -423,9 +441,10 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
       # According to the staleness, select between the enqueue op (real_grad)
       # or no-op (no_op_grad). Effectively dropping all the stale gradients.
-      no_op_grad = lambda: [control_flow_ops.no_op(name="no_grad_enqueue")]
-      real_grad = lambda: [control_flow_ops.group(*train_ops)]
-      final_train_ops = control_flow_ops.cond(is_stale, no_op_grad, real_grad)
+      with ops.control_dependencies([cg_update_op]):
+        no_op_grad = lambda: [control_flow_ops.no_op(name="no_grad_enqueue")]
+        real_grad = lambda: [control_flow_ops.group(*train_ops)]
+        final_train_ops = control_flow_ops.cond(is_stale, no_op_grad, real_grad)
 
       with ops.device(global_step.device), ops.name_scope(""):
         # Replicas have to wait until they can get a token from the token queue.

@@ -43,7 +43,7 @@ tf.app.flags.DEFINE_string('worker_hosts', '',
                            """worker jobs. e.g. """
                            """'machine1:2222,machine2:1111,machine2:2222'""")
 
-tf.app.flags.DEFINE_string('train_dir', '/lfs/local/0/daniter/no-snapshot',
+tf.app.flags.DEFINE_string('train_dir', '/lfs/local/0/daniter/cg-snapshot',
                            """Directory where to write event logs """
                            """and checkpoint.""")
 tf.app.flags.DEFINE_integer('max_steps', 1000000, 'Number of batches to run.')
@@ -61,7 +61,7 @@ tf.app.flags.DEFINE_integer(
 tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """Number of gradients to collect before """
                             """updating the parameters.""")
-tf.app.flags.DEFINE_integer('save_interval_secs', 25*60,
+tf.app.flags.DEFINE_integer('save_interval_secs', 15*60,
                             'Save interval seconds.')
 tf.app.flags.DEFINE_integer('save_summaries_secs', 30000,
                             'Save summaries interval seconds.')
@@ -273,7 +273,7 @@ def train(target, dataset, cluster_spec):
                                summary_op=None,
                                global_step=global_step,
                                saver=saver,
-                               save_model_secs=0)#FLAGS.save_interval_secs)
+                               save_model_secs=FLAGS.save_interval_secs)
 
       tf.logging.info('%s Supervisor' % datetime.now())
 
