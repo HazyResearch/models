@@ -50,10 +50,10 @@ tf.app.flags.DEFINE_integer('batch_size', 32,
                             """Number of images to process in a batch.""")
 tf.app.flags.DEFINE_integer('image_size', 256,#299,
                             """Provide square images of this size.""")
-tf.app.flags.DEFINE_integer('num_preprocess_threads', 1, #4,
+tf.app.flags.DEFINE_integer('num_preprocess_threads', 4,
                             """Number of preprocessing threads per tower. """
                             """Please make this a multiple of 4.""")
-tf.app.flags.DEFINE_integer('num_readers', 1,#4,
+tf.app.flags.DEFINE_integer('num_readers', 4,
                             """Number of parallel readers during train.""")
 
 # Images are preprocessed asynchronously using multiple threads specified by
@@ -72,7 +72,7 @@ tf.app.flags.DEFINE_integer('input_queue_memory_factor', 16,
                             """4, 2 or 1, if host memory is constrained. See """
                             """comments in code for more details.""")
 
-tf.app.flags.DEFINE_integer('DANITER_SEED', 32345, 'random seed')
+tf.app.flags.DEFINE_integer('DANITER_SEED', 8732, 'random seed')
 
 def inputs(dataset, batch_size=None, num_preprocess_threads=None):
   """Generate batches of ImageNet images for evaluation.
@@ -494,13 +494,13 @@ def batch_inputs(dataset, batch_size, train, num_preprocess_threads=None,
     # size: examples_per_shard * 16 * 1MB = 17.6GB
     min_queue_examples = examples_per_shard * FLAGS.input_queue_memory_factor
     if train:
-    #   examples_queue = tf.RandomShuffleQueue(
-    #       capacity=min_queue_examples + 3 * batch_size,
-    #       min_after_dequeue=min_queue_examples,
-    #       dtypes=[tf.string], seed=1)
-        examples_queue = tf.FIFOQueue(
-            capacity=examples_per_shard + 3 * batch_size,
-            dtypes=[tf.string])
+       examples_queue = tf.RandomShuffleQueue(
+           capacity=min_queue_examples + 3 * batch_size,
+           min_after_dequeue=min_queue_examples,
+           dtypes=[tf.string], seed=FLAGS.DANITER_SEED)
+     #   examples_queue = tf.FIFOQueue(
+     #       capacity=examples_per_shard + 3 * batch_size,
+     #       dtypes=[tf.string])
     else:
       examples_queue = tf.FIFOQueue(
           capacity=examples_per_shard + 3 * batch_size,
