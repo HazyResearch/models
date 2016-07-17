@@ -65,7 +65,7 @@ tf.app.flags.DEFINE_integer('save_interval_secs', 15*60,
                             'Save interval seconds.')
 tf.app.flags.DEFINE_integer('save_summaries_secs', 30000,
                             'Save summaries interval seconds.')
-tf.app.flags.DEFINE_integer('compute_groups', 2,
+tf.app.flags.DEFINE_integer('compute_groups', 1,
                             'Number of compute groups. Worers are divided equally.')
 
 # **IMPORTANT**
@@ -115,7 +115,7 @@ def train(target, dataset, cluster_spec):
 
   # daniter - compute groups:
   assert num_workers % FLAGS.compute_groups == 0, ("Number of workers msut be divisible by compute groups")
-  is_chief = (FLAGS.task_id < FLAGS.compute_groups)
+  is_cg_primary = (FLAGS.task_id < FLAGS.compute_groups)
 
 
   # Ops are assigned to worker by default.
@@ -291,7 +291,7 @@ def train(target, dataset, cluster_spec):
       tf.logging.info('Started %d queues for processing input data.',
                       len(queue_runners))
 
-      if is_chief and FLAGS.sync:
+      if is_cg_primary and FLAGS.sync:
         sv.start_queue_runners(sess, chief_queue_runners)
         sess.run(init_tokens_op)
 
