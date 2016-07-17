@@ -15,13 +15,12 @@ def signal_handler(signal, frame):
         sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
-momentum = [0.3, 0.0, -0.3]
-lr = [0.001, 0.005, 0.0005]
+momentum = [0.3, 0.6, 0.9]
+lr = [0.01, 0.005, 0.0025]
+cgs = [1, 2, 4]
 
-SYNC = "True"
-ASYNC = "False"
-exe = "./local_runner.sh"
-prefix = "LongRun-16-seed-3477"
+exe = "./4node_runner.sh"
+prefix = "4Node-GPU-seed-3477-CG-"
 
 def isFailed(folder):
     for log in os.listdir(folder):
@@ -36,17 +35,16 @@ def isFailed(folder):
                         return True
     return False
 
-def run(m,l, sync):
-    print("Testing (%s) momentum: %f, learning rate: %f" % (sync,m,l))
-    if SYNC == sync:
-        m += 0.6
-    cmd = [exe, str(l), str(m), sync, prefix]
+def run(m,l, cg):
+    print("Testing cg:%d, momentum: %f, learning rate: %f" % (cg,m,l))
+    dir_name = "%s-%s-%s" % (prefix+str(cg), str(l), str(m))
+    if os.path.exists(dir_name):
+        print("Skipping " + dir_name)
+        return
+
+    cmd = [exe, str(l), str(m), str(cg), dir_name]
     print " ".join(cmd)
     call(cmd)
-    if sync == ASYNC:
-        dir_name = "%s-%s-%s-%s" % (prefix, str(l), str(m), ASYNC)
-    else:
-        dir_name = "%s-%s-%s-%s" % (prefix, str(l), str(m), SYNC)
     for i in range(3): # try retry twice
         time.sleep(2*60) # give 2 minutes to set up run
         if isFailed(dir_name):
@@ -58,20 +56,13 @@ def run(m,l, sync):
         else:
             break
                 
-    time.sleep(28*60) # 28 + 2 = 30 
+    time.sleep(13*60) # 28 + 2 = 30 
     kill_exp()
 
 if __name__=='__main__':
     print("Starting experiments:")
     for m in momentum:
         for l in lr:
-            async_dir_name = "%s-%s-%s-%s" % (prefix, str(l), str(m), ASYNC)
-            sync_dir_name = "%s-%s-%s-%s" % (prefix, str(l), str(m+0.6), SYNC)
-            if os.path.exists(async_dir_name):
-                print("Skipping " + async_dir_name)
-            else:
-                run(m,l, ASYNC)
-            if os.path.exists(sync_dir_name):
-                print("Skipping " + sync_dir_name)
-            else:
-                run(m,l, SYNC)
+            for cg in cgs:
+                run(m, l, cg)
+

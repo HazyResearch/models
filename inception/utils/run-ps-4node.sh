@@ -8,15 +8,8 @@ if [ "$#" -ne 3 ]; then
   exit
 fi
 
-if [ "$3" == "True" ]
-then
-  SIZE=64
-else
-  SIZE=64
-fi
-
 CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train \
---batch_size=$SIZE \
+--batch_size=64 \
 --data_dir=/lfs/local/0/daniter/imagenet-8 \
 --job_name='ps' \
 --task_id=0 \
@@ -24,4 +17,5 @@ CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train \
 --worker_hosts='raiders1:2200,raiders1:2201,raiders3:2209,raiders3:2210'  \
 --initial_learning_rate=$1 \
 --momentum=$2 \
---sync=$3
+--sync=True \
+--compute_groups=$3

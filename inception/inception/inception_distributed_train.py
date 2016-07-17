@@ -217,6 +217,7 @@ def train(target, dataset, cluster_spec):
       # Create synchronous replica optimizer.
       if FLAGS.sync:
           tf.logging.info("Sync mode!!!!!!")
+          tf.logging.info("Compute groups : %d" % FLAGS.compute_groups)
           opt = compute_group_optimizer.ComputeGroupOptimizer(
               opt,
               replicas_to_aggregate=num_replicas_to_aggregate,
@@ -272,7 +273,7 @@ def train(target, dataset, cluster_spec):
                                summary_op=None,
                                global_step=global_step,
                                saver=saver,
-                               save_model_secs=FLAGS.save_interval_secs)
+                               save_model_secs=0)#FLAGS.save_interval_secs)
 
       tf.logging.info('%s Supervisor' % datetime.now())
 
@@ -301,7 +302,6 @@ def train(target, dataset, cluster_spec):
       tf.set_random_seed(FLAGS.DANITER_SEED)
       next_summary_time = time.time() + FLAGS.save_summaries_secs
       while not sv.should_stop():
-        tf.logging.info("I'm starting loop!!!!!")
 
         try:
           start_time = time.time()
@@ -310,8 +310,6 @@ def train(target, dataset, cluster_spec):
           if step > FLAGS.max_steps:
             break
           duration = time.time() - start_time
-
-          tf.logging.info("I'm running Something!!!!!")
 
           #Print Accuracy
           tf.logging.info("Step: %d, Accuracy: %f, Loss: %f" %(step, sess.run(accuracy), loss_value))
