@@ -61,7 +61,7 @@ tf.app.flags.DEFINE_integer(
 tf.app.flags.DEFINE_integer('num_replicas_to_aggregate', -1,
                             """Number of gradients to collect before """
                             """updating the parameters.""")
-tf.app.flags.DEFINE_integer('save_interval_secs', 15*60,
+tf.app.flags.DEFINE_integer('save_interval_secs', 10*60,
                             'Save interval seconds.')
 tf.app.flags.DEFINE_integer('save_summaries_secs', 30000,
                             'Save summaries interval seconds.')
@@ -272,7 +272,7 @@ def train(target, dataset, cluster_spec):
                                summary_op=None,
                                global_step=global_step,
                                saver=saver,
-                               save_model_secs=0)#FLAGS.save_interval_secs)
+                               save_model_secs=FLAGS.save_interval_secs)
 
       tf.logging.info('%s Supervisor' % datetime.now())
 
