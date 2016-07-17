@@ -16,7 +16,7 @@ else
   SIZE=64
 fi
 
-CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train \
+CUDA_VISIBLE_DEVICES=$1 bazel-bin/inception/imagenet_distributed_train \
 --batch_size=$SIZE \
 --data_dir=/lfs/local/0/daniter/imagenet-8 \
 --job_name='worker' \
