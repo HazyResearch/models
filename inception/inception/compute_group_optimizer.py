@@ -218,6 +218,8 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     self._max_size = 128
     self._cg_steps = None
 
+    self._cg = self._replica_id % FLAGS.compute_groups
+
 
   def compute_gradients(self, *args, **kwargs):
     """Compute gradients of "loss" for the variables in "var_list".
@@ -351,7 +353,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     local_step = array_ops.reshape(local_step, ())
 
     cg_step = array_ops.slice(self._cg_steps.ref(),
-                                 array_ops.reshape(int(self._replica_id / FLAGS.compute_groups) , (1,)),
+                                 array_ops.reshape(self._cg , (1,)),
                                  [1],
                                  name="get_cg_step")
     cg_step = array_ops.reshape(cg_step, ())
@@ -361,13 +363,13 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     with ops.op_scope(inputs, None, self._name):
       for grad, var in grads_and_vars:
         var_list.append(var)
-        with ops.device(var.device), ops.name_scope("CG-"+str(int(self._replica_id / FLAGS.compute_groups))):
+        with ops.device(var.device), ops.name_scope("CG-"+str(self._cg)):
           if isinstance(grad, ops.Tensor):
-            tf.logging.info("making gradient queue : %s" % var.name+str(int(self._replica_id / FLAGS.compute_groups)) )
+            tf.logging.info("making gradient queue : %s" % var.name+str(self._cg) )
             gradient_queue = (data_flow_ops.FIFOQueue(self._tokens_per_step * 2,
                                                       grad.dtype,
                                                       shapes=var.get_shape(),
-                                                      shared_name=var.name+str(int(self._replica_id / FLAGS.compute_groups))))
+                                                      shared_name=var.name+str(self._cg)))
             self._one_element_queue_list.append((gradient_queue, var.device))
             if not train_ops:
               with ops.control_dependencies([tf.Print(tf.constant(1), [grad], "grad: %d" % self._replica_id, summarize=2)]):
@@ -379,7 +381,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
             gradients = gradient_queue.dequeue_many(
                 int(self._replicas_to_aggregate / FLAGS.compute_groups))
             if len(train_ops) == 1:
-              with ops.control_dependencies([tf.Print(tf.constant(1), [gradients[0,:,:,:,:], gradients[1,:,:,:,:]], "Gradients in update: " + str(gradients.get_shape()), summarize=2)]):
+              with ops.control_dependencies([tf.Print(tf.constant(1), [gradients[0,:,:,:,:]], "Gradients in update: " + str(gradients.get_shape()), summarize=2)]):
                 aggregated_grad.append(math_ops.reduce_sum(gradients, [0]))
             else:
                 aggregated_grad.append(math_ops.reduce_sum(gradients, [0]))
@@ -404,24 +406,24 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                                               int(self._replica_id / FLAGS.compute_groups), global_step)
 
       # Create token queue.
-      with ops.device(global_step.device), ops.name_scope("CG-"+str(int(self._replica_id / FLAGS.compute_groups))):
-        tf.logging.info("making sync token queue : %s" % "sync_token_q"+str(int(self._replica_id / FLAGS.compute_groups)) )
+      with ops.device(global_step.device), ops.name_scope("CG-"+str(self._cg)):
+        tf.logging.info("making sync token queue : %s" % "sync_token_q"+str(self._cg) )
         sync_token_queue = (
             data_flow_ops.FIFOQueue(-1,
                                     global_step.dtype.base_dtype,
                                     shapes=(),
-                                    shared_name="sync_token_q"+str(int(self._replica_id / FLAGS.compute_groups))))
+                                    shared_name="sync_token_q"+str(self._cg)))
         self._sync_token_queue = sync_token_queue
 
         # dummy_queue is passed to the queue runner. Don't use the real queues
         # because the queue runner doesn't automatically reopen it once it
         # closed queues in PS devices.
-        tf.logging.info("making dummy_queue queue : %s" % "dummy_queue"+str(int(self._replica_id / FLAGS.compute_groups)) )        
+        tf.logging.info("making dummy_queue queue : %s" % "dummy_queue"+str(self._cg) )        
         dummy_queue = (
             data_flow_ops.FIFOQueue(1,
                                     types_pb2.DT_INT32,
                                     shapes=(),
-                                    shared_name="dummy_queue"+str(int(self._replica_id / FLAGS.compute_groups))))
+                                    shared_name="dummy_queue"+str(self._cg)))
       # Clear all the gradients queues in case there are stale gradients.
       clear_queue_ops = []
       with ops.control_dependencies([update_op]):
@@ -587,21 +589,4 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
     return init_tokens
 
-  def get_cg_queue_runner(self):
-    print("Daniter~~~~~~~~~~~ setting up cg~~~~~~~~~~~~~")
-    if self._cg_queue_runner != None:
-      return self._cg_queue_runner
-
-    cg_queue = (data_flow_ops.FIFOQueue(1,
-                                    types_pb2.DT_INT32,
-                                    shapes=(),
-                                    shared_name="cg_queue"))
-    cg_ops = []
-    # TODO : Don't use total_num replicas, this may change in the future
-    for i in range(int(self._total_num_replicas/ FLAGS.compute_groups)):
-      tmp = self._replica_id + i
-      cg_ops.append(tf.Print(tf.Variable(tmp), [tf.Variable(tmp)], "Task id: %d" % self._replica_id)) 
-
-    self._cg_queue_runner = queue_runner.QueueRunner(cg_queue, cg_ops)
-    return self._cg_queue_runner
 

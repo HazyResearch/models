@@ -115,7 +115,7 @@ def train(target, dataset, cluster_spec):
 
   # daniter - compute groups:
   assert num_workers % FLAGS.compute_groups == 0, ("Number of workers msut be divisible by compute groups")
-  is_chief = (FLAGS.task_id % (num_workers / FLAGS.compute_groups) == 0)
+  is_chief = (FLAGS.task_id < FLAGS.compute_groups)
 
 
   # Ops are assigned to worker by default.
@@ -249,7 +249,6 @@ def train(target, dataset, cluster_spec):
       # synchronize replicas.
       # More details can be found in sync_replicas_optimizer.
       if FLAGS.sync:
-          #cg_queue_runner = opt.get_cg_queue_runner()
           chief_queue_runners = [opt.get_chief_queue_runner()]
           init_tokens_op = opt.get_init_tokens_op()
           clean_up_op = opt.get_clean_up_op()
@@ -267,13 +266,13 @@ def train(target, dataset, cluster_spec):
       # passing in None for summary_op to avoid a summary_thread being started.
       # Running summaries and training operations in parallel could run out of
       # GPU memory.
-      sv = tf.train.Supervisor(is_chief=is_chief,
+      sv = tf.train.Supervisor(is_chief=is_chief, # TODO : should this be per cheif?
                                logdir=FLAGS.train_dir,
                                init_op=init_op,
                                summary_op=None,
                                global_step=global_step,
                                saver=saver,
-                               save_model_secs=FLAGS.save_interval_secs)
+                               save_model_secs=0)#FLAGS.save_interval_secs)
 
       tf.logging.info('%s Supervisor' % datetime.now())
 
@@ -294,7 +293,6 @@ def train(target, dataset, cluster_spec):
 
       if is_chief and FLAGS.sync:
         sv.start_queue_runners(sess, chief_queue_runners)
-        #sv.start_queue_runners(sess, [cg_queue_runner])
         sess.run(init_tokens_op)
 
       # Train, checking for Nans. Concurrently run the summary operation at a
