@@ -1,0 +1,767 @@
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+INFO:tensorflow:PS hosts are: ['raiders1:2228']
+INFO:tensorflow:Worker hosts are: ['raiders1:2200', 'raiders1:2201', 'raiders3:2209', 'raiders3:2210']
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX TITAN X
+major: 5 minor: 2 memoryClockRate (GHz) 1.076
+pciBusID 0000:43:00.0
+Total memory: 11.92GiB
+Free memory: 11.81GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:43:00.0)
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {raiders1:2228}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {raiders1:2200, localhost:2201, raiders3:2209, raiders3:2210}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2201
+INFO:tensorflow:Created variable global_step:0 with shape () and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Learning rate: 0.005000, momentum: 0.750000
+INFO:tensorflow:Created variable conv0/weights:0 with shape (3, 3, 3, 32) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to conv0/weights:0 and added the result conv0/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable conv0/BatchNorm/beta:0 with shape (32,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv0/BatchNorm/moving_mean:0 with shape (32,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv0/BatchNorm/moving_variance:0 with shape (32,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable conv1/weights:0 with shape (3, 3, 32, 32) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to conv1/weights:0 and added the result conv1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable conv1/BatchNorm/beta:0 with shape (32,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv1/BatchNorm/moving_mean:0 with shape (32,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv1/BatchNorm/moving_variance:0 with shape (32,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable conv2/weights:0 with shape (3, 3, 32, 64) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to conv2/weights:0 and added the result conv2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable conv2/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv2/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv2/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable conv3/weights:0 with shape (1, 1, 64, 80) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to conv3/weights:0 and added the result conv3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable conv3/BatchNorm/beta:0 with shape (80,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv3/BatchNorm/moving_mean:0 with shape (80,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv3/BatchNorm/moving_variance:0 with shape (80,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable conv4/weights:0 with shape (3, 3, 80, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to conv4/weights:0 and added the result conv4/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable conv4/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv4/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable conv4/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch1x1/Conv/weights:0 with shape (1, 1, 192, 64) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x256a/branch1x1/Conv/weights:0 and added the result mixed_35x35x256a/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x256a/branch1x1/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv/weights:0 with shape (1, 1, 192, 48) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x256a/branch5x5/Conv/weights:0 and added the result mixed_35x35x256a/branch5x5/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv/BatchNorm/beta:0 with shape (48,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv/BatchNorm/moving_mean:0 with shape (48,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv/BatchNorm/moving_variance:0 with shape (48,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv_1/weights:0 with shape (5, 5, 48, 64) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x256a/branch5x5/Conv_1/weights:0 and added the result mixed_35x35x256a/branch5x5/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv_1/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv_1/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch5x5/Conv_1/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv/weights:0 with shape (1, 1, 192, 64) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x256a/branch3x3dbl/Conv/weights:0 and added the result mixed_35x35x256a/branch3x3dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_1/weights:0 with shape (3, 3, 64, 96) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x256a/branch3x3dbl/Conv_1/weights:0 and added the result mixed_35x35x256a/branch3x3dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_1/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_1/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_1/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_2/weights:0 with shape (3, 3, 96, 96) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x256a/branch3x3dbl/Conv_2/weights:0 and added the result mixed_35x35x256a/branch3x3dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_2/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_2/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch3x3dbl/Conv_2/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch_pool/Conv/weights:0 with shape (1, 1, 192, 32) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x256a/branch_pool/Conv/weights:0 and added the result mixed_35x35x256a/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x256a/branch_pool/Conv/BatchNorm/beta:0 with shape (32,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (32,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x256a/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (32,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch1x1/Conv/weights:0 with shape (1, 1, 256, 64) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288a/branch1x1/Conv/weights:0 and added the result mixed_35x35x288a/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288a/branch1x1/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv/weights:0 with shape (1, 1, 256, 48) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288a/branch5x5/Conv/weights:0 and added the result mixed_35x35x288a/branch5x5/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv/BatchNorm/beta:0 with shape (48,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv/BatchNorm/moving_mean:0 with shape (48,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv/BatchNorm/moving_variance:0 with shape (48,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv_1/weights:0 with shape (5, 5, 48, 64) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288a/branch5x5/Conv_1/weights:0 and added the result mixed_35x35x288a/branch5x5/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv_1/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv_1/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch5x5/Conv_1/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv/weights:0 with shape (1, 1, 256, 64) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288a/branch3x3dbl/Conv/weights:0 and added the result mixed_35x35x288a/branch3x3dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_1/weights:0 with shape (3, 3, 64, 96) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288a/branch3x3dbl/Conv_1/weights:0 and added the result mixed_35x35x288a/branch3x3dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_1/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_1/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_1/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_2/weights:0 with shape (3, 3, 96, 96) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288a/branch3x3dbl/Conv_2/weights:0 and added the result mixed_35x35x288a/branch3x3dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_2/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_2/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch3x3dbl/Conv_2/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch_pool/Conv/weights:0 with shape (1, 1, 256, 64) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288a/branch_pool/Conv/weights:0 and added the result mixed_35x35x288a/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288a/branch_pool/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288a/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch1x1/Conv/weights:0 with shape (1, 1, 288, 64) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288b/branch1x1/Conv/weights:0 and added the result mixed_35x35x288b/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288b/branch1x1/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv/weights:0 with shape (1, 1, 288, 48) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288b/branch5x5/Conv/weights:0 and added the result mixed_35x35x288b/branch5x5/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv/BatchNorm/beta:0 with shape (48,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv/BatchNorm/moving_mean:0 with shape (48,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv/BatchNorm/moving_variance:0 with shape (48,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv_1/weights:0 with shape (5, 5, 48, 64) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288b/branch5x5/Conv_1/weights:0 and added the result mixed_35x35x288b/branch5x5/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv_1/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv_1/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch5x5/Conv_1/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv/weights:0 with shape (1, 1, 288, 64) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288b/branch3x3dbl/Conv/weights:0 and added the result mixed_35x35x288b/branch3x3dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_1/weights:0 with shape (3, 3, 64, 96) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288b/branch3x3dbl/Conv_1/weights:0 and added the result mixed_35x35x288b/branch3x3dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_1/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_1/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_1/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_2/weights:0 with shape (3, 3, 96, 96) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288b/branch3x3dbl/Conv_2/weights:0 and added the result mixed_35x35x288b/branch3x3dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_2/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_2/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch3x3dbl/Conv_2/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch_pool/Conv/weights:0 with shape (1, 1, 288, 64) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_35x35x288b/branch_pool/Conv/weights:0 and added the result mixed_35x35x288b/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_35x35x288b/branch_pool/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_35x35x288b/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3/Conv/weights:0 with shape (3, 3, 288, 384) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768a/branch3x3/Conv/weights:0 and added the result mixed_17x17x768a/branch3x3/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3/Conv/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3/Conv/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3/Conv/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv/weights:0 with shape (1, 1, 288, 64) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768a/branch3x3dbl/Conv/weights:0 and added the result mixed_17x17x768a/branch3x3dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv/BatchNorm/beta:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv/BatchNorm/moving_mean:0 with shape (64,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv/BatchNorm/moving_variance:0 with shape (64,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_1/weights:0 with shape (3, 3, 64, 96) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768a/branch3x3dbl/Conv_1/weights:0 and added the result mixed_17x17x768a/branch3x3dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_1/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_1/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_1/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_2/weights:0 with shape (3, 3, 96, 96) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768a/branch3x3dbl/Conv_2/weights:0 and added the result mixed_17x17x768a/branch3x3dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_2/BatchNorm/beta:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_2/BatchNorm/moving_mean:0 with shape (96,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768a/branch3x3dbl/Conv_2/BatchNorm/moving_variance:0 with shape (96,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch1x1/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch1x1/Conv/weights:0 and added the result mixed_17x17x768b/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch1x1/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv/weights:0 with shape (1, 1, 768, 128) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7/Conv/weights:0 and added the result mixed_17x17x768b/branch7x7/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv/BatchNorm/beta:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv/BatchNorm/moving_mean:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv/BatchNorm/moving_variance:0 with shape (128,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_1/weights:0 with shape (1, 7, 128, 128) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7/Conv_1/weights:0 and added the result mixed_17x17x768b/branch7x7/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_1/BatchNorm/beta:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_1/BatchNorm/moving_mean:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_1/BatchNorm/moving_variance:0 with shape (128,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_2/weights:0 with shape (7, 1, 128, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7/Conv_2/weights:0 and added the result mixed_17x17x768b/branch7x7/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_2/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_2/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7/Conv_2/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv/weights:0 with shape (1, 1, 768, 128) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7dbl/Conv/weights:0 and added the result mixed_17x17x768b/branch7x7dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv/BatchNorm/beta:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv/BatchNorm/moving_mean:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv/BatchNorm/moving_variance:0 with shape (128,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_1/weights:0 with shape (7, 1, 128, 128) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7dbl/Conv_1/weights:0 and added the result mixed_17x17x768b/branch7x7dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_1/BatchNorm/beta:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_1/BatchNorm/moving_mean:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_1/BatchNorm/moving_variance:0 with shape (128,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_2/weights:0 with shape (1, 7, 128, 128) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7dbl/Conv_2/weights:0 and added the result mixed_17x17x768b/branch7x7dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_2/BatchNorm/beta:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_2/BatchNorm/moving_mean:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_2/BatchNorm/moving_variance:0 with shape (128,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_3/weights:0 with shape (7, 1, 128, 128) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7dbl/Conv_3/weights:0 and added the result mixed_17x17x768b/branch7x7dbl/Conv_3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_3/BatchNorm/beta:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_3/BatchNorm/moving_mean:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_3/BatchNorm/moving_variance:0 with shape (128,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_4/weights:0 with shape (1, 7, 128, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch7x7dbl/Conv_4/weights:0 and added the result mixed_17x17x768b/branch7x7dbl/Conv_4/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_4/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_4/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch7x7dbl/Conv_4/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch_pool/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768b/branch_pool/Conv/weights:0 and added the result mixed_17x17x768b/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768b/branch_pool/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768b/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch1x1/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch1x1/Conv/weights:0 and added the result mixed_17x17x768c/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch1x1/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv/weights:0 with shape (1, 1, 768, 160) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7/Conv/weights:0 and added the result mixed_17x17x768c/branch7x7/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_1/weights:0 with shape (1, 7, 160, 160) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7/Conv_1/weights:0 and added the result mixed_17x17x768c/branch7x7/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_1/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_1/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_1/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_2/weights:0 with shape (7, 1, 160, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7/Conv_2/weights:0 and added the result mixed_17x17x768c/branch7x7/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_2/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_2/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7/Conv_2/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv/weights:0 with shape (1, 1, 768, 160) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7dbl/Conv/weights:0 and added the result mixed_17x17x768c/branch7x7dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_1/weights:0 with shape (7, 1, 160, 160) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7dbl/Conv_1/weights:0 and added the result mixed_17x17x768c/branch7x7dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_1/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_1/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_1/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_2/weights:0 with shape (1, 7, 160, 160) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7dbl/Conv_2/weights:0 and added the result mixed_17x17x768c/branch7x7dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_2/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_2/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_2/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_3/weights:0 with shape (7, 1, 160, 160) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7dbl/Conv_3/weights:0 and added the result mixed_17x17x768c/branch7x7dbl/Conv_3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_3/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_3/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_3/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_4/weights:0 with shape (1, 7, 160, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch7x7dbl/Conv_4/weights:0 and added the result mixed_17x17x768c/branch7x7dbl/Conv_4/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_4/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_4/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch7x7dbl/Conv_4/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch_pool/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768c/branch_pool/Conv/weights:0 and added the result mixed_17x17x768c/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768c/branch_pool/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768c/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch1x1/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch1x1/Conv/weights:0 and added the result mixed_17x17x768d/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch1x1/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv/weights:0 with shape (1, 1, 768, 160) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7/Conv/weights:0 and added the result mixed_17x17x768d/branch7x7/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_1/weights:0 with shape (1, 7, 160, 160) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7/Conv_1/weights:0 and added the result mixed_17x17x768d/branch7x7/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_1/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_1/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_1/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_2/weights:0 with shape (7, 1, 160, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7/Conv_2/weights:0 and added the result mixed_17x17x768d/branch7x7/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_2/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_2/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7/Conv_2/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv/weights:0 with shape (1, 1, 768, 160) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7dbl/Conv/weights:0 and added the result mixed_17x17x768d/branch7x7dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_1/weights:0 with shape (7, 1, 160, 160) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7dbl/Conv_1/weights:0 and added the result mixed_17x17x768d/branch7x7dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_1/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_1/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_1/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_2/weights:0 with shape (1, 7, 160, 160) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7dbl/Conv_2/weights:0 and added the result mixed_17x17x768d/branch7x7dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_2/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_2/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_2/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_3/weights:0 with shape (7, 1, 160, 160) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7dbl/Conv_3/weights:0 and added the result mixed_17x17x768d/branch7x7dbl/Conv_3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_3/BatchNorm/beta:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_3/BatchNorm/moving_mean:0 with shape (160,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_3/BatchNorm/moving_variance:0 with shape (160,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_4/weights:0 with shape (1, 7, 160, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch7x7dbl/Conv_4/weights:0 and added the result mixed_17x17x768d/branch7x7dbl/Conv_4/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_4/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_4/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch7x7dbl/Conv_4/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch_pool/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768d/branch_pool/Conv/weights:0 and added the result mixed_17x17x768d/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768d/branch_pool/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768d/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch1x1/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch1x1/Conv/weights:0 and added the result mixed_17x17x768e/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch1x1/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7/Conv/weights:0 and added the result mixed_17x17x768e/branch7x7/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_1/weights:0 with shape (1, 7, 192, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7/Conv_1/weights:0 and added the result mixed_17x17x768e/branch7x7/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_1/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_1/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_1/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_2/weights:0 with shape (7, 1, 192, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7/Conv_2/weights:0 and added the result mixed_17x17x768e/branch7x7/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_2/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_2/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7/Conv_2/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7dbl/Conv/weights:0 and added the result mixed_17x17x768e/branch7x7dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_1/weights:0 with shape (7, 1, 192, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7dbl/Conv_1/weights:0 and added the result mixed_17x17x768e/branch7x7dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_1/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_1/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_1/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_2/weights:0 with shape (1, 7, 192, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7dbl/Conv_2/weights:0 and added the result mixed_17x17x768e/branch7x7dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_2/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_2/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_2/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_3/weights:0 with shape (7, 1, 192, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7dbl/Conv_3/weights:0 and added the result mixed_17x17x768e/branch7x7dbl/Conv_3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_3/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_3/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_3/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_4/weights:0 with shape (1, 7, 192, 192) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch7x7dbl/Conv_4/weights:0 and added the result mixed_17x17x768e/branch7x7dbl/Conv_4/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_4/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_4/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch7x7dbl/Conv_4/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch_pool/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x768e/branch_pool/Conv/weights:0 and added the result mixed_17x17x768e/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x768e/branch_pool/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x768e/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable aux_logits/proj/weights:0 with shape (1, 1, 768, 128) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to aux_logits/proj/weights:0 and added the result aux_logits/proj/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable aux_logits/proj/BatchNorm/beta:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable aux_logits/proj/BatchNorm/moving_mean:0 with shape (128,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable aux_logits/proj/BatchNorm/moving_variance:0 with shape (128,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable aux_logits/Conv/weights:0 with shape (4, 4, 128, 768) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to aux_logits/Conv/weights:0 and added the result aux_logits/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable aux_logits/Conv/BatchNorm/beta:0 with shape (768,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable aux_logits/Conv/BatchNorm/moving_mean:0 with shape (768,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable aux_logits/Conv/BatchNorm/moving_variance:0 with shape (768,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable aux_logits/FC/weights:0 with shape (768, 9) and init <function _initializer at 0x7f922f2adc08>
+INFO:tensorflow:Applied regularizer to aux_logits/FC/weights:0 and added the result aux_logits/FC/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable aux_logits/FC/biases:0 with shape (9,) and init <function _initializer at 0x7f911c59ed70>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f911c59ed70>
+INFO:tensorflow:Applied regularizer to mixed_17x17x1280a/branch3x3/Conv/weights:0 and added the result mixed_17x17x1280a/branch3x3/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv_1/weights:0 with shape (3, 3, 192, 320) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x1280a/branch3x3/Conv_1/weights:0 and added the result mixed_17x17x1280a/branch3x3/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv_1/BatchNorm/beta:0 with shape (320,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv_1/BatchNorm/moving_mean:0 with shape (320,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch3x3/Conv_1/BatchNorm/moving_variance:0 with shape (320,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv/weights:0 with shape (1, 1, 768, 192) and init <function _initializer at 0x7f911c59ed70>
+INFO:tensorflow:Applied regularizer to mixed_17x17x1280a/branch7x7x3/Conv/weights:0 and added the result mixed_17x17x1280a/branch7x7x3/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_1/weights:0 with shape (1, 7, 192, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x1280a/branch7x7x3/Conv_1/weights:0 and added the result mixed_17x17x1280a/branch7x7x3/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_1/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_1/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_1/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_2/weights:0 with shape (7, 1, 192, 192) and init <function _initializer at 0x7f911c59ed70>
+INFO:tensorflow:Applied regularizer to mixed_17x17x1280a/branch7x7x3/Conv_2/weights:0 and added the result mixed_17x17x1280a/branch7x7x3/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_2/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_2/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_2/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_3/weights:0 with shape (3, 3, 192, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_17x17x1280a/branch7x7x3/Conv_3/weights:0 and added the result mixed_17x17x1280a/branch7x7x3/Conv_3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_3/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_3/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_17x17x1280a/branch7x7x3/Conv_3/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch1x1/Conv/weights:0 with shape (1, 1, 1280, 320) and init <function _initializer at 0x7f911c59ed70>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch1x1/Conv/weights:0 and added the result mixed_8x8x2048a/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch1x1/Conv/BatchNorm/beta:0 with shape (320,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (320,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (320,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv/weights:0 with shape (1, 1, 1280, 384) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch3x3/Conv/weights:0 and added the result mixed_8x8x2048a/branch3x3/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_1/weights:0 with shape (1, 3, 384, 384) and init <function _initializer at 0x7f911c59ed70>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch3x3/Conv_1/weights:0 and added the result mixed_8x8x2048a/branch3x3/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_1/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_1/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_1/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_2/weights:0 with shape (3, 1, 384, 384) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch3x3/Conv_2/weights:0 and added the result mixed_8x8x2048a/branch3x3/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv/weights:0 with shape (1, 1, 1280, 448) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch3x3dbl/Conv/weights:0 and added the result mixed_8x8x2048a/branch3x3dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv/BatchNorm/beta:0 with shape (448,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv/BatchNorm/moving_mean:0 with shape (448,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv/BatchNorm/moving_variance:0 with shape (448,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_1/weights:0 with shape (3, 3, 448, 384) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch3x3dbl/Conv_1/weights:0 and added the result mixed_8x8x2048a/branch3x3dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_1/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_1/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_1/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_2/weights:0 with shape (1, 3, 384, 384) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch3x3dbl/Conv_2/weights:0 and added the result mixed_8x8x2048a/branch3x3dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_2/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_2/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_2/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_3/weights:0 with shape (3, 1, 384, 384) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch3x3dbl/Conv_3/weights:0 and added the result mixed_8x8x2048a/branch3x3dbl/Conv_3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_3/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_3/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch3x3dbl/Conv_3/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch_pool/Conv/weights:0 with shape (1, 1, 1280, 192) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048a/branch_pool/Conv/weights:0 and added the result mixed_8x8x2048a/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch_pool/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048a/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch1x1/Conv/weights:0 with shape (1, 1, 2048, 320) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch1x1/Conv/weights:0 and added the result mixed_8x8x2048b/branch1x1/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch1x1/Conv/BatchNorm/beta:0 with shape (320,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch1x1/Conv/BatchNorm/moving_mean:0 with shape (320,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch1x1/Conv/BatchNorm/moving_variance:0 with shape (320,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv/weights:0 with shape (1, 1, 2048, 384) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch3x3/Conv/weights:0 and added the result mixed_8x8x2048b/branch3x3/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_1/weights:0 with shape (1, 3, 384, 384) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch3x3/Conv_1/weights:0 and added the result mixed_8x8x2048b/branch3x3/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_1/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_1/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_1/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_2/weights:0 with shape (3, 1, 384, 384) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch3x3/Conv_2/weights:0 and added the result mixed_8x8x2048b/branch3x3/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_2/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_2/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3/Conv_2/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv/weights:0 with shape (1, 1, 2048, 448) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch3x3dbl/Conv/weights:0 and added the result mixed_8x8x2048b/branch3x3dbl/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv/BatchNorm/beta:0 with shape (448,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv/BatchNorm/moving_mean:0 with shape (448,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv/BatchNorm/moving_variance:0 with shape (448,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_1/weights:0 with shape (3, 3, 448, 384) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch3x3dbl/Conv_1/weights:0 and added the result mixed_8x8x2048b/branch3x3dbl/Conv_1/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_1/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_1/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_1/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_2/weights:0 with shape (1, 3, 384, 384) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch3x3dbl/Conv_2/weights:0 and added the result mixed_8x8x2048b/branch3x3dbl/Conv_2/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_2/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_2/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_2/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_3/weights:0 with shape (3, 1, 384, 384) and init <function _initializer at 0x7f9228555758>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch3x3dbl/Conv_3/weights:0 and added the result mixed_8x8x2048b/branch3x3dbl/Conv_3/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_3/BatchNorm/beta:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_3/BatchNorm/moving_mean:0 with shape (384,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch3x3dbl/Conv_3/BatchNorm/moving_variance:0 with shape (384,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch_pool/Conv/weights:0 with shape (1, 1, 2048, 192) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Applied regularizer to mixed_8x8x2048b/branch_pool/Conv/weights:0 and added the result mixed_8x8x2048b/branch_pool/Conv/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch_pool/Conv/BatchNorm/beta:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch_pool/Conv/BatchNorm/moving_mean:0 with shape (192,) and init <function zeros_initializer at 0x7f918ff26398>
+INFO:tensorflow:Created variable mixed_8x8x2048b/branch_pool/Conv/BatchNorm/moving_variance:0 with shape (192,) and init <function ones_initializer at 0x7f918fc6d140>
+INFO:tensorflow:Created variable logits/logits/weights:0 with shape (2048, 9) and init <function _initializer at 0x7f91085f4ed8>
+INFO:tensorflow:Applied regularizer to logits/logits/weights:0 and added the result logits/logits/weights/Regularizer/L2Regularizer/value:0 to REGULARIZATION_LOSSES.
+INFO:tensorflow:Created variable logits/logits/biases:0 with shape (9,) and init <function _initializer at 0x7f91146d46e0>
+INFO:tensorflow:Sync mode!!!!!!
+INFO:tensorflow:Compute groups : 4
+INFO:tensorflow:SyncReplicas enabled: replicas_to_aggregate=4; total_num_replicas=4
+INFO:tensorflow:2016-07-17 14:21:54.253934 Supervisor
+INFO:tensorflow:Waiting for model to be ready: Attempting to use uninitialized value mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta
+	 [[Node: mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta/read = Identity[T=DT_FLOAT, _class=["loc:@mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta"], _device="/job:ps/replica:0/task:0/cpu:0"](mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta)]]
+Caused by op u'mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta/read', defined at:
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 69, in <module>
+    tf.app.run()
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/platform/app.py", line 30, in run
+    sys.exit(main(sys.argv))
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 65, in main
+    inception_distributed_train.train(server.target, dataset, cluster_spec)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/inception_distributed_train.py", line 167, in train
+    logits = inception.inference(images, num_classes, for_training=True)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/inception_model.py", line 87, in inference
+    scope=scope)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/slim/inception_model.py", line 290, in inception_v3
+    ops.conv2d(branch3x3, 384, [3, 1])])
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/slim/scopes.py", line 155, in func_with_args
+    return func(*args, **current_args)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/slim/ops.py", line 234, in conv2d
+    outputs = batch_norm(conv, **batch_norm_params)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/slim/scopes.py", line 155, in func_with_args
+    return func(*args, **current_args)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/slim/ops.py", line 90, in batch_norm
+    restore=restore)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/slim/scopes.py", line 155, in func_with_args
+    return func(*args, **current_args)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/slim/variables.py", line 290, in variable
+    trainable=trainable, collections=collections)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 339, in get_variable
+    collections=collections)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 262, in get_variable
+    collections=collections, caching_device=caching_device)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 158, in get_variable
+    dtype=variable_dtype)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variables.py", line 209, in __init__
+    dtype=dtype)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variables.py", line 318, in _init_from_args
+    self._snapshot = array_ops.identity(self._variable, name="read")
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_array_ops.py", line 609, in identity
+    return _op_def_lib.apply_op("Identity", input=input, name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/op_def_library.py", line 655, in apply_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 2154, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1154, in __init__
+    self._traceback = _extract_stack()
+
+INFO:tensorflow:got sessions!
+INFO:tensorflow:Started 2 queues for processing input data.
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3859 get requests, put_count=2171 evicted_count=1000 eviction_rate=0.460617 and unsatisfied allocation rate=0.722467
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 100 to 110
+INFO:tensorflow:Step: 399, Accuracy: 0.656250, Loss: 5.363732
+INFO:tensorflow:Worker 1: 2016-07-17 14:23:01.092747: step 399, loss = 5.36(11.8 examples/sec; 5.416  sec/batch)
+INFO:tensorflow:Step: 400, Accuracy: 0.578125, Loss: 5.355189
+INFO:tensorflow:Step: 401, Accuracy: 0.406250, Loss: 5.295219
+INFO:tensorflow:Step: 405, Accuracy: 0.578125, Loss: 5.215976
+INFO:tensorflow:Worker 1: 2016-07-17 14:23:16.066277: step 405, loss = 5.22(10.8 examples/sec; 5.917  sec/batch)
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3956 get requests, put_count=3284 evicted_count=2000 eviction_rate=0.609013 and unsatisfied allocation rate=0.678716
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 146 to 160
+INFO:tensorflow:Step: 408, Accuracy: 0.500000, Loss: 5.328868
+INFO:tensorflow:Worker 1: 2016-07-17 14:23:23.847403: step 408, loss = 5.33(12.3 examples/sec; 5.218  sec/batch)
+INFO:tensorflow:Step: 411, Accuracy: 0.500000, Loss: 5.198366
+INFO:tensorflow:Worker 1: 2016-07-17 14:23:29.703376: step 411, loss = 5.20(16.7 examples/sec; 3.831  sec/batch)
+INFO:tensorflow:Step: 416, Accuracy: 0.640625, Loss: 5.511454
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=2019 evicted_count=2000 eviction_rate=0.990589 and unsatisfied allocation rate=0
+INFO:tensorflow:Step: 419, Accuracy: 0.562500, Loss: 4.954771
+INFO:tensorflow:Step: 422, Accuracy: 0.625000, Loss: 5.036149
+INFO:tensorflow:Step: 426, Accuracy: 0.593750, Loss: 5.177125
+INFO:tensorflow:Worker 1: 2016-07-17 14:23:53.441056: step 426, loss = 5.18(20.5 examples/sec; 3.129  sec/batch)
+INFO:tensorflow:Step: 430, Accuracy: 0.609375, Loss: 5.247322
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=2028 evicted_count=2000 eviction_rate=0.986193 and unsatisfied allocation rate=0
+INFO:tensorflow:Step: 434, Accuracy: 0.656250, Loss: 5.259899
+INFO:tensorflow:Step: 439, Accuracy: 0.531250, Loss: 4.981463
+INFO:tensorflow:Step: 441, Accuracy: 0.578125, Loss: 5.454835
+INFO:tensorflow:Worker 1: 2016-07-17 14:24:19.474313: step 441, loss = 5.45(15.9 examples/sec; 4.014  sec/batch)
+INFO:tensorflow:Step: 446, Accuracy: 0.625000, Loss: 5.198655
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=2040 evicted_count=2000 eviction_rate=0.980392 and unsatisfied allocation rate=0
+INFO:tensorflow:Step: 450, Accuracy: 0.562500, Loss: 5.213490
+INFO:tensorflow:Worker 1: 2016-07-17 14:24:31.591574: step 450, loss = 5.21(17.3 examples/sec; 3.705  sec/batch)
+INFO:tensorflow:Step: 454, Accuracy: 0.546875, Loss: 5.306811
+INFO:tensorflow:Step: 458, Accuracy: 0.593750, Loss: 5.157667
+INFO:tensorflow:Step: 461, Accuracy: 0.687500, Loss: 5.264291
+INFO:tensorflow:Step: 465, Accuracy: 0.562500, Loss: 5.096790
+INFO:tensorflow:Worker 1: 2016-07-17 14:24:55.223327: step 465, loss = 5.10(11.8 examples/sec; 5.444  sec/batch)
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=1065 evicted_count=1000 eviction_rate=0.938967 and unsatisfied allocation rate=0
+INFO:tensorflow:Step: 467, Accuracy: 0.625000, Loss: 4.932439
+INFO:tensorflow:Step: 471, Accuracy: 0.593750, Loss: 5.076113
+INFO:tensorflow:Worker 1: 2016-07-17 14:25:07.440509: step 471, loss = 5.08(18.7 examples/sec; 3.425  sec/batch)
+INFO:tensorflow:Step: 475, Accuracy: 0.609375, Loss: 5.178001
+INFO:tensorflow:Step: 479, Accuracy: 0.593750, Loss: 5.184547
+INFO:tensorflow:Step: 483, Accuracy: 0.515625, Loss: 5.399642
+INFO:tensorflow:Worker 1: 2016-07-17 14:25:26.177778: step 483, loss = 5.40(14.7 examples/sec; 4.361  sec/batch)
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=1105 evicted_count=1000 eviction_rate=0.904977 and unsatisfied allocation rate=0
+INFO:tensorflow:Step: 487, Accuracy: 0.593750, Loss: 5.217199
+INFO:tensorflow:Step: 491, Accuracy: 0.671875, Loss: 5.093500
+INFO:tensorflow:Step: 494, Accuracy: 0.562500, Loss: 5.249706
+INFO:tensorflow:Step: 499, Accuracy: 0.421875, Loss: 4.966494
+INFO:tensorflow:Step: 502, Accuracy: 0.546875, Loss: 5.399003
+INFO:tensorflow:Step: 505, Accuracy: 0.671875, Loss: 5.197460
+INFO:tensorflow:Step: 509, Accuracy: 0.562500, Loss: 5.178354
+INFO:tensorflow:Step: 513, Accuracy: 0.531250, Loss: 5.065997
+INFO:tensorflow:Worker 1: 2016-07-17 14:26:10.559320: step 513, loss = 5.07(19.3 examples/sec; 3.312  sec/batch)
+INFO:tensorflow:Step: 517, Accuracy: 0.578125, Loss: 5.065960
+INFO:tensorflow:Step: 522, Accuracy: 0.671875, Loss: 5.460485
+INFO:tensorflow:Worker 1: 2016-07-17 14:26:24.709972: step 522, loss = 5.46(14.2 examples/sec; 4.520  sec/batch)
+INFO:tensorflow:Step: 526, Accuracy: 0.640625, Loss: 5.208380
+INFO:tensorflow:Step: 528, Accuracy: 0.546875, Loss: 5.295530
+INFO:tensorflow:Worker 1: 2016-07-17 14:26:34.287481: step 528, loss = 5.30(16.9 examples/sec; 3.798  sec/batch)
+INFO:tensorflow:Step: 532, Accuracy: 0.546875, Loss: 5.131113
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 11868 get requests, put_count=12164 evicted_count=1000 eviction_rate=0.0822098 and unsatisfied allocation rate=0.0782777
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 2478 to 2725
+INFO:tensorflow:Step: 535, Accuracy: 0.671875, Loss: 5.186271
+INFO:tensorflow:Step: 539, Accuracy: 0.609375, Loss: 5.239371
+INFO:tensorflow:Step: 543, Accuracy: 0.703125, Loss: 5.121264
+INFO:tensorflow:Worker 1: 2016-07-17 14:26:58.121638: step 543, loss = 5.12(12.1 examples/sec; 5.276  sec/batch)
+INFO:tensorflow:Step: 547, Accuracy: 0.578125, Loss: 5.241351
+INFO:tensorflow:Step: 550, Accuracy: 0.640625, Loss: 5.121333
+INFO:tensorflow:Step: 554, Accuracy: 0.656250, Loss: 5.151800
+INFO:tensorflow:Step: 559, Accuracy: 0.640625, Loss: 5.154462
+INFO:tensorflow:Step: 562, Accuracy: 0.593750, Loss: 5.117415
+INFO:tensorflow:Step: 567, Accuracy: 0.656250, Loss: 5.086435
+INFO:tensorflow:Worker 1: 2016-07-17 14:27:35.843961: step 567, loss = 5.09(14.8 examples/sec; 4.335  sec/batch)
+INFO:tensorflow:Step: 570, Accuracy: 0.531250, Loss: 5.095998
+INFO:tensorflow:Worker 1: 2016-07-17 14:27:41.048920: step 570, loss = 5.10(15.0 examples/sec; 4.266  sec/batch)
+INFO:tensorflow:Step: 574, Accuracy: 0.687500, Loss: 5.152888
+INFO:tensorflow:Step: 579, Accuracy: 0.656250, Loss: 5.167491
+INFO:tensorflow:Worker 1: 2016-07-17 14:27:51.844711: step 579, loss = 5.17(20.7 examples/sec; 3.096  sec/batch)
+INFO:tensorflow:Step: 582, Accuracy: 0.593750, Loss: 5.095932
+INFO:tensorflow:Worker 1: 2016-07-17 14:27:57.715919: step 582, loss = 5.10(15.6 examples/sec; 4.096  sec/batch)
+INFO:tensorflow:Step: 585, Accuracy: 0.609375, Loss: 5.059855
+INFO:tensorflow:Worker 1: 2016-07-17 14:28:01.102544: step 585, loss = 5.06(28.2 examples/sec; 2.273  sec/batch)
+INFO:tensorflow:Step: 589, Accuracy: 0.515625, Loss: 5.341258
+INFO:tensorflow:Step: 593, Accuracy: 0.562500, Loss: 5.168491
+INFO:tensorflow:Step: 597, Accuracy: 0.593750, Loss: 5.141424
+INFO:tensorflow:Worker 1: 2016-07-17 14:28:18.183609: step 597, loss = 5.14(15.7 examples/sec; 4.070  sec/batch)
+INFO:tensorflow:Step: 599, Accuracy: 0.750000, Loss: 5.182024
+INFO:tensorflow:Step: 603, Accuracy: 0.609375, Loss: 5.178882
+INFO:tensorflow:Worker 1: 2016-07-17 14:28:31.208063: step 603, loss = 5.18(14.1 examples/sec; 4.527  sec/batch)
+INFO:tensorflow:Step: 607, Accuracy: 0.578125, Loss: 5.066585
+INFO:tensorflow:Step: 611, Accuracy: 0.656250, Loss: 5.339660
+INFO:tensorflow:Step: 615, Accuracy: 0.531250, Loss: 5.395486
+INFO:tensorflow:Worker 1: 2016-07-17 14:28:49.087743: step 615, loss = 5.40(14.4 examples/sec; 4.441  sec/batch)
+INFO:tensorflow:Step: 619, Accuracy: 0.484375, Loss: 5.092537
+INFO:tensorflow:Step: 623, Accuracy: 0.625000, Loss: 5.178641
+INFO:tensorflow:Step: 628, Accuracy: 0.609375, Loss: 5.186063
+INFO:tensorflow:Step: 630, Accuracy: 0.593750, Loss: 5.250095
+INFO:tensorflow:Worker 1: 2016-07-17 14:29:12.204354: step 630, loss = 5.25(13.2 examples/sec; 4.844  sec/batch)
+INFO:tensorflow:Step: 635, Accuracy: 0.687500, Loss: 5.164423
+INFO:tensorflow:Step: 638, Accuracy: 0.515625, Loss: 5.080513
+INFO:tensorflow:Step: 642, Accuracy: 0.531250, Loss: 4.999813
+INFO:tensorflow:Worker 1: 2016-07-17 14:29:27.202351: step 642, loss = 5.00(19.8 examples/sec; 3.227  sec/batch)
+INFO:tensorflow:Step: 646, Accuracy: 0.500000, Loss: 5.129719
+INFO:tensorflow:Step: 649, Accuracy: 0.453125, Loss: 4.974067
+INFO:tensorflow:Step: 653, Accuracy: 0.562500, Loss: 5.111796
+INFO:tensorflow:Step: 656, Accuracy: 0.671875, Loss: 4.962249
+INFO:tensorflow:Step: 660, Accuracy: 0.640625, Loss: 4.926774
+INFO:tensorflow:Worker 1: 2016-07-17 14:29:54.268517: step 660, loss = 4.93(21.9 examples/sec; 2.927  sec/batch)
+INFO:tensorflow:Step: 664, Accuracy: 0.656250, Loss: 5.205191
+INFO:tensorflow:Step: 668, Accuracy: 0.562500, Loss: 5.400545
+INFO:tensorflow:Step: 672, Accuracy: 0.625000, Loss: 5.163098
+INFO:tensorflow:Worker 1: 2016-07-17 14:30:11.477163: step 672, loss = 5.16(12.9 examples/sec; 4.962  sec/batch)
+INFO:tensorflow:Step: 676, Accuracy: 0.640625, Loss: 5.163574
+INFO:tensorflow:Step: 680, Accuracy: 0.625000, Loss: 5.219623
+INFO:tensorflow:Step: 684, Accuracy: 0.703125, Loss: 5.199624
+INFO:tensorflow:Worker 1: 2016-07-17 14:30:27.938117: step 684, loss = 5.20(16.0 examples/sec; 3.990  sec/batch)
+INFO:tensorflow:Step: 687, Accuracy: 0.609375, Loss: 5.347743
+INFO:tensorflow:Worker 1: 2016-07-17 14:30:33.002203: step 687, loss = 5.35(15.3 examples/sec; 4.174  sec/batch)
+INFO:tensorflow:Step: 691, Accuracy: 0.687500, Loss: 5.215217
+INFO:tensorflow:Step: 696, Accuracy: 0.500000, Loss: 4.996037
+INFO:tensorflow:Worker 1: 2016-07-17 14:30:44.711158: step 696, loss = 5.00(12.3 examples/sec; 5.202  sec/batch)
+INFO:tensorflow:Step: 698, Accuracy: 0.578125, Loss: 5.319180
+INFO:tensorflow:Step: 702, Accuracy: 0.687500, Loss: 5.031491
+INFO:tensorflow:Worker 1: 2016-07-17 14:30:55.485455: step 702, loss = 5.03(19.1 examples/sec; 3.359  sec/batch)
+INFO:tensorflow:Step: 706, Accuracy: 0.687500, Loss: 5.148364
+INFO:tensorflow:Step: 710, Accuracy: 0.593750, Loss: 4.935555
+INFO:tensorflow:Step: 713, Accuracy: 0.593750, Loss: 4.910072
+INFO:tensorflow:Step: 717, Accuracy: 0.625000, Loss: 5.189214
+INFO:tensorflow:Worker 1: 2016-07-17 14:31:14.626106: step 717, loss = 5.19(14.2 examples/sec; 4.507  sec/batch)
+INFO:tensorflow:Step: 721, Accuracy: 0.625000, Loss: 5.094342
+INFO:tensorflow:Step: 725, Accuracy: 0.656250, Loss: 4.872494
+INFO:tensorflow:Step: 728, Accuracy: 0.562500, Loss: 4.953437
+INFO:tensorflow:Step: 732, Accuracy: 0.609375, Loss: 5.062321
+INFO:tensorflow:Worker 1: 2016-07-17 14:31:35.728617: step 732, loss = 5.06(19.1 examples/sec; 3.345  sec/batch)
+INFO:tensorflow:Step: 736, Accuracy: 0.593750, Loss: 5.176989
+INFO:tensorflow:Step: 740, Accuracy: 0.640625, Loss: 5.011869
+INFO:tensorflow:Step: 743, Accuracy: 0.687500, Loss: 5.108435
+INFO:tensorflow:Step: 747, Accuracy: 0.671875, Loss: 5.278065
+INFO:tensorflow:Worker 1: 2016-07-17 14:31:57.445580: step 747, loss = 5.28(15.5 examples/sec; 4.121  sec/batch)
+INFO:tensorflow:Step: 751, Accuracy: 0.625000, Loss: 5.164810
+INFO:tensorflow:Step: 755, Accuracy: 0.718750, Loss: 5.075383
+INFO:tensorflow:Step: 759, Accuracy: 0.593750, Loss: 4.929357
+INFO:tensorflow:Worker 1: 2016-07-17 14:32:12.088506: step 759, loss = 4.93(16.4 examples/sec; 3.905  sec/batch)
+INFO:tensorflow:Step: 762, Accuracy: 0.578125, Loss: 5.203091
+INFO:tensorflow:Worker 1: 2016-07-17 14:32:17.589256: step 762, loss = 5.20(14.1 examples/sec; 4.523  sec/batch)
+INFO:tensorflow:Step: 766, Accuracy: 0.671875, Loss: 4.960933
+INFO:tensorflow:Step: 770, Accuracy: 0.468750, Loss: 5.209896
+INFO:tensorflow:Step: 775, Accuracy: 0.468750, Loss: 5.159251
+INFO:tensorflow:Step: 777, Accuracy: 0.671875, Loss: 5.461938
+INFO:tensorflow:Worker 1: 2016-07-17 14:32:38.048606: step 777, loss = 5.46(18.2 examples/sec; 3.521  sec/batch)
+INFO:tensorflow:Step: 781, Accuracy: 0.656250, Loss: 5.305297
+INFO:tensorflow:Step: 785, Accuracy: 0.703125, Loss: 5.008574
+INFO:tensorflow:Step: 789, Accuracy: 0.609375, Loss: 5.311230
+INFO:tensorflow:Worker 1: 2016-07-17 14:32:54.027586: step 789, loss = 5.31(15.9 examples/sec; 4.021  sec/batch)
+INFO:tensorflow:Step: 794, Accuracy: 0.593750, Loss: 5.356672
+INFO:tensorflow:Step: 797, Accuracy: 0.609375, Loss: 5.176521
+INFO:tensorflow:Step: 801, Accuracy: 0.718750, Loss: 5.257951
+INFO:tensorflow:Worker 1: 2016-07-17 14:33:09.496054: step 801, loss = 5.26(15.9 examples/sec; 4.023  sec/batch)
+INFO:tensorflow:Step: 805, Accuracy: 0.578125, Loss: 5.085650
+INFO:tensorflow:Step: 808, Accuracy: 0.484375, Loss: 5.015480
+INFO:tensorflow:Step: 811, Accuracy: 0.500000, Loss: 5.161201
+INFO:tensorflow:Step: 815, Accuracy: 0.734375, Loss: 5.220052
+INFO:tensorflow:Step: 819, Accuracy: 0.609375, Loss: 4.923011
+INFO:tensorflow:Worker 1: 2016-07-17 14:33:35.313408: step 819, loss = 4.92(13.0 examples/sec; 4.912  sec/batch)
+INFO:tensorflow:Step: 822, Accuracy: 0.562500, Loss: 5.041156
+INFO:tensorflow:Worker 1: 2016-07-17 14:33:40.804365: step 822, loss = 5.04(15.0 examples/sec; 4.279  sec/batch)
+INFO:tensorflow:Step: 826, Accuracy: 0.640625, Loss: 5.143198
+INFO:tensorflow:Step: 830, Accuracy: 0.687500, Loss: 5.037324
+INFO:tensorflow:Step: 834, Accuracy: 0.625000, Loss: 5.084282
+INFO:tensorflow:Worker 1: 2016-07-17 14:33:55.082384: step 834, loss = 5.08(16.9 examples/sec; 3.782  sec/batch)
+INFO:tensorflow:Step: 837, Accuracy: 0.656250, Loss: 5.246703
+INFO:tensorflow:Worker 1: 2016-07-17 14:33:59.900971: step 837, loss = 5.25(17.0 examples/sec; 3.770  sec/batch)
+INFO:tensorflow:Step: 842, Accuracy: 0.671875, Loss: 5.023370
+INFO:tensorflow:Step: 844, Accuracy: 0.671875, Loss: 5.255219
+INFO:tensorflow:Step: 848, Accuracy: 0.640625, Loss: 5.093707
+INFO:tensorflow:Step: 852, Accuracy: 0.609375, Loss: 5.072200
+INFO:tensorflow:Worker 1: 2016-07-17 14:34:18.961492: step 852, loss = 5.07(15.8 examples/sec; 4.062  sec/batch)
+INFO:tensorflow:Step: 856, Accuracy: 0.578125, Loss: 5.168121
+INFO:tensorflow:Step: 860, Accuracy: 0.640625, Loss: 5.063597
+INFO:tensorflow:Step: 864, Accuracy: 0.625000, Loss: 4.970173
+INFO:tensorflow:Worker 1: 2016-07-17 14:34:33.862742: step 864, loss = 4.97(21.2 examples/sec; 3.014  sec/batch)
+INFO:tensorflow:Step: 868, Accuracy: 0.656250, Loss: 5.118831
+INFO:tensorflow:Step: 871, Accuracy: 0.687500, Loss: 5.087683
+INFO:tensorflow:Step: 874, Accuracy: 0.687500, Loss: 5.185808
+INFO:tensorflow:Step: 878, Accuracy: 0.671875, Loss: 5.060779
+INFO:tensorflow:Step: 883, Accuracy: 0.765625, Loss: 5.095386
+INFO:tensorflow:Step: 886, Accuracy: 0.687500, Loss: 4.829572
+INFO:tensorflow:Step: 891, Accuracy: 0.718750, Loss: 5.002202
+INFO:tensorflow:Worker 1: 2016-07-17 14:35:08.769993: step 891, loss = 5.00(23.4 examples/sec; 2.735  sec/batch)
+INFO:tensorflow:Step: 893, Accuracy: 0.640625, Loss: 4.983657
+INFO:tensorflow:Step: 897, Accuracy: 0.703125, Loss: 4.947864
+INFO:tensorflow:Worker 1: 2016-07-17 14:35:18.456787: step 897, loss = 4.95(18.9 examples/sec; 3.381  sec/batch)
+INFO:tensorflow:Step: 901, Accuracy: 0.578125, Loss: 4.970891
+INFO:tensorflow:Step: 904, Accuracy: 0.687500, Loss: 5.037125
+INFO:tensorflow:Step: 908, Accuracy: 0.593750, Loss: 5.068242
+INFO:tensorflow:Step: 912, Accuracy: 0.671875, Loss: 5.048228
+INFO:tensorflow:Worker 1: 2016-07-17 14:35:40.985661: step 912, loss = 5.05(16.1 examples/sec; 3.964  sec/batch)
+INFO:tensorflow:Step: 916, Accuracy: 0.640625, Loss: 5.080552
+INFO:tensorflow:Step: 921, Accuracy: 0.671875, Loss: 5.118845
+INFO:tensorflow:Worker 1: 2016-07-17 14:35:51.609642: step 921, loss = 5.12(17.2 examples/sec; 3.720  sec/batch)
+INFO:tensorflow:Step: 923, Accuracy: 0.562500, Loss: 5.143621
+INFO:tensorflow:Step: 928, Accuracy: 0.640625, Loss: 4.962856
+INFO:tensorflow:Step: 932, Accuracy: 0.671875, Loss: 4.934459
+INFO:tensorflow:Step: 936, Accuracy: 0.609375, Loss: 5.143929
+INFO:tensorflow:Worker 1: 2016-07-17 14:36:12.116618: step 936, loss = 5.14(14.1 examples/sec; 4.537  sec/batch)
+INFO:tensorflow:Step: 940, Accuracy: 0.687500, Loss: 4.907103
+INFO:tensorflow:Step: 944, Accuracy: 0.578125, Loss: 5.098715
+run-expr-4node.sh: line 23: 58104 Terminated              CUDA_VISIBLE_DEVICES=$1 bazel-bin/inception/imagenet_distributed_train --batch_size=64 --data_dir=/lfs/local/0/daniter/imagenet-8 --job_name='worker' --task_id=$2 --ps_hosts='raiders1:2228' --worker_hosts='raiders1:2200,raiders1:2201,raiders3:2209,raiders3:2210' --initial_learning_rate=$3 --momentum=$4 --sync=True --compute_groups=$5
