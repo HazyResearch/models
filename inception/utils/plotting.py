@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
+import re
+
 from os import listdir
 
 # PLOTTING
@@ -48,7 +50,7 @@ def plot_all_runs(results, window=100, two_panels=False,
     for folder, loss in results.items():
         LR, mom = params_from_folder_name(folder)
         if len(loss)<window:
-            print('WARNING: Run shorter than window ('+str(window)+'): '+folder)
+            print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
             continue
      
         if "True" in folder:
@@ -84,7 +86,7 @@ def plot_all_runs(results, window=100, two_panels=False,
     for folder, loss in results.items():
         LR, mom = params_from_folder_name(folder)
         if len(loss)<window:
-            print('WARNING: Run shorter than window ('+str(window)+'): '+folder)
+            print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
             continue
 
         if "False" in folder:
@@ -132,7 +134,7 @@ def plot_loss_contour(loss_results, window, sync=True):
     for folder, loss in loss_results.items():
         if (sync and "True" in folder) or (not sync and "False" in folder):
             if len(loss)<2*window:
-                print('WARNING: Run shorter than window ('+str(window)+'): '+folder)
+                print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
                 continue
             if any(np.isnan(loss)):
                 print('WARNING: NaN value found in: '+folder)
@@ -150,7 +152,7 @@ def plot_loss_contour(loss_results, window, sync=True):
 
     plt.figure()
     plt.tricontourf(x,np.log10(y),z,
-                   levels=np.linspace(min_z, min_z*1.1, 20))
+                   levels=np.linspace(min_z, min_z*1.03, 20))
     #plt.tricontourf(x,np.log10(y),z,
     #               levels=np.linspace(0.32, 0.42, 20))
                 #, norm=plt.Normalize(vmax=minz*1.4, vmin=minz))
@@ -162,6 +164,43 @@ def plot_loss_contour(loss_results, window, sync=True):
         plt.title('Synchronous');
     else:
         plt.title('Asynchronous');
+
+def plot_times(list_of_runs, M):
+    times = load_times(list_of_runs, M=16)
+
+#    run_iter = iter(times.keys())
+#    name=run_iter.next()
+#    if name:
+
+    for name in times.keys():
+
+        this_times = np.array(times[name])
+        flat = [item for row in this_times for item in row]
+        f1 = plt.figure()
+        plt.hist(flat);
+        plt.grid()
+        plt.xlabel('seconds')
+        plt.ylabel('frequency');
+        plt.title(name);
+        f2, ax = plt.subplots(4,4, figsize=(10,8), sharex=True, sharey=True)
+        for ind in range(M):
+            cur_ax = ax[ind%4,ind//4]
+            cur_ax.hist(times[name][ind])
+            if ind%4==4-1:
+                cur_ax.set_xlabel('seconds')
+            if ind//4==0:
+                cur_ax.set_ylabel('frequency')
+            cur_ax.set_title('Worker '+str(ind))
+            cur_ax.grid()
+
+        f3 = plt.figure()
+        for ind in range(M):
+            plt.plot(this_times[ind])
+            plt.xlabel('Logging step')
+            plt.ylabel('seconds')
+        plt.grid()
+    
+    return f1, f2, f3
 
 def plot_se_calculation(loss_results, window):
     best_sync, best_async, best_sync_name, best_async_name = get_best_for_each_mode(loss_results, window)
@@ -273,7 +312,7 @@ def plot_se_he(loss_results, window, M, sync_seconds_per_batch,
     ax1.set_ylabel('Statistical Efficiency')
     ax1.set_xlabel('# compute groups')
     ax1.grid()
-    ax1.axis([0.9,M+.1, 0, 2])
+    #ax1.axis([0.9,M+.1, 0, 2])
 
 # Hardware efficiency
     sync_time_per_iter = sync_seconds_per_batch
@@ -286,19 +325,70 @@ def plot_se_he(loss_results, window, M, sync_seconds_per_batch,
     ax2.set_ylabel('Hardware Efficiency')
     ax2.set_xlabel('# compute groups')
     ax2.grid()
-    ax2.axis([0.9,M+.1, 0, 2])
+    #ax2.axis([0.9,M+.1, 0, 2])
 
 
     ax3.plot([1,M],np.multiply(HE,SE), '-s')
     ax3.set_ylabel('Relative Time')
     ax3.set_xlabel('# compute groups')
     ax3.grid()
-    ax3.axis([0.9,M+.1, 0, 2]);
+    #ax3.axis([0.9,M+.1, 0, 2]);
 
 
     return fig
     
     
+# STATS
+def mean_times(times_dict, M):
+    times = times_dict
+
+    sync_count = []
+    async_count = []
+    sync_means =[]
+    async_means =[]
+    sync_means1 =[]
+    async_means1 =[]
+    sync_means2 =[]
+    async_means2 =[]
+
+    for name in times.keys():
+        this_times = np.array(times[name])
+        flat = [item for row in this_times for item in row]
+        mn = np.mean(flat)
+        flat1 = [item for row in this_times for item in row[:len(row)/4]]
+        mn1 = np.mean(flat1)
+        flat2 = [item for row in this_times for item in row[len(row)/2:]]
+        mn2 = np.mean(flat2)
+        if not np.isnan(mn):
+            print name,':\t',mn
+            if 'True' in name:
+                sync_count.append(len(flat))
+                sync_means.append(mn)
+                sync_means1.append(mn1)
+                sync_means2.append(mn2)
+            else:
+                async_count.append(len(flat))
+                async_means.append(mn)
+                async_means1.append(mn1)
+                async_means2.append(mn2)
+    
+    print
+    print '------------------------------------------------------'
+    print 'Mode\tMean batch time\tMean (0-15min)\tMean (30-60min)'
+    print '------------------------------------------------------'
+    print 'Sync:\t', np.mean(sync_means), '\t', np.mean(sync_means1), '\t', np.mean(sync_means2)
+    print 'Async:\t', np.mean(async_means), '\t', np.mean(async_means1), '\t', np.mean(async_means2)
+    print '------------------------------------------------------'
+    print
+    print '------------------------------------------------------'
+    print 'Mode\tMean batch time\tSteps/worker\tActive time'
+    print '------------------------------------------------------'
+    print 'Sync:\t', np.mean(sync_means), '\t', 3*np.mean(sync_count), '\t', (3/16.0)*np.mean(sync_means)*np.mean(sync_count)/60.0
+    print 'Async:\t', np.mean(async_means), '\t', 3*np.mean(async_count), '\t',(3/16.0)* np.mean(async_means)*np.mean(async_count)/60.0
+    print '------------------------------------------------------'
+
+    return np.mean(sync_means), np.mean(async_means)
+
 
 # SELECTION
 def get_best_for_each_mode(results, window):
@@ -309,7 +399,7 @@ def get_best_for_each_mode(results, window):
 
     for folder, loss in results.items():
         if len(loss)<window:
-            print('WARNING: Run shorter than window ('+str(window)+'): '+folder)
+            print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
             continue
      
         if "True" in folder:
@@ -321,7 +411,7 @@ def get_best_for_each_mode(results, window):
 
     for folder, loss in results.items():
         if len(loss)<window:
-            print('WARNING: Run shorter than window ('+str(window)+'): '+folder)
+            print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
             continue
 
         if "False" in folder:
@@ -340,7 +430,7 @@ def get_best_for_each_momentum(results, window):
 
     for folder, loss in results.items():
         if len(loss)<window:
-            print('WARNING: Run shorter than window ('+str(window)+'): '+folder)
+            print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
             continue
         LR, mom = params_from_folder_name(folder)
         avg = moving_average2(loss,window)
@@ -388,7 +478,7 @@ def load_list_of_runs(list_of_runs, data_dir='.'):
     acc_results = {}
     loss_results = {}
     print 'Loading run logs:'
-    print '----------------'
+    print '-----------------'
     # List files in data:
     for folder in list_of_runs:
         print folder
@@ -417,6 +507,26 @@ def load_list_of_runs(list_of_runs, data_dir='.'):
 
     return loss_results, acc_results
 
+def load_times(list_of_runs, M, data_dir='.'):
+    times = {}
+    print 'Loading run logs:'
+    print '-----------------'
+    # List files in data:
+    for folder in list_of_runs:
+        print folder
+        times[folder] = []
+        for worker_index in range(M):
+            this_worker = []
+            filename='w'+str(worker_index)+'.out'
+            with open(data_dir+"/"+folder+"/"+filename, "r") as f:
+                for line in f.readlines():
+                    m = re.search('\s*([0-9.]+)\s*sec/batch', line)
+                    if m:
+                        this_worker.append(float(m.group(1)))
+                times[folder].append(this_worker)
+
+    return times
+
 def params_from_folder_name(folder):
     folderParts = folder.split('-')
     if folderParts[0]=='ShortRun':
@@ -432,6 +542,8 @@ def params_from_folder_name(folder):
             field_zero = 3
         elif folderParts[2]=='2hr':
             field_zero = 3
+        elif folderParts[2]=='seed':
+            field_zero = 4
         else:
             field_zero = 2
     elif folderParts[0]=='expr2':
