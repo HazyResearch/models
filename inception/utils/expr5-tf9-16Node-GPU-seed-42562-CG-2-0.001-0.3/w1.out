@@ -1,0 +1,59 @@
+INFO:tensorflow:PS hosts are: ['localhost:2228']
+INFO:tensorflow:Worker hosts are: ['localhost:2201', 'localhost:2202', 'localhost:2203', 'localhost:2204', 'localhost:2205', 'localhost:2206', 'localhost:2207', 'localhost:2208', 'localhost:2209', 'localhost:2210', 'localhost:2211', 'localhost:2212', 'localhost:2213', 'localhost:2214', 'localhost:2215', 'localhost:2216']
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {localhost:2228}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {localhost:2201, localhost:2202, localhost:2203, localhost:2204, localhost:2205, localhost:2206, localhost:2207, localhost:2208, localhost:2209, localhost:2210, localhost:2211, localhost:2212, localhost:2213, localhost:2214, localhost:2215, localhost:2216}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2201
+INFO:tensorflow:Learning rate: 0.001000, momentum: 0.300000
+INFO:tensorflow:Sync mode!!!!!!
+INFO:tensorflow:Compute groups : 2
+INFO:tensorflow:SyncReplicas enabled: replicas_to_aggregate=16; total_num_replicas=16
+INFO:tensorflow:Num nodes per compute groups: 8
+INFO:tensorflow:Tokens per step: 8
+INFO:tensorflow:2016-07-19 09:22:02.454340 Supervisor
+INFO:tensorflow:Restored model from /lfs/local/0/daniter/cg-snapshot/model.ckpt-399
+INFO:tensorflow:got sessions!
+INFO:tensorflow:Started 3 queues for processing input data.
+INFO:tensorflow:global_step/sec: 0
+INFO:tensorflow:Step: 399, Accuracy: 0.312500, Loss: 6.089749, time: 27.065 sec/batch
+INFO:tensorflow:global_step/sec: 0
+INFO:tensorflow:Step: 399, Accuracy: 0.625000, Loss: 5.471721, time: 76.001 sec/batch
+INFO:tensorflow:Step: 401, Accuracy: 0.375000, Loss: 5.879234, time: 60.863 sec/batch
+INFO:tensorflow:global_step/sec: 0.0333618
+INFO:tensorflow:Step: 402, Accuracy: 0.437500, Loss: 5.179327, time: 57.762 sec/batch
+INFO:tensorflow:global_step/sec: 0.016665
+INFO:tensorflow:Step: 403, Accuracy: 0.562500, Loss: 5.573524, time: 58.299 sec/batch
+INFO:tensorflow:Step: 405, Accuracy: 0.312500, Loss: 6.674741, time: 65.079 sec/batch
+INFO:tensorflow:global_step/sec: 0.0166838
+INFO:tensorflow:Step: 407, Accuracy: 0.375000, Loss: 5.282139, time: 63.772 sec/batch
+INFO:tensorflow:Step: 409, Accuracy: 0.187500, Loss: 5.611912, time: 67.313 sec/batch
+INFO:tensorflow:global_step/sec: 0.0332571
+INFO:tensorflow:Step: 411, Accuracy: 0.687500, Loss: 5.250378, time: 62.063 sec/batch
+INFO:tensorflow:global_step/sec: 0.0167092
+INFO:tensorflow:Step: 413, Accuracy: 0.562500, Loss: 5.470771, time: 63.366 sec/batch
+INFO:tensorflow:Step: 415, Accuracy: 0.625000, Loss: 6.347697, time: 66.027 sec/batch
+INFO:tensorflow:global_step/sec: 0.033304
+INFO:tensorflow:Step: 417, Accuracy: 0.687500, Loss: 5.511522, time: 64.634 sec/batch
+INFO:tensorflow:global_step/sec: 0.0166847
+INFO:tensorflow:Step: 419, Accuracy: 0.500000, Loss: 5.794189, time: 61.786 sec/batch
+INFO:tensorflow:Step: 419, Accuracy: 0.687500, Loss: 5.009014, time: 62.271 sec/batch
+INFO:tensorflow:global_step/sec: 0.0332893
+INFO:tensorflow:Step: 421, Accuracy: 0.562500, Loss: 5.416123, time: 62.191 sec/batch
+INFO:tensorflow:Step: 423, Accuracy: 0.500000, Loss: 5.382736, time: 62.860 sec/batch
+INFO:tensorflow:Step: 425, Accuracy: 0.437500, Loss: 5.770971, time: 54.492 sec/batch
+INFO:tensorflow:Step: 427, Accuracy: 0.562500, Loss: 5.748908, time: 70.238 sec/batch
+INFO:tensorflow:Step: 429, Accuracy: 0.687500, Loss: 5.401860, time: 72.029 sec/batch
+INFO:tensorflow:Step: 431, Accuracy: 0.562500, Loss: 5.622847, time: 73.246 sec/batch
+INFO:tensorflow:Step: 433, Accuracy: 0.562500, Loss: 5.459887, time: 74.132 sec/batch
+INFO:tensorflow:Step: 436, Accuracy: 0.375000, Loss: 5.518166, time: 73.324 sec/batch
+INFO:tensorflow:Step: 438, Accuracy: 0.375000, Loss: 4.960338, time: 58.823 sec/batch
+INFO:tensorflow:Step: 439, Accuracy: 0.625000, Loss: 5.190076, time: 69.499 sec/batch
+INFO:tensorflow:Step: 442, Accuracy: 0.500000, Loss: 5.242595, time: 72.043 sec/batch
+INFO:tensorflow:Step: 444, Accuracy: 0.562500, Loss: 4.904067, time: 66.731 sec/batch
+INFO:tensorflow:Step: 446, Accuracy: 0.687500, Loss: 5.667998, time: 62.189 sec/batch
+INFO:tensorflow:Step: 447, Accuracy: 0.500000, Loss: 5.827168, time: 66.205 sec/batch
+INFO:tensorflow:Step: 449, Accuracy: 0.562500, Loss: 5.776019, time: 67.463 sec/batch
+INFO:tensorflow:Step: 452, Accuracy: 0.500000, Loss: 5.720673, time: 68.923 sec/batch
+INFO:tensorflow:Step: 454, Accuracy: 0.562500, Loss: 5.392653, time: 66.033 sec/batch
+INFO:tensorflow:Step: 456, Accuracy: 0.500000, Loss: 5.173857, time: 63.538 sec/batch
+INFO:tensorflow:Step: 458, Accuracy: 0.500000, Loss: 6.327294, time: 61.514 sec/batch
+run-expr-16node.sh: line 23: 37441 Terminated              CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train --batch_size=16 --data_dir=/lfs/local/0/daniter/imagenet-8-$2 --job_name='worker' --task_id=$2 --ps_hosts='localhost:2228' --worker_hosts='localhost:2201,localhost:2202,localhost:2203,localhost:2204,localhost:2205,localhost:2206,localhost:2207,localhost:2208,localhost:2209,localhost:2210,localhost:2211,localhost:2212,localhost:2213,localhost:2214,localhost:2215,localhost:2216' --initial_learning_rate=$3 --momentum=$4 --sync=True --compute_groups=$5
