@@ -12,7 +12,7 @@ fi
 
 CUDA_VISIBLE_DEVICES=$1 bazel-bin/inception/imagenet_distributed_train \
 --batch_size=64 \
---data_dir=/lfs/local/0/daniter/imagenet-8 \
+--data_dir=/lfs/local/0/daniter/imagenet-8-$2 \
 --job_name='worker' \
 --task_id=$2 \
 --ps_hosts='raiders1:2228' \

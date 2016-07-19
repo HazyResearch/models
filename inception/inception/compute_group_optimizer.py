@@ -31,6 +31,7 @@ from tensorflow.python.training import optimizer
 from tensorflow.python.training import queue_runner
 import tensorflow as tf
 
+from datetime import datetime
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -219,6 +220,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     self._cg_steps = None
 
     self._cg = self._replica_id % FLAGS.compute_groups
+    self._nodes_per_cg = int(self._replicas_to_aggregate / FLAGS.compute_groups)
 
 
   def compute_gradients(self, *args, **kwargs):
@@ -360,6 +362,9 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
     is_stale = math_ops.less(local_step, cg_step)#global_step)
 
+    tf.logging.info("Num nodes per compute groups: %d" % self._nodes_per_cg)
+    tf.logging.info("Tokens per step: %d" % self._tokens_per_step)
+
     with ops.op_scope(inputs, None, self._name):
       for grad, var in grads_and_vars:
         var_list.append(var)
@@ -373,7 +378,8 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
             train_ops.append(gradient_queue.enqueue([grad]))
 
             # Aggregate all gradients
-            gradients = gradient_queue.dequeue_many(int(self._replicas_to_aggregate / FLAGS.compute_groups))
+            gradients = gradient_queue.dequeue_many(self._nodes_per_cg)
+
             aggregated_grad.append(math_ops.reduce_sum(gradients, [0]))
 
           elif grad is None:
@@ -397,7 +403,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
       # Create token queue.
       with ops.device(global_step.device), ops.name_scope("CG-"+str(self._cg)):
         sync_token_queue = (
-            data_flow_ops.FIFOQueue(-1,
+            data_flow_ops.FIFOQueue(64,
                                     global_step.dtype.base_dtype,
                                     shapes=(),
                                     shared_name="sync_token_q"+str(self._cg)))
@@ -407,7 +413,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
         # because the queue runner doesn't automatically reopen it once it
         # closed queues in PS devices.
         dummy_queue = (
-            data_flow_ops.FIFOQueue(1,
+            data_flow_ops.FIFOQueue(-1,
                                     types_pb2.DT_INT32,
                                     shapes=(),
                                     shared_name="dummy_queue"+str(self._cg)))

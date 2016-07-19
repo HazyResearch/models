@@ -26,6 +26,8 @@ import time
 
 import numpy as np
 import tensorflow as tf
+from tensorflow.python.client import timeline
+
 
 from inception import image_processing, compute_group_optimizer
 from inception import inception_model as inception
@@ -243,6 +245,7 @@ def train(target, dataset, cluster_spec):
 
       apply_gradients_op = opt.apply_gradients(grads, global_step=global_step)
 
+
       with tf.control_dependencies([apply_gradients_op]):
         train_op = tf.identity(total_loss, name='train_op')
 
@@ -301,20 +304,23 @@ def train(target, dataset, cluster_spec):
       # simultaneously in order to prevent running out of GPU memory.
       tf.set_random_seed(FLAGS.DANITER_SEED)
       next_summary_time = time.time() + FLAGS.save_summaries_secs
+
       while not sv.should_stop():
 
         try:
           start_time = time.time()
+
           loss_value, step = sess.run([train_op, global_step])
+
           assert not np.isnan(loss_value), 'Model diverged with loss = NaN'
           if step > FLAGS.max_steps:
             break
           duration = time.time() - start_time
 
           #Print Accuracy
-          tf.logging.info("Step: %d, Accuracy: %f, Loss: %f" %(step, sess.run(accuracy), loss_value))
+          tf.logging.info("Step: %d, Accuracy: %f, Loss: %f, time: %.3f sec/batch" %(step, sess.run(accuracy), loss_value, duration))
 
-          if step % 3 == 0:
+          if False:
             examples_per_sec = FLAGS.batch_size / float(duration)
             format_str = ('Worker %d: %s: step %d, loss = %.2f'
                           '(%.1f examples/sec; %.3f  sec/batch)')
