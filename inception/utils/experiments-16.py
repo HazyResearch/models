@@ -8,19 +8,18 @@ import sys, os
 
 def kill_exp():
     call(["pkill", "-u", "daniter", "-f","imagenet_distributed_train"])
-    call(["ssh", "raiders3","pkill -u daniter -f imagenet_distributed_train"])
 
 def signal_handler(signal, frame):
         kill_exp()
         sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
-momentum = [0.45, 0.6, 0.75, 0.9]
-lr = [ 0.01, 0.005, 0.0025 ]
-cgs = [1,2,4]
+momentum = [0.3, 0.6, 0.9]
+lr = [  0.005, 0.0025, 0.001]
+cgs = [1,2,4,8,16]
 
-exe = "./4node_runner.sh"
-prefix = "expr5-tf9-4Node-GPU-seed-42562-CG-"
+exe = "./16node_runner.sh"
+prefix = "expr5-tf9-16Node-GPU-seed-42562-CG-"
 
 def isFailed(folder):
     for log in os.listdir(folder):
@@ -56,7 +55,7 @@ def run(m,l, cg):
         else:
             break
                 
-    time.sleep(8*60) # 28 + 2 = 30 
+    time.sleep(43*60) # 28 + 2 = 30 
     kill_exp()
 
 if __name__=='__main__':
