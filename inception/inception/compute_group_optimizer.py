@@ -445,6 +445,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
         # Replicas have to wait until they can get a token from the token queue.
         with ops.control_dependencies([final_train_ops]):
           token = sync_token_queue.dequeue()
+          token = tf.Print(token, [token], "Node %d dequeues token: " % self._replica_id)
           train_op = state_ops.scatter_update(self._local_steps,
                                               self._replica_id, token)
 
@@ -454,7 +455,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
               # step so the replicas can fetch them to start the next step.
               # Note that ref() is used to avoid reading from the identity with old
               # the step.
-          tokens = array_ops.fill([self._tokens_per_step], global_step.ref())
+          tokens = array_ops.fill([self._tokens_per_step], cg_step)
           sync_op = sync_token_queue.enqueue_many((tokens,))
 
 
@@ -565,7 +566,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
     tokens_needed = self._replicas_to_aggregate - self._total_num_replicas
     if num_tokens == -1:
-      num_tokens = self._replicas_to_aggregate
+      num_tokens = self._nodes_per_cg #self._replicas_to_aggregate
     elif num_tokens < tokens_needed:
       raise ValueError(
           "Too few tokens to finish the first step: %d (given) vs %d (needed)" %
@@ -574,7 +575,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
     if num_tokens > 0:
       with ops.device(self._global_step.device), ops.name_scope(""):
         tokens = array_ops.fill([num_tokens],
-                                self._global_step.ref())
+                                self._global_step)
         init_tokens = self._sync_token_queue.enqueue_many((tokens,))
     else:
       init_tokens = control_flow_ops.no_op(name="no_init_tokens")

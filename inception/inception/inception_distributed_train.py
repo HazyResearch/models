@@ -299,34 +299,35 @@ def train(target, dataset, cluster_spec):
         sv.start_queue_runners(sess, chief_queue_runners)
         sess.run(init_tokens_op)
 
+      if FLAGS.task_id != 0:
+        time.sleep(15)
+
       # Train, checking for Nans. Concurrently run the summary operation at a
       # specified interval. Note that the summary_op and train_op never run
       # simultaneously in order to prevent running out of GPU memory.
       tf.set_random_seed(FLAGS.DANITER_SEED)
       next_summary_time = time.time() + FLAGS.save_summaries_secs
-
       while not sv.should_stop():
 
         try:
           start_time = time.time()
-
           loss_value, step = sess.run([train_op, global_step])
-
           assert not np.isnan(loss_value), 'Model diverged with loss = NaN'
           if step > FLAGS.max_steps:
             break
           duration = time.time() - start_time
 
           #Print Accuracy
-          tf.logging.info("Step: %d, Accuracy: %f, Loss: %f, time: %.3f sec/batch" %(step, sess.run(accuracy), loss_value, duration))
+          #tf.logging.info("Step: %d, Accuracy: %f, Loss: %f, time: %.3f sec/batch" %(step, sess.run(accuracy), loss_value, duration))
+          tf.logging.info("Step: %d, Loss: %f, time: %.3f sec/batch" %(step, loss_value, duration))
 
-          if False:
-            examples_per_sec = FLAGS.batch_size / float(duration)
-            format_str = ('Worker %d: %s: step %d, loss = %.2f'
-                          '(%.1f examples/sec; %.3f  sec/batch)')
-            tf.logging.info(format_str %
-                            (FLAGS.task_id, datetime.now(), step, loss_value,
-                             examples_per_sec, duration))
+          # if False:
+          #   examples_per_sec = FLAGS.batch_size / float(duration)
+          #   format_str = ('Worker %d: %s: step %d, loss = %.2f'
+          #                 '(%.1f examples/sec; %.3f  sec/batch)')
+          #   tf.logging.info(format_str %
+          #                   (FLAGS.task_id, datetime.now(), step, loss_value,
+          #                    examples_per_sec, duration))
 
           # Determine if the summary_op should be run on the chief worker.
           #if is_chief and next_summary_time < time.time():
