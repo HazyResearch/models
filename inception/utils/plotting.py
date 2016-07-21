@@ -340,7 +340,7 @@ def plot_se_he(loss_results, window, M, sync_seconds_per_batch,
     ax1.set_ylabel('Statistical Efficiency')
     ax1.set_xlabel('# compute groups')
     ax1.grid()
-    #ax1.axis([0.9,M+.1, 0, 2])
+    ax1.axis([0.9,M+.1, 0, 2])
 
 # Hardware efficiency
     sync_time_per_iter = sync_seconds_per_batch
@@ -353,17 +353,17 @@ def plot_se_he(loss_results, window, M, sync_seconds_per_batch,
     ax2.set_ylabel('Hardware Efficiency')
     ax2.set_xlabel('# compute groups')
     ax2.grid()
-    #ax2.axis([0.9,M+.1, 0, 2])
+    ax2.axis([0.9,M+.1, 0, 2])
 
 
     ax3.plot([1,M],np.multiply(HE,SE), '-s')
     ax3.set_ylabel('Relative Time')
     ax3.set_xlabel('# compute groups')
     ax3.grid()
-    #ax3.axis([0.9,M+.1, 0, 2]);
+    ax3.axis([0.9,M+.1, 0, 2]);
 
 
-    return fig
+    return f
     
     
 # STATS
@@ -522,7 +522,7 @@ def load_list_of_runs(list_of_runs, data_dir='.'):
                             if step > 5000:
                                 break
                             accuracy = float(parts[3][:-1])
-                            loss = float(parts[5])
+                            loss = float(parts[3][:-1])
                             acc_results[folder].append((step, accuracy))
                             loss_results[folder].append((step, loss))
 
@@ -546,11 +546,13 @@ def load_times(list_of_runs, M, data_dir='.', zero_based=True, verbose=False):
             print folder
         times[folder] = []
         if zero_based:
-            worker_indices = range(M)
+            worker_indices = range(M+1)
         else:
-            worker_indices = range(1,M+1)
+            worker_indices = range(0,M+1)
 
         for worker_index in worker_indices:
+            if worker_index == 2:
+              continue
             this_worker = []
             filename='w'+str(worker_index)+'.out'
             with open(data_dir+"/"+folder+"/"+filename, "r") as f:
