@@ -360,7 +360,9 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                                  name="get_cg_step")
     cg_step = array_ops.reshape(cg_step, ())
 
-    is_stale = math_ops.less(local_step, cg_step)#global_step)
+    
+    is_stale = math_ops.less(local_step, local_step)#global_step)
+
 
     tf.logging.info("Num nodes per compute groups: %d" % self._nodes_per_cg)
     tf.logging.info("Tokens per step: %d" % self._tokens_per_step)
@@ -375,7 +377,13 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                                                       shapes=var.get_shape(),
                                                       shared_name=var.name+str(self._cg)))
             self._one_element_queue_list.append((gradient_queue, var.device))
-            train_ops.append(gradient_queue.enqueue([grad]))
+
+            if len(var_list) == 1:
+              with tf.control_dependencies([tf.Print(tf.constant(1), [grad], "Worker: %d :" % self._replica_id, summarize=2)]):
+                train_ops.append(gradient_queue.enqueue([grad]))
+            else:
+              train_ops.append(gradient_queue.enqueue([grad]))
+
 
             # Aggregate all gradients
             gradients = gradient_queue.dequeue_many(self._nodes_per_cg)
@@ -403,7 +411,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
       # Create token queue.
       with ops.device(global_step.device), ops.name_scope("CG-"+str(self._cg)):
         sync_token_queue = (
-            data_flow_ops.FIFOQueue(64,
+            data_flow_ops.FIFOQueue(self._nodes_per_cg,
                                     global_step.dtype.base_dtype,
                                     shapes=(),
                                     shared_name="sync_token_q"+str(self._cg)))
@@ -420,15 +428,17 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
       # Clear all the gradients queues in case there are stale gradients.
       clear_queue_ops = []
       with ops.control_dependencies([update_op]):
-        for queue, dev in self._one_element_queue_list:
-          with ops.device(dev):
-            stale_grads = queue.dequeue_many(queue.size())
-            clear_queue_ops.append(stale_grads)
+        with ops.control_dependencies([cg_update_op]):
 
-        for queue, dev in self._sparse_grad_queues_and_devs:
-          with ops.device(dev):
-            _, stale_indices = queue.dequeue_many(queue.size())
-            clear_queue_ops.append(stale_indices)
+          for queue, dev in self._one_element_queue_list:
+            with ops.device(dev):
+              stale_grads = queue.dequeue_many(queue.size())
+              clear_queue_ops.append(stale_grads)
+
+          for queue, dev in self._sparse_grad_queues_and_devs:
+            with ops.device(dev):
+              _, stale_indices = queue.dequeue_many(queue.size())
+              clear_queue_ops.append(stale_indices)
 
       with ops.device(global_step.device):
         self._clean_up_op = control_flow_ops.abort(
@@ -436,10 +446,9 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
       # According to the staleness, select between the enqueue op (real_grad)
       # or no-op (no_op_grad). Effectively dropping all the stale gradients.
-      with ops.control_dependencies([cg_update_op]):
-        no_op_grad = lambda: [control_flow_ops.no_op(name="no_grad_enqueue")]
-        real_grad = lambda: [control_flow_ops.group(*train_ops)]
-        final_train_ops = control_flow_ops.cond(is_stale, no_op_grad, real_grad)
+      no_op_grad = lambda: [tf.Print(tf.constant(True), [tf.constant(1)], "###############NOOP")]#control_flow_ops.no_op(name="no_grad_enqueue")]
+      real_grad = lambda: [control_flow_ops.group(*train_ops)]
+      final_train_ops = control_flow_ops.cond(is_stale, no_op_grad, real_grad)
 
       with ops.device(global_step.device), ops.name_scope(""):
         # Replicas have to wait until they can get a token from the token queue.
@@ -573,10 +582,15 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
           (num_tokens, tokens_needed))
 
     if num_tokens > 0:
-      with ops.device(self._global_step.device), ops.name_scope(""):
-        tokens = array_ops.fill([num_tokens],
-                                self._global_step)
-        init_tokens = self._sync_token_queue.enqueue_many((tokens,))
+      with ops.device(self._global_step.device), ops.name_scope("CG-"+str(self._cg)):
+        cg_step = array_ops.slice(self._cg_steps.ref(),
+                                 array_ops.reshape(self._cg , (1,)),
+                                 [1],
+                                 name="get_cg_step")
+        cg_step = array_ops.reshape(cg_step, ())
+        tokens = array_ops.fill([num_tokens],cg_step)
+        with tf.control_dependencies([tf.Print(tf.constant(1), [tf.constant(1)], "enqueue init tokens")]):
+          init_tokens = self._sync_token_queue.enqueue_many((tokens,))
     else:
       init_tokens = control_flow_ops.no_op(name="no_init_tokens")
 
