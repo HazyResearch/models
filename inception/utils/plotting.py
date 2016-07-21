@@ -165,8 +165,8 @@ def plot_loss_contour(loss_results, window, sync=True):
     else:
         plt.title('Asynchronous');
 
-def plot_times(list_of_runs, M):
-    times = load_times(list_of_runs, M=M, zero_based=False)
+def plot_times(list_of_runs, M, data_dir='.'):
+    times = load_times(list_of_runs, M=M, zero_based=True, data_dir=data_dir)
 
 #    run_iter = iter(times.keys())
 #    name=run_iter.next()
@@ -317,8 +317,7 @@ def plot_winners_snr(loss_results, window):
 
     return fig
 
-def plot_se_he(loss_results, window, M, sync_seconds_per_batch,
-                 async_seconds_per_batch):
+def plot_se_he(loss_results, window, M):
     best_sync, best_async, best_sync_name, best_async_name = get_best_for_each_mode(loss_results, window)
 
     s = best_sync.copy()
@@ -343,11 +342,11 @@ def plot_se_he(loss_results, window, M, sync_seconds_per_batch,
     ax1.axis([0.9,M+.1, 0, 2])
 
 # Hardware efficiency
-    sync_time_per_iter = sync_seconds_per_batch
-
-    async_time_per_iter = async_seconds_per_batch
-
-    HE = np.array([sync_time_per_iter,async_time_per_iter])/float(sync_time_per_iter)
+    #niter = np.array([len(best_avg[k]) for k in best_avg ])
+    niter = np.array([ len(loss_results[best_sync_name]), len(loss_results[best_async_name]) ])
+    seconds_per_iter = 15*60.0/niter
+    print seconds_per_iter
+    HE=seconds_per_iter/seconds_per_iter[0]
 
     ax2.plot([1,M],HE, '-s')
     ax2.set_ylabel('Hardware Efficiency')
@@ -574,6 +573,8 @@ def params_from_folder_name(folder):
                 field_zero = 3
         else:
             field_zero = 1
+    elif folderParts[0]=='Sync' and folderParts[1]=='Async':
+        field_zero = 4
     elif folderParts[0]=='LongRun':
         if folderParts[2]=='v2':
             field_zero = 3
