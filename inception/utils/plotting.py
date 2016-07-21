@@ -166,29 +166,33 @@ def plot_loss_contour(loss_results, window, sync=True):
         plt.title('Asynchronous');
 
 def plot_times(list_of_runs, M):
-    times = load_times(list_of_runs, M=16)
+    times = load_times(list_of_runs, M=M, zero_based=False)
 
 #    run_iter = iter(times.keys())
 #    name=run_iter.next()
 #    if name:
+
+    nrowcol = int(np.ceil(np.sqrt(M)))
+    
+    maxx=11.0
 
     for name in times.keys():
 
         this_times = np.array(times[name])
         flat = [item for row in this_times for item in row]
         f1 = plt.figure()
-        plt.hist(flat);
+        plt.hist(flat, np.arange(0, maxx,0.5))
         plt.grid()
         plt.xlabel('seconds')
         plt.ylabel('frequency');
         plt.title(name);
-        f2, ax = plt.subplots(4,4, figsize=(10,8), sharex=True, sharey=True)
+        f2, ax = plt.subplots(nrowcol,nrowcol, figsize=(10,8), sharex=True, sharey=True)
         for ind in range(M):
-            cur_ax = ax[ind%4,ind//4]
+            cur_ax = ax[ind%nrowcol,ind//nrowcol]
             cur_ax.hist(times[name][ind])
-            if ind%4==4-1:
+            if ind%nrowcol==nrowcol-1:
                 cur_ax.set_xlabel('seconds')
-            if ind//4==0:
+            if ind//nrowcol==0:
                 cur_ax.set_ylabel('frequency')
             cur_ax.set_title('Worker '+str(ind))
             cur_ax.grid()
@@ -201,6 +205,30 @@ def plot_times(list_of_runs, M):
         plt.grid()
     
     return f1, f2, f3
+
+def plot_time_hists(list_of_runs, M):
+    times = load_times(list_of_runs, M=M, zero_based=False)
+
+#    run_iter = iter(times.keys())
+#    name=run_iter.next()
+#    if name:
+
+    nrowcol = int(np.ceil(np.sqrt(M)))
+    
+    maxx=11.0
+
+    for name in times.keys():
+        this_times = np.array(times[name])
+        flat = [item for row in this_times for item in row]
+        print name, np.mean(flat), np.std(flat)
+        f1 = plt.figure()
+        plt.hist(flat, np.arange(0, maxx,0.5))
+        plt.grid()
+        plt.xlabel('seconds')
+        plt.ylabel('frequency');
+        plt.title(name);
+    
+    return f1
 
 def plot_se_calculation(loss_results, window):
     best_sync, best_async, best_sync_name, best_async_name = get_best_for_each_mode(loss_results, window)
@@ -507,15 +535,22 @@ def load_list_of_runs(list_of_runs, data_dir='.'):
 
     return loss_results, acc_results
 
-def load_times(list_of_runs, M, data_dir='.'):
+def load_times(list_of_runs, M, data_dir='.', zero_based=True, verbose=False):
     times = {}
-    print 'Loading run logs:'
-    print '-----------------'
+    if verbose:
+        print 'Loading run logs:'
+        print '-----------------'
     # List files in data:
     for folder in list_of_runs:
-        print folder
+        if verbose:
+            print folder
         times[folder] = []
-        for worker_index in range(M):
+        if zero_based:
+            worker_indices = range(M)
+        else:
+            worker_indices = range(1,M+1)
+
+        for worker_index in worker_indices:
             this_worker = []
             filename='w'+str(worker_index)+'.out'
             with open(data_dir+"/"+folder+"/"+filename, "r") as f:
