@@ -1,0 +1,60 @@
+DISPLAY "(null)" invalid; disabling X11 forwarding
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+INFO:tensorflow:PS hosts are: ['raiders1:2228']
+INFO:tensorflow:Worker hosts are: ['raiders1:2200', 'raiders1:2201', 'raiders3:2209', 'raiders3:2210']
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX TITAN X
+major: 5 minor: 2 memoryClockRate (GHz) 1.076
+pciBusID 0000:43:00.0
+Total memory: 11.92GiB
+Free memory: 11.81GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:806] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:43:00.0)
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {raiders1:2228}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {raiders1:2200, raiders1:2201, raiders3:2209, localhost:2210}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2210
+INFO:tensorflow:Learning rate: 0.005000, momentum: 0.600000
+INFO:tensorflow:Sync mode!!!!!!
+INFO:tensorflow:Compute groups : 1
+INFO:tensorflow:SyncReplicas enabled: replicas_to_aggregate=4; total_num_replicas=4
+INFO:tensorflow:Num nodes per compute groups: 4
+INFO:tensorflow:Tokens per step: 4
+INFO:tensorflow:2016-07-20 04:21:02.296862 Supervisor
+INFO:tensorflow:got sessions!
+INFO:tensorflow:Started 3 queues for processing input data.
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3576 get requests, put_count=2566 evicted_count=1000 eviction_rate=0.389712 and unsatisfied allocation rate=0.590045
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 100 to 110
+INFO:tensorflow:Step: 399, Loss: 5.132594, time: 31.844 sec/batch
+INFO:tensorflow:Step: 399, Loss: 5.303171, time: 1.330 sec/batch
+INFO:tensorflow:Step: 399, Loss: 5.534730, time: 3.120 sec/batch
+INFO:tensorflow:Step: 400, Loss: 5.184909, time: 1.377 sec/batch
+INFO:tensorflow:Step: 400, Loss: 5.647026, time: 1.381 sec/batch
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=1016 evicted_count=1000 eviction_rate=0.984252 and unsatisfied allocation rate=0
+not cropping. Imagesize: 256
+not cropping. Imagesize: 256
+not cropping. Imagesize: 256
+not cropping. Imagesize: 256
+Traceback (most recent call last):
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 69, in <module>
+    tf.app.run()
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/platform/app.py", line 30, in run
+    sys.exit(main(sys.argv))
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 65, in main
+    inception_distributed_train.train(server.target, dataset, cluster_spec)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/inception_distributed_train.py", line 314, in train
+    loss_value, step = sess.run([train_op, global_step])
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 372, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 636, in _run
+    feed_dict_string, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 708, in _do_run
+    target_list, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 728, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors.UnavailableError
+run-expr-4node.sh: line 23:  5781 Terminated              CUDA_VISIBLE_DEVICES=$1 bazel-bin/inception/imagenet_distributed_train --batch_size=64 --data_dir=/lfs/local/0/daniter/imagenet-8-$2 --job_name='worker' --task_id=$2 --ps_hosts='raiders1:2228' --worker_hosts='raiders1:2200,raiders1:2201,raiders3:2209,raiders3:2210' --initial_learning_rate=$3 --momentum=$4 --sync=True --compute_groups=$5

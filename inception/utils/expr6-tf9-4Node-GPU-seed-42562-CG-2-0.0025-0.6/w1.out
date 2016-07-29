@@ -1,0 +1,70 @@
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+INFO:tensorflow:PS hosts are: ['raiders1:2228']
+INFO:tensorflow:Worker hosts are: ['raiders1:2200', 'raiders1:2201', 'raiders3:2209', 'raiders3:2210']
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX TITAN X
+major: 5 minor: 2 memoryClockRate (GHz) 1.076
+pciBusID 0000:03:00.0
+Total memory: 11.92GiB
+Free memory: 11.81GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:806] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:03:00.0)
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {raiders1:2228}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {localhost:2200, raiders1:2201, raiders3:2209, raiders3:2210}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2200
+INFO:tensorflow:Learning rate: 0.002500, momentum: 0.600000
+INFO:tensorflow:Sync mode!!!!!!
+INFO:tensorflow:Compute groups : 2
+INFO:tensorflow:SyncReplicas enabled: replicas_to_aggregate=4; total_num_replicas=4
+INFO:tensorflow:Num nodes per compute groups: 2
+INFO:tensorflow:Tokens per step: 2
+INFO:tensorflow:2016-07-20 05:11:01.740882 Supervisor
+INFO:tensorflow:Restored model from /lfs/local/0/daniter/cg-snapshot/model.ckpt-399
+INFO:tensorflow:got sessions!
+INFO:tensorflow:Started 3 queues for processing input data.
+INFO:tensorflow:global_step/sec: 0
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3678 get requests, put_count=2564 evicted_count=1000 eviction_rate=0.390016 and unsatisfied allocation rate=0.601958
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 100 to 110
+INFO:tensorflow:Step: 400, Loss: 5.443149, time: 7.185 sec/batch
+INFO:tensorflow:Step: 402, Loss: 5.267860, time: 1.443 sec/batch
+INFO:tensorflow:Step: 403, Loss: 5.199987, time: 1.595 sec/batch
+INFO:tensorflow:Step: 404, Loss: 5.428138, time: 1.857 sec/batch
+INFO:tensorflow:Step: 405, Loss: 5.322850, time: 1.568 sec/batch
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3575 get requests, put_count=2640 evicted_count=1000 eviction_rate=0.378788 and unsatisfied allocation rate=0.545734
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 176 to 193
+INFO:tensorflow:Step: 406, Loss: 5.282209, time: 1.938 sec/batch
+INFO:tensorflow:Step: 407, Loss: 5.201636, time: 1.945 sec/batch
+INFO:tensorflow:Step: 408, Loss: 5.379714, time: 1.463 sec/batch
+INFO:tensorflow:Step: 408, Loss: 5.363791, time: 1.346 sec/batch
+INFO:tensorflow:Step: 409, Loss: 5.340984, time: 1.376 sec/batch
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=1028 evicted_count=1000 eviction_rate=0.972763 and unsatisfied allocation rate=0
+INFO:tensorflow:About to execute sync_clean_up_op!
+INFO:tensorflow:Error reported to Coordinator: <class 'tensorflow.python.framework.errors.UnavailableError'>, 
+not cropping. Imagesize: 256
+not cropping. Imagesize: 256
+not cropping. Imagesize: 256
+not cropping. Imagesize: 256
+Traceback (most recent call last):
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 69, in <module>
+    tf.app.run()
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/platform/app.py", line 30, in run
+    sys.exit(main(sys.argv))
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 65, in main
+    inception_distributed_train.train(server.target, dataset, cluster_spec)
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/inception_distributed_train.py", line 344, in train
+    sess.run(clean_up_op)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 372, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 636, in _run
+    feed_dict_string, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 708, in _do_run
+    target_list, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 728, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors.UnavailableError
+E0720 05:12:26.484042283   12002 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2228': socket error: connection refused
