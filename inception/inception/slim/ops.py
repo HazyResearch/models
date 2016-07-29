@@ -228,6 +228,7 @@ def conv2d(inputs,
                                  restore=restore)
     conv = tf.nn.conv2d(inputs, weights, [1, stride_h, stride_w, 1],
                         padding=padding)
+    #conv = tf.Print(conv, [conv], "Weights in conv:", summarize=1)
     if batch_norm_params is not None:
       with scopes.arg_scope([batch_norm], is_training=is_training,
                             trainable=trainable, restore=restore):
@@ -243,6 +244,8 @@ def conv2d(inputs,
       outputs = tf.nn.bias_add(conv, biases)
     if activation:
       outputs = activation(outputs)
+    #outputs = tf.Print(outputs, [tf.reduce_any(tf.is_nan(outputs))], "Activations in conv:", summarize=1)
+
     return outputs
 
 
@@ -314,6 +317,8 @@ def fc(inputs,
       outputs = tf.nn.xw_plus_b(inputs, weights, biases)
     if activation:
       outputs = activation(outputs)
+    #outputs = tf.Print(outputs, [tf.reduce_any(tf.is_nan(outputs))], "Activations in fc:", summarize=1)
+
     return outputs
 
 

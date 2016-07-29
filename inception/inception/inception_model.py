@@ -42,7 +42,7 @@ TOWER_NAME = 'tower'
 BATCHNORM_MOVING_AVERAGE_DECAY = 0.9997
 
 # The decay to use for the moving average.
-MOVING_AVERAGE_DECAY = 1.0#0.9999
+MOVING_AVERAGE_DECAY = 0.9999
 
 
 def inference(images, num_classes, for_training=False, restore_logits=True,

@@ -35,7 +35,6 @@ from datetime import datetime
 
 FLAGS = tf.app.flags.FLAGS
 
-
 class ComputeGroupOptimizer(optimizer.Optimizer):
   """Class to synchronize, aggregate gradients and pass them to the optimizer.
 
@@ -221,6 +220,7 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
 
     self._cg = self._replica_id % FLAGS.compute_groups
     self._nodes_per_cg = int(self._replicas_to_aggregate / FLAGS.compute_groups)
+    self.start_queue = None
 
 
   def compute_gradients(self, *args, **kwargs):
@@ -378,11 +378,11 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
                                                       shared_name=var.name+str(self._cg)))
             self._one_element_queue_list.append((gradient_queue, var.device))
 
-            if len(var_list) == 1:
-              with tf.control_dependencies([tf.Print(tf.constant(1), [grad], "Worker: %d :" % self._replica_id, summarize=2)]):
-                train_ops.append(gradient_queue.enqueue([grad]))
-            else:
-              train_ops.append(gradient_queue.enqueue([grad]))
+            #if len(var_list) == 1:
+            #  with tf.control_dependencies([tf.Print(tf.constant(1), [grad], "Worker: %d :" % self._replica_id, summarize=2)]):
+            #    train_ops.append(gradient_queue.enqueue([grad]))
+            #else:
+            train_ops.append(gradient_queue.enqueue([grad]))
 
 
             # Aggregate all gradients
@@ -573,27 +573,36 @@ class ComputeGroupOptimizer(optimizer.Optimizer):
       raise ValueError(
           "get_init_tokens_op() should be called after apply_gradients().")
 
-    tokens_needed = self._replicas_to_aggregate - self._total_num_replicas
-    if num_tokens == -1:
-      num_tokens = self._nodes_per_cg #self._replicas_to_aggregate
-    elif num_tokens < tokens_needed:
-      raise ValueError(
-          "Too few tokens to finish the first step: %d (given) vs %d (needed)" %
-          (num_tokens, tokens_needed))
+    #tokens_needed = self._replicas_to_aggregate - self._total_num_replicas
+    #if num_tokens == -1:
+    num_tokens = self._nodes_per_cg #self._replicas_to_aggregate
+    # elif num_tokens < tokens_needed:
+    #   raise ValueError(
+    #       "Too few tokens to finish the first step: %d (given) vs %d (needed)" %
+    #       (num_tokens, tokens_needed))
 
     if num_tokens > 0:
       with ops.device(self._global_step.device), ops.name_scope("CG-"+str(self._cg)):
-        cg_step = array_ops.slice(self._cg_steps.ref(),
-                                 array_ops.reshape(self._cg , (1,)),
-                                 [1],
-                                 name="get_cg_step")
-        cg_step = array_ops.reshape(cg_step, ())
-        tokens = array_ops.fill([num_tokens],cg_step)
-        with tf.control_dependencies([tf.Print(tf.constant(1), [tf.constant(1)], "enqueue init tokens")]):
+        tokens = array_ops.fill([num_tokens],self._global_step)
+        with tf.control_dependencies([tf.Print(tf.constant(1), [tokens], "enqueue init tokens")]):
           init_tokens = self._sync_token_queue.enqueue_many((tokens,))
-    else:
-      init_tokens = control_flow_ops.no_op(name="no_init_tokens")
+    # else:
+    #   init_tokens = control_flow_ops.no_op(name="no_init_tokens")
 
     return init_tokens
+
+  def start(self):
+    with ops.device(self._global_step.device), ops.name_scope(""):
+      self.start_queue = (data_flow_ops.FIFOQueue(self._total_num_replicas,
+                                    tf.int32,
+                                    shapes=(),
+                                    shared_name="start_Q"))
+      return self.start_queue.dequeue()
+
+  def cheif_starter(self):
+    with ops.device(self._global_step.device), ops.name_scope(""):
+      start_token = array_ops.fill([self._total_num_replicas],tf.constant(1))
+      return self.start_queue.enqueue_many((start_token,))
+
 
 

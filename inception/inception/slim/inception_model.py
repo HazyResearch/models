@@ -260,6 +260,8 @@ def inception_v3(inputs,
           aux_logits = ops.flatten(aux_logits)
           aux_logits = ops.fc(aux_logits, num_classes, activation=None,
                               stddev=0.001, restore=restore_logits)
+          #aux_logits = tf.Print(aux_logits, [tf.reduce_any(tf.is_nan(aux_logits))], "aux_logits:")
+
           end_points['aux_logits'] = aux_logits
         # mixed_8: 8 x 8 x 1280.
         # Note that the scope below is not changed to not void previous
@@ -326,6 +328,7 @@ def inception_v3(inputs,
           # 2048
           logits = ops.fc(net, num_classes, activation=None, scope='logits',
                           restore=restore_logits)
+          #logits = tf.Print(logits, [tf.reduce_any(tf.is_nan(logits))], "logits:")
           # 1000
           end_points['logits'] = logits
           end_points['predictions'] = tf.nn.softmax(logits, name='predictions')

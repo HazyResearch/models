@@ -359,7 +359,7 @@ def parse_daniter_example(example_serialized):
   label = tf.cast(features['label'], dtype=tf.int32)
   image = tf.decode_raw(features['image_raw'], tf.uint8)
   image = tf.reshape(image, [256, 256, 3])
-  print("not cropping. Imagesize: %d" % FLAGS.image_size)
+  #print("not cropping. Imagesize: %d" % FLAGS.image_size)
   #image = tf.image.resize_image_with_crop_or_pad(image, FLAGS.image_size, FLAGS.image_size) # put this back!
   image = tf.cast(image, tf.float32) * (1. / 255) - 0.5
 

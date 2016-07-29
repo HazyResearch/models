@@ -68,6 +68,7 @@ def l2_regularizer(weight=1.0, scope=None):
       l2_weight = tf.convert_to_tensor(weight,
                                        dtype=tensor.dtype.base_dtype,
                                        name='weight')
+      #tensor = tf.Print(tensor, [tensor], "Tensor:")
       return tf.mul(l2_weight, tf.nn.l2_loss(tensor), name='value')
   return regularizer
 
@@ -166,6 +167,7 @@ def cross_entropy_loss(logits, one_hot_labels, label_smoothing=0,
     cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits,
                                                             one_hot_labels,
                                                             name='xentropy')
+    #with tf.control_dependencies([tf.Print(cross_entropy, [tf.reduce_any(tf.is_nan(cross_entropy))], "cross_entropy_loss")]):
     weight = tf.convert_to_tensor(weight,
                                   dtype=logits.dtype.base_dtype,
                                   name='loss_weight')

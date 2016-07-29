@@ -115,6 +115,9 @@ def train(target, dataset, cluster_spec):
   # but there should be only one chief.
   is_chief = (FLAGS.task_id == 0)
 
+  if num_workers == FLAGS.compute_groups:
+    FLAGS.sync = False
+
   # daniter - compute groups:
   assert num_workers % FLAGS.compute_groups == 0, ("Number of workers msut be divisible by compute groups")
   is_cg_primary = (FLAGS.task_id < FLAGS.compute_groups)
@@ -153,7 +156,7 @@ def train(target, dataset, cluster_spec):
 #                                      momentum=RMSPROP_MOMENTUM,
     #                                  epsilon=RMSPROP_EPSILON)
 
-      opt = tf.train.MomentumOptimizer(lr,FLAGS.momentum) # Tuning done for these!
+      opt = tf.train.MomentumOptimizer(lr,FLAGS.momentum,use_locking=True) # Tuning done for these!
       tf.logging.info("Learning rate: %f, momentum: %f" % (FLAGS.initial_learning_rate, FLAGS.momentum))
 
       images, labels = image_processing.distorted_inputs(
@@ -173,13 +176,14 @@ def train(target, dataset, cluster_spec):
       inception.loss(logits, labels)
 
       #Accuracy
-      correct_prediction = tf.nn.in_top_k(logits[0], labels, 1)
-      accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+      #correct_prediction = tf.nn.in_top_k(logits[0], labels, 1)
+      #accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
 
       # Gather all of the losses including regularization losses.
       losses = tf.get_collection(slim.losses.LOSSES_COLLECTION)
       losses += tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
 
+      #with tf.control_dependencies([tf.Print(losses, [losses], "pre-addn losses", summarize=64)]):
       total_loss = tf.add_n(losses, name='total_loss')
 
       if is_chief:
@@ -200,6 +204,8 @@ def train(target, dataset, cluster_spec):
         # Add dependency to compute loss_averages.
         with tf.control_dependencies([loss_averages_op]):
           total_loss = tf.identity(total_loss)
+          #total_loss = tf.Print(total_loss, [total_loss], "first total loss:")
+
 
       # Track the moving averages of all trainable variables.
       # Note that we maintain a 'double-average' of the BatchNormalization
@@ -235,8 +241,13 @@ def train(target, dataset, cluster_spec):
       with tf.control_dependencies([batchnorm_updates_op]):
         total_loss = tf.identity(total_loss)
 
+      #total_loss = tf.Print(total_loss, [total_loss], "total loss:")
+
       # Compute gradients with respect to the loss.
-      grads = opt.compute_gradients(total_loss)
+      grads = opt.compute_gradients(total_loss, gate_gradients=2)
+
+      #grads = [(tf.clip_by_value(grad, -1, 1),v) for grad,v in grads]
+
 
       # Add histograms for gradients.
       for grad, var in grads:
@@ -256,6 +267,8 @@ def train(target, dataset, cluster_spec):
           chief_queue_runners = [opt.get_chief_queue_runner()]
           init_tokens_op = opt.get_init_tokens_op()
           clean_up_op = opt.get_clean_up_op()
+          start_op = opt.start()
+          cheif_start_op = opt.cheif_starter()
 
       # Create a saver.
       saver = tf.train.Saver(max_to_keep=24)
@@ -287,7 +300,7 @@ def train(target, dataset, cluster_spec):
       # Get a session.
       sess = sv.prepare_or_wait_for_session(target, config=sess_config)
 
-      tf.logging.info("got sessions!")
+      tf.logging.info("got sessions! %s " % datetime.now())
 
       # Start the queue runners.
       queue_runners = tf.get_collection(tf.GraphKeys.QUEUE_RUNNERS)
@@ -295,11 +308,15 @@ def train(target, dataset, cluster_spec):
       tf.logging.info('Started %d queues for processing input data.',
                       len(queue_runners))
 
+      if is_chief and FLAGS.sync:
+        sess.run(cheif_start_op)
+
+      if FLAGS.sync:
+        sess.run(start_op)
+
       if is_cg_primary and FLAGS.sync:
         sv.start_queue_runners(sess, chief_queue_runners)
         sess.run(init_tokens_op)
-
-        
 
       # Train, checking for Nans. Concurrently run the summary operation at a
       # specified interval. Note that the summary_op and train_op never run
