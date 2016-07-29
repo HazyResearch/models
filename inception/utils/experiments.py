@@ -20,7 +20,7 @@ lr = [ 0.01, 0.005, 0.0025 ]
 cgs = [1,2,4]
 
 exe = "./4node_runner.sh"
-prefix = "expr5-tf9-4Node-GPU-seed-42562-CG-"
+prefix = "expr6-tf9-4Node-GPU-seed-42562-CG-"
 
 def isFailed(folder):
     for log in os.listdir(folder):

@@ -592,6 +592,8 @@ def params_from_folder_name(folder):
     elif folderParts[0]=='expr5' and folderParts[1]=='tf9' and folderParts[2]=='4Node':
         assert(folderParts[6]=='CG')
         field_zero = 7
+    else folderParts[0] == 'CPU' and folderParts[1]=='4Machine':
+        field_zero = 3
     else:
         raise Exception('Experiment name not understood')
 
