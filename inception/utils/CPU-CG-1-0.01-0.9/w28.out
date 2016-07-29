@@ -1,0 +1,19 @@
+DISPLAY "(null)" invalid; disabling X11 forwarding
+INFO:tensorflow:PS hosts are: ['raiders1:2200']
+INFO:tensorflow:Worker hosts are: ['raiders1:2201', 'raiders1:2202', 'raiders1:2203', 'raiders1:2204', 'raiders1:2205', 'raiders1:2206', 'raiders1:2207', 'raiders1:2208', 'raiders1:2209', 'raiders1:2210', 'raiders1:2211', 'raiders3:2212', 'raiders3:2213', 'raiders3:2214', 'raiders3:2215', 'raiders3:2216', 'raiders3:2217', 'raiders3:2218', 'raiders3:2219', 'raiders3:2220', 'raiders3:2221', 'raiders3:2222', 'raiders8:2223', 'raiders8:2224', 'raiders8:2225', 'raiders8:2226', 'raiders8:2227', 'raiders8:2228', 'raiders8:2228', 'raiders8:2230', 'raiders8:2231', 'raiders8:2232']
+E0723 06:49:12.668048132   47340 tcp_server_posix.c:284]     bind addr=[::]:2228: Address already in use
+E0723 06:49:12.668087037   47340 server_chttp2.c:119]        No address added out of total 1 resolved
+Traceback (most recent call last):
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 69, in <module>
+    tf.app.run()
+  File "/afs/cs.stanford.edu/u/daniter/.local/lib/python2.7/site-packages/tensorflow/python/platform/app.py", line 30, in run
+    sys.exit(main(sys.argv))
+  File "/afs/cs.stanford.edu/u/daniter/tf-test/inception/bazel-bin/inception/imagenet_distributed_train.runfiles/__main__/inception/imagenet_distributed_train.py", line 49, in main
+    task_index=FLAGS.task_id)
+  File "/afs/cs.stanford.edu/u/daniter/.local/lib/python2.7/site-packages/tensorflow/python/training/server_lib.py", line 142, in __init__
+    server_def.SerializeToString(), status)
+  File "/usr/lib/python2.7/contextlib.py", line 24, in __exit__
+    self.gen.next()
+  File "/afs/cs.stanford.edu/u/daniter/.local/lib/python2.7/site-packages/tensorflow/python/framework/errors.py", line 450, in raise_exception_on_not_ok_status
+    pywrap_tensorflow.TF_GetCode(status))
+tensorflow.python.framework.errors.InternalError: Could not start gRPC server

@@ -1,0 +1,60 @@
+DISPLAY "(null)" invalid; disabling X11 forwarding
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+INFO:tensorflow:PS hosts are: ['raiders1:2200']
+INFO:tensorflow:Worker hosts are: ['raiders1:2201', 'raiders1:2202', 'raiders1:2203', 'raiders1:2204', 'raiders2:2205', 'raiders2:2206', 'raiders2:2207', 'raiders2:2208', 'raiders3:2209', 'raiders3:2210', 'raiders3:2211', 'raiders3:2212', 'raiders8:2213', 'raiders8:2214', 'raiders8:2215', 'raiders8:2216']
+E tensorflow/stream_executor/cuda/cuda_driver.cc:491] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:153] retrieving CUDA diagnostic information for host: raiders3
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:160] hostname: raiders3
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:185] libcuda reported version is: Not found: was unable to find libcuda.so DSO loaded into this program
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:347] driver version file contents: """NVRM version: NVIDIA UNIX x86_64 Kernel Module  367.27  Thu Jun  9 18:53:27 PDT 2016
+GCC version:  gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3) 
+"""
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:189] kernel reported version is: 367.27.0
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:81] No GPU devices available on machine.
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {raiders1:2200}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {raiders1:2201, raiders1:2202, raiders1:2203, raiders1:2204, raiders2:2205, raiders2:2206, raiders2:2207, raiders2:2208, localhost:2209, raiders3:2210, raiders3:2211, raiders3:2212, raiders8:2213, raiders8:2214, raiders8:2215, raiders8:2216}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2209
+INFO:tensorflow:Learning rate: 0.005000, momentum: 0.900000
+INFO:tensorflow:Sync mode!!!!!!
+INFO:tensorflow:Compute groups : 4
+INFO:tensorflow:SyncReplicas enabled: replicas_to_aggregate=16; total_num_replicas=16
+INFO:tensorflow:Num nodes per compute groups: 4
+INFO:tensorflow:Tokens per step: 4
+INFO:tensorflow:2016-07-26 10:31:44.346235 Supervisor
+INFO:tensorflow:got sessions! 2016-07-26 10:32:00.230145 
+INFO:tensorflow:Started 3 queues for processing input data.
+INFO:tensorflow:Step: 399, Loss: 5.211088, time: 29.853 sec/batch
+INFO:tensorflow:Step: 400, Loss: 5.525126, time: 13.717 sec/batch
+INFO:tensorflow:Step: 404, Loss: 5.513413, time: 15.352 sec/batch
+INFO:tensorflow:Step: 407, Loss: 6.754716, time: 12.723 sec/batch
+INFO:tensorflow:Step: 411, Loss: 6.397564, time: 18.453 sec/batch
+INFO:tensorflow:Step: 418, Loss: 11.149056, time: 13.419 sec/batch
+INFO:tensorflow:Step: 421, Loss: 14.657207, time: 12.144 sec/batch
+INFO:tensorflow:Step: 425, Loss: 11.775733, time: 13.253 sec/batch
+INFO:tensorflow:Step: 429, Loss: 10.386720, time: 13.664 sec/batch
+INFO:tensorflow:Step: 433, Loss: 16.138239, time: 15.349 sec/batch
+INFO:tensorflow:Step: 437, Loss: 14.963798, time: 14.016 sec/batch
+INFO:tensorflow:Step: 441, Loss: 10.117304, time: 23.685 sec/batch
+INFO:tensorflow:Step: 447, Loss: 13.119431, time: 31.244 sec/batch
+INFO:tensorflow:Step: 452, Loss: 8.065870, time: 41.921 sec/batch
+INFO:tensorflow:Step: 456, Loss: 6.776789, time: 36.399 sec/batch
+INFO:tensorflow:Step: 460, Loss: 7.608473, time: 25.471 sec/batch
+INFO:tensorflow:Step: 464, Loss: 7.541301, time: 32.175 sec/batch
+INFO:tensorflow:Step: 468, Loss: 6.881557, time: 38.144 sec/batch
+INFO:tensorflow:Step: 472, Loss: 10.989655, time: 21.862 sec/batch
+INFO:tensorflow:Step: 476, Loss: 8.829898, time: 23.633 sec/batch
+INFO:tensorflow:Step: 480, Loss: 7.222112, time: 25.341 sec/batch
+INFO:tensorflow:Step: 484, Loss: 9.771290, time: 27.791 sec/batch
+INFO:tensorflow:Step: 488, Loss: 6.825839, time: 20.232 sec/batch
+INFO:tensorflow:Step: 492, Loss: 6.536147, time: 18.217 sec/batch
+INFO:tensorflow:Step: 496, Loss: 6.908857, time: 20.983 sec/batch
+INFO:tensorflow:Step: 500, Loss: 7.090708, time: 17.854 sec/batch
+INFO:tensorflow:Step: 504, Loss: 7.007899, time: 16.902 sec/batch
+INFO:tensorflow:Step: 508, Loss: 7.386760, time: 21.977 sec/batch
+INFO:tensorflow:Step: 512, Loss: 6.763192, time: 17.349 sec/batch
+INFO:tensorflow:Step: 516, Loss: 6.971902, time: 18.570 sec/batch
+run-expr-32node.sh: line 23: 59269 Terminated              CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train --batch_size=16 --data_dir=/lfs/local/0/daniter/16node-data-$2 --job_name='worker' --task_id=$2 --ps_hosts='raiders1:2200' --worker_hosts='raiders1:2201,raiders1:2202,raiders1:2203,raiders1:2204,raiders2:2205,raiders2:2206,raiders2:2207,raiders2:2208,raiders3:2209,raiders3:2210,raiders3:2211,raiders3:2212,raiders8:2213,raiders8:2214,raiders8:2215,raiders8:2216' --initial_learning_rate=$3 --momentum=$4 --sync=True --compute_groups=$5

@@ -1,0 +1,22 @@
+DISPLAY "(null)" invalid; disabling X11 forwarding
+INFO:tensorflow:PS hosts are: ['raiders1:2200']
+INFO:tensorflow:Worker hosts are: ['raiders1:2201', 'raiders1:2202', 'raiders1:2203', 'raiders1:2204', 'raiders1:2205', 'raiders1:2206', 'raiders1:2207', 'raiders1:2208', 'raiders1:2209', 'raiders1:2210', 'raiders1:2211', 'raiders3:2212', 'raiders3:2213', 'raiders3:2214', 'raiders3:2215', 'raiders3:2216', 'raiders3:2217', 'raiders3:2218', 'raiders3:2219', 'raiders3:2220', 'raiders3:2221', 'raiders3:2222', 'raiders8:2223', 'raiders8:2224', 'raiders8:2225', 'raiders8:2226', 'raiders8:2227', 'raiders8:2228', 'raiders8:2228', 'raiders8:2230', 'raiders8:2231', 'raiders8:2232']
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {raiders1:2200}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {raiders1:2201, raiders1:2202, raiders1:2203, raiders1:2204, raiders1:2205, raiders1:2206, raiders1:2207, raiders1:2208, raiders1:2209, raiders1:2210, raiders1:2211, raiders3:2212, raiders3:2213, localhost:2214, raiders3:2215, raiders3:2216, raiders3:2217, raiders3:2218, raiders3:2219, raiders3:2220, raiders3:2221, raiders3:2222, raiders8:2223, raiders8:2224, raiders8:2225, raiders8:2226, raiders8:2227, raiders8:2228, raiders8:2228, raiders8:2230, raiders8:2231, raiders8:2232}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2214
+INFO:tensorflow:Learning rate: 0.005000, momentum: 0.900000
+INFO:tensorflow:Sync mode!!!!!!
+INFO:tensorflow:Compute groups : 8
+INFO:tensorflow:SyncReplicas enabled: replicas_to_aggregate=32; total_num_replicas=32
+INFO:tensorflow:Num nodes per compute groups: 4
+INFO:tensorflow:Tokens per step: 4
+INFO:tensorflow:2016-07-23 09:19:41.315734 Supervisor
+E0723 09:19:56.020727883   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+E0723 09:19:58.019660582   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+E0723 09:20:00.673401510   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+E0723 09:20:05.109534330   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+E0723 09:20:11.095486706   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+E0723 09:20:19.485198352   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+E0723 09:20:32.132809343   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+E0723 09:20:53.206734145   68488 tcp_client_posix.c:173]     failed to connect to 'ipv4:127.0.1.1:2220': socket error: connection refused
+run-expr-32node.sh: line 23: 67166 Terminated              CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train --batch_size=16 --data_dir=/lfs/local/0/daniter/32node-data-$2 --job_name='worker' --task_id=$2 --ps_hosts='raiders1:2200' --worker_hosts='raiders1:2201,raiders1:2202,raiders1:2203,raiders1:2204,raiders1:2205,raiders1:2206,raiders1:2207,raiders1:2208,raiders1:2209,raiders1:2210,raiders1:2211,raiders3:2212,raiders3:2213,raiders3:2214,raiders3:2215,raiders3:2216,raiders3:2217,raiders3:2218,raiders3:2219,raiders3:2220,raiders3:2221,raiders3:2222,raiders8:2223,raiders8:2224,raiders8:2225,raiders8:2226,raiders8:2227,raiders8:2228,raiders8:2228,raiders8:2230,raiders8:2231,raiders8:2232' --initial_learning_rate=$3 --momentum=$4 --sync=True --compute_groups=$5
