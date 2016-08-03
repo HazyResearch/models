@@ -3,9 +3,9 @@
 
 cd ../
 
-if [ "$#" -ne 5 ]; then
+if [ "$#" -ne 6 ]; then
   echo "Illegal number of parameters"
-  echo "Usage: sh run-expr.sh <Device> <id> <learning_rate> <momentum> <compute_groups>"
+  echo "Usage: sh run-expr.sh <Device> <id> <learning_rate> <momentum> <compute_groups> <checkpoint-prefix>"
   exit
 fi
 
@@ -20,4 +20,5 @@ CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train \
 --initial_learning_rate=$3 \
 --momentum=$4 \
 --sync=True \
---compute_groups=$5
+--compute_groups=$5 \
+--checkpoint_prefix=$6

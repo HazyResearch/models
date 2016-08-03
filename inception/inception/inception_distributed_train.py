@@ -45,7 +45,7 @@ tf.app.flags.DEFINE_string('worker_hosts', '',
                            """worker jobs. e.g. """
                            """'machine1:2222,machine2:1111,machine2:2222'""")
 
-tf.app.flags.DEFINE_string('train_dir', '/lfs/local/0/daniter/cg-snapshot',
+tf.app.flags.DEFINE_string('train_dir', '/lfs/local/0/daniter/optimizer',
                            """Directory where to write event logs """
                            """and checkpoint.""")
 tf.app.flags.DEFINE_integer('max_steps', 1000000, 'Number of batches to run.')
@@ -87,6 +87,16 @@ tf.app.flags.DEFINE_float('learning_rate_decay_factor', 1.0,#0.94,
 tf.app.flags.DEFINE_float('momentum', 0.9,'Momentum term')
 tf.app.flags.DEFINE_boolean('sync', True, "Async Mode")
 
+
+# ******************************* OPTIMIZER PARAMETERS ***********************
+
+tf.app.flags.DEFINE_integer('duration', 1*60, "How long should the run last in seconds")
+tf.app.flags.DEFINE_string('checkpoint_prefix', "model.ckpt", "Name to use for the checkpoint files")
+
+
+
+# ******************************* END OPTIMIZER PARAMETERS ***********************
+
 # Constants dictating the learning rate schedule.
 RMSPROP_DECAY = 0.9                # Decay term for RMSProp.
 RMSPROP_MOMENTUM = 0.9             # Momentum in RMSProp.
@@ -97,6 +107,8 @@ def train(target, dataset, cluster_spec):
   """Train Inception on a dataset for a number of steps."""
   # Number of workers and parameter servers are infered from the workers and ps
   # hosts string.
+
+  tf.logging.info("Starting: %s" % datetime.now() )
   num_workers = len(cluster_spec.as_dict()['worker'])
   num_parameter_servers = len(cluster_spec.as_dict()['ps'])
   # If no value is given, num_replicas_to_aggregate defaults to be the number of
@@ -271,7 +283,7 @@ def train(target, dataset, cluster_spec):
           cheif_start_op = opt.cheif_starter()
 
       # Create a saver.
-      saver = tf.train.Saver(max_to_keep=24)
+      saver = tf.train.Saver(max_to_keep=100)
 
       # Build the summary operation based on the TF collection of Summaries.
       summary_op = tf.merge_all_summaries()
@@ -323,9 +335,14 @@ def train(target, dataset, cluster_spec):
       # simultaneously in order to prevent running out of GPU memory.
       tf.set_random_seed(FLAGS.DANITER_SEED)
       next_summary_time = time.time() + FLAGS.save_summaries_secs
-      while not sv.should_stop():
+
+      begin_run = time.time()
+
+
+      while not sv.should_stop() and (time.time()-begin_run < FLAGS.duration):
 
         try:
+          tf.logging.info("Actual first run: %s" % datetime.now())
           start_time = time.time()
           loss_value, step = sess.run([train_op, global_step])
           assert not np.isnan(loss_value), 'Model diverged with loss = NaN'
@@ -361,10 +378,14 @@ def train(target, dataset, cluster_spec):
           raise
 
       # Stop the supervisor.  This also waits for service threads to finish.
-      sv.stop()
+      try:
+        sv.stop()
+      except:
+        pass
 
       # Save after the training ends.
-      #if is_chief:
-    #    saver.save(sess,
-    #               os.path.join(FLAGS.train_dir, 'model.ckpt'),
-    #               global_step=global_step)
+      if is_chief:
+        saver.save(sess,
+                  os.path.join(FLAGS.train_dir, FLAGS.checkpoint_prefix),
+                  global_step=global_step)
+        tf.logging.info("finished writing checkpoint")
