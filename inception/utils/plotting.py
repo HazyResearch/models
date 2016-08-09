@@ -48,7 +48,7 @@ def plot_all_runs(results, window=100, two_panels=False,
 
 
     for folder, loss in results.items():
-        LR, mom = params_from_folder_name(folder)
+        cg, LR, mom = params_from_folder_name(folder)
         if len(loss)<window:
             print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
             continue
@@ -84,7 +84,7 @@ def plot_all_runs(results, window=100, two_panels=False,
         ax2=ax1
             
     for folder, loss in results.items():
-        LR, mom = params_from_folder_name(folder)
+        cg, LR, mom = params_from_folder_name(folder)
         if len(loss)<window:
             print('WARNING: Run shorter than window ('+str(len(loss))+'): '+folder)
             continue
@@ -547,9 +547,9 @@ def load_list_of_runs(list_of_runs, data_dir='.'):
                             step = int(parts[1][:-1])
                             if step > 5000:
                                 break
-                            accuracy = float(parts[3][:-1])
-                            loss = float(parts[5][:-1])
-                            acc_results[folder].append((step, accuracy))
+                            #accuracy = float(parts[3][:-1])
+                            loss = float(parts[3][:-1])
+                            #acc_results[folder].append((step, accuracy))
                             loss_results[folder].append((step, loss))
 
     for key, val in acc_results.items():
@@ -592,7 +592,7 @@ def params_from_folder_name(folder):
     elif folderParts[0]=='expr5' and folderParts[1]=='tf9' and folderParts[2]=='4Node':
         assert(folderParts[6]=='CG')
         field_zero = 7
-    else folderParts[0] == 'CPU' and folderParts[1]=='4Machine':
+    elif folderParts[0] == 'CPU2' and folderParts[1] == '4Machine':
         field_zero = 3
     else:
         raise Exception('Experiment name not understood')
