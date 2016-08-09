@@ -350,6 +350,7 @@ def plot_se_he(loss_results, window, M, mean_times_dict):
     SE = np.array(meets)/float(meets[0])
 
     niter = np.array([len(best_avg[k]) for k in best_avg ])
+    niter = niter[order]
     seconds_per_iter = 15*60.0/niter
     print seconds_per_iter
     HE=seconds_per_iter/seconds_per_iter[0]
@@ -359,7 +360,7 @@ def plot_se_he(loss_results, window, M, mean_times_dict):
     ax1.set_ylabel('Statistical Efficiency')
     ax1.set_xlabel('# compute groups')
     ax1.grid()
-    ax1.axis([0.9,M+.1, 0, 2])
+    ax1.axis([0.9,M+.1, 0, 3])
 
     print cgs
     print HE
@@ -367,14 +368,14 @@ def plot_se_he(loss_results, window, M, mean_times_dict):
     ax2.set_ylabel('Hardware Efficiency')
     ax2.set_xlabel('# compute groups')
     ax2.grid()
-    ax2.axis([0.9,M+.1, 0, 2])
+    ax2.axis([0.9,M+.1, 0, 3])
 
 
     ax3.plot(cgs,np.multiply(HE,SE), '-s')
     ax3.set_ylabel('Relative Time')
     ax3.set_xlabel('# compute groups')
     ax3.grid()
-    ax3.axis([0.9,M+.1, 0, 2]);
+    ax3.axis([0.9,M+.1, 0, 3]);
 
 
     return f
@@ -598,7 +599,7 @@ def params_from_folder_name(folder):
         field_zero = 7
     elif folderParts[0] == 'CPU2' and folderParts[1] == '4Machine':
         field_zero = 3
-    elif folderParts[0] == 'AWS' and folderParts[1] == 'GPU':
+    elif 'AWS' in folderParts[0]  and folderParts[1] == 'GPU':
         field_zero = 3
     else:
         raise Exception('Experiment name not understood')
