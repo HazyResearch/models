@@ -1,0 +1,20 @@
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+INFO:tensorflow:PS hosts are: ['master:2200']
+INFO:tensorflow:Worker hosts are: ['master:2201', 'master:2202', 'master:2203', 'master:2204', 'node001:2205', 'node001:2206', 'node001:2207', 'node001:2208', 'node002:2209', 'node002:2210', 'node002:2211', 'node002:2212', 'node003:2213', 'node003:2214', 'node003:2215', 'node003:2216']
+E tensorflow/stream_executor/cuda/cuda_driver.cc:491] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:153] retrieving CUDA diagnostic information for host: master
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:160] hostname: master
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:185] libcuda reported version is: Not found: was unable to find libcuda.so DSO loaded into this program
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:347] driver version file contents: """NVRM version: NVIDIA UNIX x86_64 Kernel Module  352.63  Sat Nov  7 21:25:42 PST 2015
+GCC version:  gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3) 
+"""
+I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:189] kernel reported version is: 352.63.0
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:81] No GPU devices available on machine.
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {localhost:2200}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {master:2201, master:2202, master:2203, master:2204, node001:2205, node001:2206, node001:2207, node001:2208, node002:2209, node002:2210, node002:2211, node002:2212, node003:2213, node003:2214, node003:2215, node003:2216}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2200
+run-ps-32node.sh: line 21: 105569 Terminated              CUDA_VISIBLE_DEVICES='' bazel-bin/inception/imagenet_distributed_train --batch_size=32 --data_dir=/home/data/sample-data --job_name='ps' --task_id=0 --ps_hosts='master:2200' --worker_hosts='master:2201,master:2202,master:2203,master:2204,node001:2205,node001:2206,node001:2207,node001:2208,node002:2209,node002:2210,node002:2211,node002:2212,node003:2213,node003:2214,node003:2215,node003:2216' --initial_learning_rate=$1 --momentum=$2 --sync=True --compute_groups=$3

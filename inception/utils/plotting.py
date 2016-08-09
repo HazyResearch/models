@@ -335,10 +335,16 @@ def plot_se_he(loss_results, window, M, mean_times_dict):
     best_names, best_avg = get_best_for_each_cg(loss_results,window=window)
 
     allFinalValues = [np.min(best_avg[k][window:]) for k in best_avg]
+    
+    cgs = [k for k in best_avg ]
+    cgs = np.array(cgs)
+    order = cgs.argsort()
+    cgs.sort()
 
     target = max(allFinalValues)
 
     meets = [np.argmax(best_avg[k]<=target) for k in best_avg ]
+    meets = np.array(meets)[order]
 
 #    SE = np.array([sync_meets_target,async_meets_target])/float(sync_meets_target)
     SE = np.array(meets)/float(meets[0])
@@ -347,8 +353,6 @@ def plot_se_he(loss_results, window, M, mean_times_dict):
     seconds_per_iter = 15*60.0/niter
     print seconds_per_iter
     HE=seconds_per_iter/seconds_per_iter[0]
-
-    cgs = [k for k in best_avg ]
 
     f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12,4))
     ax1.plot(cgs,SE, '-s')
@@ -593,6 +597,8 @@ def params_from_folder_name(folder):
         assert(folderParts[6]=='CG')
         field_zero = 7
     elif folderParts[0] == 'CPU2' and folderParts[1] == '4Machine':
+        field_zero = 3
+    elif folderParts[0] == 'AWS' and folderParts[1] == 'GPU':
         field_zero = 3
     else:
         raise Exception('Experiment name not understood')
