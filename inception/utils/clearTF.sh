@@ -1,3 +1,5 @@
 #!/bin/bash
-pkill -u daniter python
-ssh raiders3 'pkill -u daniter python'
+pkill python
+ssh node001 'pkill python'
+ssh node002 'pkill python'
+ssh node003 'pkill python'
