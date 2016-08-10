@@ -1,0 +1,302 @@
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+INFO:tensorflow:PS hosts are: ['master:2200']
+INFO:tensorflow:Worker hosts are: ['master:2201', 'master:2202', 'master:2203', 'master:2204', 'node001:2205', 'node001:2206', 'node001:2207', 'node001:2208', 'node002:2209', 'node002:2210', 'node002:2211', 'node002:2212', 'node003:2213', 'node003:2214', 'node003:2215', 'node003:2216', 'node004:2217', 'node004:2218', 'node004:2219', 'node004:2220', 'node005:2221', 'node005:2222', 'node005:2223', 'node005:2224', 'node006:2225', 'node006:2226', 'node006:2227', 'node006:2228', 'node007:2229', 'node007:2230', 'node007:2231', 'node007:2232']
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:922] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GRID K520
+major: 3 minor: 0 memoryClockRate (GHz) 0.797
+pciBusID 0000:00:06.0
+Total memory: 4.00GiB
+Free memory: 3.95GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:784] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GRID K520, pci bus id: 0000:00:06.0)
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job ps -> {master:2200}
+I tensorflow/core/distributed_runtime/rpc/grpc_channel.cc:206] Initialize HostPortsGrpcChannelCache for job worker -> {master:2201, master:2202, master:2203, localhost:2204, node001:2205, node001:2206, node001:2207, node001:2208, node002:2209, node002:2210, node002:2211, node002:2212, node003:2213, node003:2214, node003:2215, node003:2216, node004:2217, node004:2218, node004:2219, node004:2220, node005:2221, node005:2222, node005:2223, node005:2224, node006:2225, node006:2226, node006:2227, node006:2228, node007:2229, node007:2230, node007:2231, node007:2232}
+I tensorflow/core/distributed_runtime/rpc/grpc_server_lib.cc:202] Started server with target: grpc://localhost:2204
+INFO:tensorflow:Learning rate: 0.010000, momentum: 0.300000
+INFO:tensorflow:2016-08-10 10:43:14.789493 Supervisor
+INFO:tensorflow:Waiting for model to be ready: Variables not initialized: global_step, conv0/weights, conv0/BatchNorm/beta, conv0/BatchNorm/moving_mean, conv0/BatchNorm/moving_variance, conv1/weights, conv1/BatchNorm/beta, conv1/BatchNorm/moving_mean, conv1/BatchNorm/moving_variance, conv2/weights, conv2/BatchNorm/beta, conv2/BatchNorm/moving_mean, conv2/BatchNorm/moving_variance, conv3/weights, conv3/BatchNorm/beta, conv3/BatchNorm/moving_mean, conv3/BatchNorm/moving_variance, conv4/weights, conv4/BatchNorm/beta, conv4/BatchNorm/moving_mean, conv4/BatchNorm/moving_variance, mixed_35x35x256a/branch1x1/Conv/weights, mixed_35x35x256a/branch1x1/Conv/BatchNorm/beta, mixed_35x35x256a/branch1x1/Conv/BatchNorm/moving_mean, mixed_35x35x256a/branch1x1/Conv/BatchNorm/moving_variance, mixed_35x35x256a/branch5x5/Conv/weights, mixed_35x35x256a/branch5x5/Conv/BatchNorm/beta, mixed_35x35x256a/branch5x5/Conv/BatchNorm/moving_mean, mixed_35x35x256a/branch5x5/Conv/BatchNorm/moving_variance, mixed_35x35x256a/branch5x5/Conv_1/weights, mixed_35x35x256a/branch5x5/Conv_1/BatchNorm/beta, mixed_35x35x256a/branch5x5/Conv_1/BatchNorm/moving_mean, mixed_35x35x256a/branch5x5/Conv_1/BatchNorm/moving_variance, mixed_35x35x256a/branch3x3dbl/Conv/weights, mixed_35x35x256a/branch3x3dbl/Conv/BatchNorm/beta, mixed_35x35x256a/branch3x3dbl/Conv/BatchNorm/moving_mean, mixed_35x35x256a/branch3x3dbl/Conv/BatchNorm/moving_variance, mixed_35x35x256a/branch3x3dbl/Conv_1/weights, mixed_35x35x256a/branch3x3dbl/Conv_1/BatchNorm/beta, mixed_35x35x256a/branch3x3dbl/Conv_1/BatchNorm/moving_mean, mixed_35x35x256a/branch3x3dbl/Conv_1/BatchNorm/moving_variance, mixed_35x35x256a/branch3x3dbl/Conv_2/weights, mixed_35x35x256a/branch3x3dbl/Conv_2/BatchNorm/beta, mixed_35x35x256a/branch3x3dbl/Conv_2/BatchNorm/moving_mean, mixed_35x35x256a/branch3x3dbl/Conv_2/BatchNorm/moving_variance, mixed_35x35x256a/branch_pool/Conv/weights, mixed_35x35x256a/branch_pool/Conv/BatchNorm/beta, mixed_35x35x256a/branch_pool/Conv/BatchNorm/moving_mean, mixed_35x35x256a/branch_pool/Conv/BatchNorm/moving_variance, mixed_35x35x288a/branch1x1/Conv/weights, mixed_35x35x288a/branch1x1/Conv/BatchNorm/beta, mixed_35x35x288a/branch1x1/Conv/BatchNorm/moving_mean, mixed_35x35x288a/branch1x1/Conv/BatchNorm/moving_variance, mixed_35x35x288a/branch5x5/Conv/weights, mixed_35x35x288a/branch5x5/Conv/BatchNorm/beta, mixed_35x35x288a/branch5x5/Conv/BatchNorm/moving_mean, mixed_35x35x288a/branch5x5/Conv/BatchNorm/moving_variance, mixed_35x35x288a/branch5x5/Conv_1/weights, mixed_35x35x288a/branch5x5/Conv_1/BatchNorm/beta, mixed_35x35x288a/branch5x5/Conv_1/BatchNorm/moving_mean, mixed_35x35x288a/branch5x5/Conv_1/BatchNorm/moving_variance, mixed_35x35x288a/branch3x3dbl/Conv/weights, mixed_35x35x288a/branch3x3dbl/Conv/BatchNorm/beta, mixed_35x35x288a/branch3x3dbl/Conv/BatchNorm/moving_mean, mixed_35x35x288a/branch3x3dbl/Conv/BatchNorm/moving_variance, mixed_35x35x288a/branch3x3dbl/Conv_1/weights, mixed_35x35x288a/branch3x3dbl/Conv_1/BatchNorm/beta, mixed_35x35x288a/branch3x3dbl/Conv_1/BatchNorm/moving_mean, mixed_35x35x288a/branch3x3dbl/Conv_1/BatchNorm/moving_variance, mixed_35x35x288a/branch3x3dbl/Conv_2/weights, mixed_35x35x288a/branch3x3dbl/Conv_2/BatchNorm/beta, mixed_35x35x288a/branch3x3dbl/Conv_2/BatchNorm/moving_mean, mixed_35x35x288a/branch3x3dbl/Conv_2/BatchNorm/moving_variance, mixed_35x35x288a/branch_pool/Conv/weights, mixed_35x35x288a/branch_pool/Conv/BatchNorm/beta, mixed_35x35x288a/branch_pool/Conv/BatchNorm/moving_mean, mixed_35x35x288a/branch_pool/Conv/BatchNorm/moving_variance, mixed_35x35x288b/branch1x1/Conv/weights, mixed_35x35x288b/branch1x1/Conv/BatchNorm/beta, mixed_35x35x288b/branch1x1/Conv/BatchNorm/moving_mean, mixed_35x35x288b/branch1x1/Conv/BatchNorm/moving_variance, mixed_35x35x288b/branch5x5/Conv/weights, mixed_35x35x288b/branch5x5/Conv/BatchNorm/beta, mixed_35x35x288b/branch5x5/Conv/BatchNorm/moving_mean, mixed_35x35x288b/branch5x5/Conv/BatchNorm/moving_variance, mixed_35x35x288b/branch5x5/Conv_1/weights, mixed_35x35x288b/branch5x5/Conv_1/BatchNorm/beta, mixed_35x35x288b/branch5x5/Conv_1/BatchNorm/moving_mean, mixed_35x35x288b/branch5x5/Conv_1/BatchNorm/moving_variance, mixed_35x35x288b/branch3x3dbl/Conv/weights, mixed_35x35x288b/branch3x3dbl/Conv/BatchNorm/beta, mixed_35x35x288b/branch3x3dbl/Conv/BatchNorm/moving_mean, mixed_35x35x288b/branch3x3dbl/Conv/BatchNorm/moving_variance, mixed_35x35x288b/branch3x3dbl/Conv_1/weights, mixed_35x35x288b/branch3x3dbl/Conv_1/BatchNorm/beta, mixed_35x35x288b/branch3x3dbl/Conv_1/BatchNorm/moving_mean, mixed_35x35x288b/branch3x3dbl/Conv_1/BatchNorm/moving_variance, mixed_35x35x288b/branch3x3dbl/Conv_2/weights, mixed_35x35x288b/branch3x3dbl/Conv_2/BatchNorm/beta, mixed_35x35x288b/branch3x3dbl/Conv_2/BatchNorm/moving_mean, mixed_35x35x288b/branch3x3dbl/Conv_2/BatchNorm/moving_variance, mixed_35x35x288b/branch_pool/Conv/weights, mixed_35x35x288b/branch_pool/Conv/BatchNorm/beta, mixed_35x35x288b/branch_pool/Conv/BatchNorm/moving_mean, mixed_35x35x288b/branch_pool/Conv/BatchNorm/moving_variance, mixed_17x17x768a/branch3x3/Conv/weights, mixed_17x17x768a/branch3x3/Conv/BatchNorm/beta, mixed_17x17x768a/branch3x3/Conv/BatchNorm/moving_mean, mixed_17x17x768a/branch3x3/Conv/BatchNorm/moving_variance, mixed_17x17x768a/branch3x3dbl/Conv/weights, mixed_17x17x768a/branch3x3dbl/Conv/BatchNorm/beta, mixed_17x17x768a/branch3x3dbl/Conv/BatchNorm/moving_mean, mixed_17x17x768a/branch3x3dbl/Conv/BatchNorm/moving_variance, mixed_17x17x768a/branch3x3dbl/Conv_1/weights, mixed_17x17x768a/branch3x3dbl/Conv_1/BatchNorm/beta, mixed_17x17x768a/branch3x3dbl/Conv_1/BatchNorm/moving_mean, mixed_17x17x768a/branch3x3dbl/Conv_1/BatchNorm/moving_variance, mixed_17x17x768a/branch3x3dbl/Conv_2/weights, mixed_17x17x768a/branch3x3dbl/Conv_2/BatchNorm/beta, mixed_17x17x768a/branch3x3dbl/Conv_2/BatchNorm/moving_mean, mixed_17x17x768a/branch3x3dbl/Conv_2/BatchNorm/moving_variance, mixed_17x17x768b/branch1x1/Conv/weights, mixed_17x17x768b/branch1x1/Conv/BatchNorm/beta, mixed_17x17x768b/branch1x1/Conv/BatchNorm/moving_mean, mixed_17x17x768b/branch1x1/Conv/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7/Conv/weights, mixed_17x17x768b/branch7x7/Conv/BatchNorm/beta, mixed_17x17x768b/branch7x7/Conv/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7/Conv/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7/Conv_1/weights, mixed_17x17x768b/branch7x7/Conv_1/BatchNorm/beta, mixed_17x17x768b/branch7x7/Conv_1/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7/Conv_1/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7/Conv_2/weights, mixed_17x17x768b/branch7x7/Conv_2/BatchNorm/beta, mixed_17x17x768b/branch7x7/Conv_2/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7/Conv_2/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7dbl/Conv/weights, mixed_17x17x768b/branch7x7dbl/Conv/BatchNorm/beta, mixed_17x17x768b/branch7x7dbl/Conv/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7dbl/Conv/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7dbl/Conv_1/weights, mixed_17x17x768b/branch7x7dbl/Conv_1/BatchNorm/beta, mixed_17x17x768b/branch7x7dbl/Conv_1/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7dbl/Conv_1/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7dbl/Conv_2/weights, mixed_17x17x768b/branch7x7dbl/Conv_2/BatchNorm/beta, mixed_17x17x768b/branch7x7dbl/Conv_2/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7dbl/Conv_2/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7dbl/Conv_3/weights, mixed_17x17x768b/branch7x7dbl/Conv_3/BatchNorm/beta, mixed_17x17x768b/branch7x7dbl/Conv_3/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7dbl/Conv_3/BatchNorm/moving_variance, mixed_17x17x768b/branch7x7dbl/Conv_4/weights, mixed_17x17x768b/branch7x7dbl/Conv_4/BatchNorm/beta, mixed_17x17x768b/branch7x7dbl/Conv_4/BatchNorm/moving_mean, mixed_17x17x768b/branch7x7dbl/Conv_4/BatchNorm/moving_variance, mixed_17x17x768b/branch_pool/Conv/weights, mixed_17x17x768b/branch_pool/Conv/BatchNorm/beta, mixed_17x17x768b/branch_pool/Conv/BatchNorm/moving_mean, mixed_17x17x768b/branch_pool/Conv/BatchNorm/moving_variance, mixed_17x17x768c/branch1x1/Conv/weights, mixed_17x17x768c/branch1x1/Conv/BatchNorm/beta, mixed_17x17x768c/branch1x1/Conv/BatchNorm/moving_mean, mixed_17x17x768c/branch1x1/Conv/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7/Conv/weights, mixed_17x17x768c/branch7x7/Conv/BatchNorm/beta, mixed_17x17x768c/branch7x7/Conv/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7/Conv/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7/Conv_1/weights, mixed_17x17x768c/branch7x7/Conv_1/BatchNorm/beta, mixed_17x17x768c/branch7x7/Conv_1/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7/Conv_1/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7/Conv_2/weights, mixed_17x17x768c/branch7x7/Conv_2/BatchNorm/beta, mixed_17x17x768c/branch7x7/Conv_2/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7/Conv_2/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7dbl/Conv/weights, mixed_17x17x768c/branch7x7dbl/Conv/BatchNorm/beta, mixed_17x17x768c/branch7x7dbl/Conv/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7dbl/Conv/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7dbl/Conv_1/weights, mixed_17x17x768c/branch7x7dbl/Conv_1/BatchNorm/beta, mixed_17x17x768c/branch7x7dbl/Conv_1/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7dbl/Conv_1/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7dbl/Conv_2/weights, mixed_17x17x768c/branch7x7dbl/Conv_2/BatchNorm/beta, mixed_17x17x768c/branch7x7dbl/Conv_2/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7dbl/Conv_2/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7dbl/Conv_3/weights, mixed_17x17x768c/branch7x7dbl/Conv_3/BatchNorm/beta, mixed_17x17x768c/branch7x7dbl/Conv_3/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7dbl/Conv_3/BatchNorm/moving_variance, mixed_17x17x768c/branch7x7dbl/Conv_4/weights, mixed_17x17x768c/branch7x7dbl/Conv_4/BatchNorm/beta, mixed_17x17x768c/branch7x7dbl/Conv_4/BatchNorm/moving_mean, mixed_17x17x768c/branch7x7dbl/Conv_4/BatchNorm/moving_variance, mixed_17x17x768c/branch_pool/Conv/weights, mixed_17x17x768c/branch_pool/Conv/BatchNorm/beta, mixed_17x17x768c/branch_pool/Conv/BatchNorm/moving_mean, mixed_17x17x768c/branch_pool/Conv/BatchNorm/moving_variance, mixed_17x17x768d/branch1x1/Conv/weights, mixed_17x17x768d/branch1x1/Conv/BatchNorm/beta, mixed_17x17x768d/branch1x1/Conv/BatchNorm/moving_mean, mixed_17x17x768d/branch1x1/Conv/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7/Conv/weights, mixed_17x17x768d/branch7x7/Conv/BatchNorm/beta, mixed_17x17x768d/branch7x7/Conv/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7/Conv/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7/Conv_1/weights, mixed_17x17x768d/branch7x7/Conv_1/BatchNorm/beta, mixed_17x17x768d/branch7x7/Conv_1/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7/Conv_1/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7/Conv_2/weights, mixed_17x17x768d/branch7x7/Conv_2/BatchNorm/beta, mixed_17x17x768d/branch7x7/Conv_2/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7/Conv_2/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7dbl/Conv/weights, mixed_17x17x768d/branch7x7dbl/Conv/BatchNorm/beta, mixed_17x17x768d/branch7x7dbl/Conv/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7dbl/Conv/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7dbl/Conv_1/weights, mixed_17x17x768d/branch7x7dbl/Conv_1/BatchNorm/beta, mixed_17x17x768d/branch7x7dbl/Conv_1/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7dbl/Conv_1/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7dbl/Conv_2/weights, mixed_17x17x768d/branch7x7dbl/Conv_2/BatchNorm/beta, mixed_17x17x768d/branch7x7dbl/Conv_2/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7dbl/Conv_2/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7dbl/Conv_3/weights, mixed_17x17x768d/branch7x7dbl/Conv_3/BatchNorm/beta, mixed_17x17x768d/branch7x7dbl/Conv_3/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7dbl/Conv_3/BatchNorm/moving_variance, mixed_17x17x768d/branch7x7dbl/Conv_4/weights, mixed_17x17x768d/branch7x7dbl/Conv_4/BatchNorm/beta, mixed_17x17x768d/branch7x7dbl/Conv_4/BatchNorm/moving_mean, mixed_17x17x768d/branch7x7dbl/Conv_4/BatchNorm/moving_variance, mixed_17x17x768d/branch_pool/Conv/weights, mixed_17x17x768d/branch_pool/Conv/BatchNorm/beta, mixed_17x17x768d/branch_pool/Conv/BatchNorm/moving_mean, mixed_17x17x768d/branch_pool/Conv/BatchNorm/moving_variance, mixed_17x17x768e/branch1x1/Conv/weights, mixed_17x17x768e/branch1x1/Conv/BatchNorm/beta, mixed_17x17x768e/branch1x1/Conv/BatchNorm/moving_mean, mixed_17x17x768e/branch1x1/Conv/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7/Conv/weights, mixed_17x17x768e/branch7x7/Conv/BatchNorm/beta, mixed_17x17x768e/branch7x7/Conv/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7/Conv/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7/Conv_1/weights, mixed_17x17x768e/branch7x7/Conv_1/BatchNorm/beta, mixed_17x17x768e/branch7x7/Conv_1/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7/Conv_1/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7/Conv_2/weights, mixed_17x17x768e/branch7x7/Conv_2/BatchNorm/beta, mixed_17x17x768e/branch7x7/Conv_2/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7/Conv_2/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7dbl/Conv/weights, mixed_17x17x768e/branch7x7dbl/Conv/BatchNorm/beta, mixed_17x17x768e/branch7x7dbl/Conv/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7dbl/Conv/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7dbl/Conv_1/weights, mixed_17x17x768e/branch7x7dbl/Conv_1/BatchNorm/beta, mixed_17x17x768e/branch7x7dbl/Conv_1/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7dbl/Conv_1/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7dbl/Conv_2/weights, mixed_17x17x768e/branch7x7dbl/Conv_2/BatchNorm/beta, mixed_17x17x768e/branch7x7dbl/Conv_2/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7dbl/Conv_2/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7dbl/Conv_3/weights, mixed_17x17x768e/branch7x7dbl/Conv_3/BatchNorm/beta, mixed_17x17x768e/branch7x7dbl/Conv_3/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7dbl/Conv_3/BatchNorm/moving_variance, mixed_17x17x768e/branch7x7dbl/Conv_4/weights, mixed_17x17x768e/branch7x7dbl/Conv_4/BatchNorm/beta, mixed_17x17x768e/branch7x7dbl/Conv_4/BatchNorm/moving_mean, mixed_17x17x768e/branch7x7dbl/Conv_4/BatchNorm/moving_variance, mixed_17x17x768e/branch_pool/Conv/weights, mixed_17x17x768e/branch_pool/Conv/BatchNorm/beta, mixed_17x17x768e/branch_pool/Conv/BatchNorm/moving_mean, mixed_17x17x768e/branch_pool/Conv/BatchNorm/moving_variance, aux_logits/proj/weights, aux_logits/proj/BatchNorm/beta, aux_logits/proj/BatchNorm/moving_mean, aux_logits/proj/BatchNorm/moving_variance, aux_logits/Conv/weights, aux_logits/Conv/BatchNorm/beta, aux_logits/Conv/BatchNorm/moving_mean, aux_logits/Conv/BatchNorm/moving_variance, aux_logits/FC/weights, aux_logits/FC/biases, mixed_17x17x1280a/branch3x3/Conv/weights, mixed_17x17x1280a/branch3x3/Conv/BatchNorm/beta, mixed_17x17x1280a/branch3x3/Conv/BatchNorm/moving_mean, mixed_17x17x1280a/branch3x3/Conv/BatchNorm/moving_variance, mixed_17x17x1280a/branch3x3/Conv_1/weights, mixed_17x17x1280a/branch3x3/Conv_1/BatchNorm/beta, mixed_17x17x1280a/branch3x3/Conv_1/BatchNorm/moving_mean, mixed_17x17x1280a/branch3x3/Conv_1/BatchNorm/moving_variance, mixed_17x17x1280a/branch7x7x3/Conv/weights, mixed_17x17x1280a/branch7x7x3/Conv/BatchNorm/beta, mixed_17x17x1280a/branch7x7x3/Conv/BatchNorm/moving_mean, mixed_17x17x1280a/branch7x7x3/Conv/BatchNorm/moving_variance, mixed_17x17x1280a/branch7x7x3/Conv_1/weights, mixed_17x17x1280a/branch7x7x3/Conv_1/BatchNorm/beta, mixed_17x17x1280a/branch7x7x3/Conv_1/BatchNorm/moving_mean, mixed_17x17x1280a/branch7x7x3/Conv_1/BatchNorm/moving_variance, mixed_17x17x1280a/branch7x7x3/Conv_2/weights, mixed_17x17x1280a/branch7x7x3/Conv_2/BatchNorm/beta, mixed_17x17x1280a/branch7x7x3/Conv_2/BatchNorm/moving_mean, mixed_17x17x1280a/branch7x7x3/Conv_2/BatchNorm/moving_variance, mixed_17x17x1280a/branch7x7x3/Conv_3/weights, mixed_17x17x1280a/branch7x7x3/Conv_3/BatchNorm/beta, mixed_17x17x1280a/branch7x7x3/Conv_3/BatchNorm/moving_mean, mixed_17x17x1280a/branch7x7x3/Conv_3/BatchNorm/moving_variance, mixed_8x8x2048a/branch1x1/Conv/weights, mixed_8x8x2048a/branch1x1/Conv/BatchNorm/beta, mixed_8x8x2048a/branch1x1/Conv/BatchNorm/moving_mean, mixed_8x8x2048a/branch1x1/Conv/BatchNorm/moving_variance, mixed_8x8x2048a/branch3x3/Conv/weights, mixed_8x8x2048a/branch3x3/Conv/BatchNorm/beta, mixed_8x8x2048a/branch3x3/Conv/BatchNorm/moving_mean, mixed_8x8x2048a/branch3x3/Conv/BatchNorm/moving_variance, mixed_8x8x2048a/branch3x3/Conv_1/weights, mixed_8x8x2048a/branch3x3/Conv_1/BatchNorm/beta, mixed_8x8x2048a/branch3x3/Conv_1/BatchNorm/moving_mean, mixed_8x8x2048a/branch3x3/Conv_1/BatchNorm/moving_variance, mixed_8x8x2048a/branch3x3/Conv_2/weights, mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta, mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/moving_mean, mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/moving_variance, mixed_8x8x2048a/branch3x3dbl/Conv/weights, mixed_8x8x2048a/branch3x3dbl/Conv/BatchNorm/beta, mixed_8x8x2048a/branch3x3dbl/Conv/BatchNorm/moving_mean, mixed_8x8x2048a/branch3x3dbl/Conv/BatchNorm/moving_variance, mixed_8x8x2048a/branch3x3dbl/Conv_1/weights, mixed_8x8x2048a/branch3x3dbl/Conv_1/BatchNorm/beta, mixed_8x8x2048a/branch3x3dbl/Conv_1/BatchNorm/moving_mean, mixed_8x8x2048a/branch3x3dbl/Conv_1/BatchNorm/moving_variance, mixed_8x8x2048a/branch3x3dbl/Conv_2/weights, mixed_8x8x2048a/branch3x3dbl/Conv_2/BatchNorm/beta, mixed_8x8x2048a/branch3x3dbl/Conv_2/BatchNorm/moving_mean, mixed_8x8x2048a/branch3x3dbl/Conv_2/BatchNorm/moving_variance, mixed_8x8x2048a/branch3x3dbl/Conv_3/weights, mixed_8x8x2048a/branch3x3dbl/Conv_3/BatchNorm/beta, mixed_8x8x2048a/branch3x3dbl/Conv_3/BatchNorm/moving_mean, mixed_8x8x2048a/branch3x3dbl/Conv_3/BatchNorm/moving_variance, mixed_8x8x2048a/branch_pool/Conv/weights, mixed_8x8x2048a/branch_pool/Conv/BatchNorm/beta, mixed_8x8x2048a/branch_pool/Conv/BatchNorm/moving_mean, mixed_8x8x2048a/branch_pool/Conv/BatchNorm/moving_variance, mixed_8x8x2048b/branch1x1/Conv/weights, mixed_8x8x2048b/branch1x1/Conv/BatchNorm/beta, mixed_8x8x2048b/branch1x1/Conv/BatchNorm/moving_mean, mixed_8x8x2048b/branch1x1/Conv/BatchNorm/moving_variance, mixed_8x8x2048b/branch3x3/Conv/weights, mixed_8x8x2048b/branch3x3/Conv/BatchNorm/beta, mixed_8x8x2048b/branch3x3/Conv/BatchNorm/moving_mean, mixed_8x8x2048b/branch3x3/Conv/BatchNorm/moving_variance, mixed_8x8x2048b/branch3x3/Conv_1/weights, mixed_8x8x2048b/branch3x3/Conv_1/BatchNorm/beta, mixed_8x8x2048b/branch3x3/Conv_1/BatchNorm/moving_mean, mixed_8x8x2048b/branch3x3/Conv_1/BatchNorm/moving_variance, mixed_8x8x2048b/branch3x3/Conv_2/weights, mixed_8x8x2048b/branch3x3/Conv_2/BatchNorm/beta, mixed_8x8x2048b/branch3x3/Conv_2/BatchNorm/moving_mean, mixed_8x8x2048b/branch3x3/Conv_2/BatchNorm/moving_variance, mixed_8x8x2048b/branch3x3dbl/Conv/weights, mixed_8x8x2048b/branch3x3dbl/Conv/BatchNorm/beta, mixed_8x8x2048b/branch3x3dbl/Conv/BatchNorm/moving_mean, mixed_8x8x2048b/branch3x3dbl/Conv/BatchNorm/moving_variance, mixed_8x8x2048b/branch3x3dbl/Conv_1/weights, mixed_8x8x2048b/branch3x3dbl/Conv_1/BatchNorm/beta, mixed_8x8x2048b/branch3x3dbl/Conv_1/BatchNorm/moving_mean, mixed_8x8x2048b/branch3x3dbl/Conv_1/BatchNorm/moving_variance, mixed_8x8x2048b/branch3x3dbl/Conv_2/weights, mixed_8x8x2048b/branch3x3dbl/Conv_2/BatchNorm/beta, mixed_8x8x2048b/branch3x3dbl/Conv_2/BatchNorm/moving_mean, mixed_8x8x2048b/branch3x3dbl/Conv_2/BatchNorm/moving_variance, mixed_8x8x2048b/branch3x3dbl/Conv_3/weights, mixed_8x8x2048b/branch3x3dbl/Conv_3/BatchNorm/beta, mixed_8x8x2048b/branch3x3dbl/Conv_3/BatchNorm/moving_mean, mixed_8x8x2048b/branch3x3dbl/Conv_3/BatchNorm/moving_variance, mixed_8x8x2048b/branch_pool/Conv/weights, mixed_8x8x2048b/branch_pool/Conv/BatchNorm/beta, mixed_8x8x2048b/branch_pool/Conv/BatchNorm/moving_mean, mixed_8x8x2048b/branch_pool/Conv/BatchNorm/moving_variance, logits/logits/weights, logits/logits/biases, conv0/weights/Momentum, conv0/BatchNorm/beta/Momentum, conv1/weights/Momentum, conv1/BatchNorm/beta/Momentum, conv2/weights/Momentum, conv2/BatchNorm/beta/Momentum, conv3/weights/Momentum, conv3/BatchNorm/beta/Momentum, conv4/weights/Momentum, conv4/BatchNorm/beta/Momentum, mixed_35x35x256a/branch1x1/Conv/weights/Momentum, mixed_35x35x256a/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_35x35x256a/branch5x5/Conv/weights/Momentum, mixed_35x35x256a/branch5x5/Conv/BatchNorm/beta/Momentum, mixed_35x35x256a/branch5x5/Conv_1/weights/Momentum, mixed_35x35x256a/branch5x5/Conv_1/BatchNorm/beta/Momentum, mixed_35x35x256a/branch3x3dbl/Conv/weights/Momentum, mixed_35x35x256a/branch3x3dbl/Conv/BatchNorm/beta/Momentum, mixed_35x35x256a/branch3x3dbl/Conv_1/weights/Momentum, mixed_35x35x256a/branch3x3dbl/Conv_1/BatchNorm/beta/Momentum, mixed_35x35x256a/branch3x3dbl/Conv_2/weights/Momentum, mixed_35x35x256a/branch3x3dbl/Conv_2/BatchNorm/beta/Momentum, mixed_35x35x256a/branch_pool/Conv/weights/Momentum, mixed_35x35x256a/branch_pool/Conv/BatchNorm/beta/Momentum, mixed_35x35x288a/branch1x1/Conv/weights/Momentum, mixed_35x35x288a/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_35x35x288a/branch5x5/Conv/weights/Momentum, mixed_35x35x288a/branch5x5/Conv/BatchNorm/beta/Momentum, mixed_35x35x288a/branch5x5/Conv_1/weights/Momentum, mixed_35x35x288a/branch5x5/Conv_1/BatchNorm/beta/Momentum, mixed_35x35x288a/branch3x3dbl/Conv/weights/Momentum, mixed_35x35x288a/branch3x3dbl/Conv/BatchNorm/beta/Momentum, mixed_35x35x288a/branch3x3dbl/Conv_1/weights/Momentum, mixed_35x35x288a/branch3x3dbl/Conv_1/BatchNorm/beta/Momentum, mixed_35x35x288a/branch3x3dbl/Conv_2/weights/Momentum, mixed_35x35x288a/branch3x3dbl/Conv_2/BatchNorm/beta/Momentum, mixed_35x35x288a/branch_pool/Conv/weights/Momentum, mixed_35x35x288a/branch_pool/Conv/BatchNorm/beta/Momentum, mixed_35x35x288b/branch1x1/Conv/weights/Momentum, mixed_35x35x288b/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_35x35x288b/branch5x5/Conv/weights/Momentum, mixed_35x35x288b/branch5x5/Conv/BatchNorm/beta/Momentum, mixed_35x35x288b/branch5x5/Conv_1/weights/Momentum, mixed_35x35x288b/branch5x5/Conv_1/BatchNorm/beta/Momentum, mixed_35x35x288b/branch3x3dbl/Conv/weights/Momentum, mixed_35x35x288b/branch3x3dbl/Conv/BatchNorm/beta/Momentum, mixed_35x35x288b/branch3x3dbl/Conv_1/weights/Momentum, mixed_35x35x288b/branch3x3dbl/Conv_1/BatchNorm/beta/Momentum, mixed_35x35x288b/branch3x3dbl/Conv_2/weights/Momentum, mixed_35x35x288b/branch3x3dbl/Conv_2/BatchNorm/beta/Momentum, mixed_35x35x288b/branch_pool/Conv/weights/Momentum, mixed_35x35x288b/branch_pool/Conv/BatchNorm/beta/Momentum, mixed_17x17x768a/branch3x3/Conv/weights/Momentum, mixed_17x17x768a/branch3x3/Conv/BatchNorm/beta/Momentum, mixed_17x17x768a/branch3x3dbl/Conv/weights/Momentum, mixed_17x17x768a/branch3x3dbl/Conv/BatchNorm/beta/Momentum, mixed_17x17x768a/branch3x3dbl/Conv_1/weights/Momentum, mixed_17x17x768a/branch3x3dbl/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768a/branch3x3dbl/Conv_2/weights/Momentum, mixed_17x17x768a/branch3x3dbl/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768b/branch1x1/Conv/weights/Momentum, mixed_17x17x768b/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7/Conv/weights/Momentum, mixed_17x17x768b/branch7x7/Conv/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7/Conv_1/weights/Momentum, mixed_17x17x768b/branch7x7/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7/Conv_2/weights/Momentum, mixed_17x17x768b/branch7x7/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7dbl/Conv/weights/Momentum, mixed_17x17x768b/branch7x7dbl/Conv/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_1/weights/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_2/weights/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_3/weights/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_3/BatchNorm/beta/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_4/weights/Momentum, mixed_17x17x768b/branch7x7dbl/Conv_4/BatchNorm/beta/Momentum, mixed_17x17x768b/branch_pool/Conv/weights/Momentum, mixed_17x17x768b/branch_pool/Conv/BatchNorm/beta/Momentum, mixed_17x17x768c/branch1x1/Conv/weights/Momentum, mixed_17x17x768c/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7/Conv/weights/Momentum, mixed_17x17x768c/branch7x7/Conv/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7/Conv_1/weights/Momentum, mixed_17x17x768c/branch7x7/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7/Conv_2/weights/Momentum, mixed_17x17x768c/branch7x7/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7dbl/Conv/weights/Momentum, mixed_17x17x768c/branch7x7dbl/Conv/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_1/weights/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_2/weights/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_3/weights/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_3/BatchNorm/beta/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_4/weights/Momentum, mixed_17x17x768c/branch7x7dbl/Conv_4/BatchNorm/beta/Momentum, mixed_17x17x768c/branch_pool/Conv/weights/Momentum, mixed_17x17x768c/branch_pool/Conv/BatchNorm/beta/Momentum, mixed_17x17x768d/branch1x1/Conv/weights/Momentum, mixed_17x17x768d/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7/Conv/weights/Momentum, mixed_17x17x768d/branch7x7/Conv/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7/Conv_1/weights/Momentum, mixed_17x17x768d/branch7x7/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7/Conv_2/weights/Momentum, mixed_17x17x768d/branch7x7/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7dbl/Conv/weights/Momentum, mixed_17x17x768d/branch7x7dbl/Conv/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_1/weights/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_2/weights/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_3/weights/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_3/BatchNorm/beta/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_4/weights/Momentum, mixed_17x17x768d/branch7x7dbl/Conv_4/BatchNorm/beta/Momentum, mixed_17x17x768d/branch_pool/Conv/weights/Momentum, mixed_17x17x768d/branch_pool/Conv/BatchNorm/beta/Momentum, mixed_17x17x768e/branch1x1/Conv/weights/Momentum, mixed_17x17x768e/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7/Conv/weights/Momentum, mixed_17x17x768e/branch7x7/Conv/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7/Conv_1/weights/Momentum, mixed_17x17x768e/branch7x7/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7/Conv_2/weights/Momentum, mixed_17x17x768e/branch7x7/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7dbl/Conv/weights/Momentum, mixed_17x17x768e/branch7x7dbl/Conv/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_1/weights/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_2/weights/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_3/weights/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_3/BatchNorm/beta/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_4/weights/Momentum, mixed_17x17x768e/branch7x7dbl/Conv_4/BatchNorm/beta/Momentum, mixed_17x17x768e/branch_pool/Conv/weights/Momentum, mixed_17x17x768e/branch_pool/Conv/BatchNorm/beta/Momentum, aux_logits/proj/weights/Momentum, aux_logits/proj/BatchNorm/beta/Momentum, aux_logits/Conv/weights/Momentum, aux_logits/Conv/BatchNorm/beta/Momentum, aux_logits/FC/weights/Momentum, aux_logits/FC/biases/Momentum, mixed_17x17x1280a/branch3x3/Conv/weights/Momentum, mixed_17x17x1280a/branch3x3/Conv/BatchNorm/beta/Momentum, mixed_17x17x1280a/branch3x3/Conv_1/weights/Momentum, mixed_17x17x1280a/branch3x3/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x1280a/branch7x7x3/Conv/weights/Momentum, mixed_17x17x1280a/branch7x7x3/Conv/BatchNorm/beta/Momentum, mixed_17x17x1280a/branch7x7x3/Conv_1/weights/Momentum, mixed_17x17x1280a/branch7x7x3/Conv_1/BatchNorm/beta/Momentum, mixed_17x17x1280a/branch7x7x3/Conv_2/weights/Momentum, mixed_17x17x1280a/branch7x7x3/Conv_2/BatchNorm/beta/Momentum, mixed_17x17x1280a/branch7x7x3/Conv_3/weights/Momentum, mixed_17x17x1280a/branch7x7x3/Conv_3/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch1x1/Conv/weights/Momentum, mixed_8x8x2048a/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch3x3/Conv/weights/Momentum, mixed_8x8x2048a/branch3x3/Conv/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch3x3/Conv_1/weights/Momentum, mixed_8x8x2048a/branch3x3/Conv_1/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch3x3/Conv_2/weights/Momentum, mixed_8x8x2048a/branch3x3/Conv_2/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv/weights/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv_1/weights/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv_1/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv_2/weights/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv_2/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv_3/weights/Momentum, mixed_8x8x2048a/branch3x3dbl/Conv_3/BatchNorm/beta/Momentum, mixed_8x8x2048a/branch_pool/Conv/weights/Momentum, mixed_8x8x2048a/branch_pool/Conv/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch1x1/Conv/weights/Momentum, mixed_8x8x2048b/branch1x1/Conv/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch3x3/Conv/weights/Momentum, mixed_8x8x2048b/branch3x3/Conv/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch3x3/Conv_1/weights/Momentum, mixed_8x8x2048b/branch3x3/Conv_1/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch3x3/Conv_2/weights/Momentum, mixed_8x8x2048b/branch3x3/Conv_2/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv/weights/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv_1/weights/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv_1/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv_2/weights/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv_2/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv_3/weights/Momentum, mixed_8x8x2048b/branch3x3dbl/Conv_3/BatchNorm/beta/Momentum, mixed_8x8x2048b/branch_pool/Conv/weights/Momentum, mixed_8x8x2048b/branch_pool/Conv/BatchNorm/beta/Momentum, logits/logits/weights/Momentum, logits/logits/biases/Momentum
+INFO:tensorflow:got sessions! 2016-08-10 10:44:02.691722 
+INFO:tensorflow:Started 3 queues for processing input data.
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3769 get requests, put_count=2852 evicted_count=1000 eviction_rate=0.350631 and unsatisfied allocation rate=0.535155
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 100 to 110
+INFO:tensorflow:Step: 7873, Loss: 8.831240, time: 33.984 sec/batch
+INFO:tensorflow:Step: 7899, Loss: 10.074631, time: 2.925 sec/batch
+INFO:tensorflow:Step: 7906, Loss: 9.460128, time: 2.621 sec/batch
+INFO:tensorflow:Step: 7916, Loss: 9.064411, time: 8.943 sec/batch
+INFO:tensorflow:Step: 7943, Loss: 8.883297, time: 2.650 sec/batch
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=1016 evicted_count=1000 eviction_rate=0.984252 and unsatisfied allocation rate=0
+INFO:tensorflow:Step: 7950, Loss: 9.531929, time: 12.440 sec/batch
+INFO:tensorflow:Step: 7984, Loss: 8.651155, time: 8.026 sec/batch
+INFO:tensorflow:Step: 8002, Loss: 9.833583, time: 4.045 sec/batch
+INFO:tensorflow:Step: 8012, Loss: 9.376224, time: 3.538 sec/batch
+INFO:tensorflow:Step: 8023, Loss: 9.407890, time: 4.913 sec/batch
+INFO:tensorflow:Step: 8038, Loss: 9.845981, time: 4.354 sec/batch
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3767 get requests, put_count=4061 evicted_count=2000 eviction_rate=0.49249 and unsatisfied allocation rate=0.459517
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 281 to 309
+INFO:tensorflow:Step: 8051, Loss: 9.588625, time: 8.107 sec/batch
+INFO:tensorflow:Step: 8074, Loss: 8.813348, time: 4.074 sec/batch
+INFO:tensorflow:Step: 8088, Loss: 9.823492, time: 10.786 sec/batch
+INFO:tensorflow:Step: 8117, Loss: 9.283779, time: 6.703 sec/batch
+INFO:tensorflow:Step: 8138, Loss: 9.130780, time: 5.781 sec/batch
+INFO:tensorflow:Step: 8151, Loss: 8.932243, time: 5.896 sec/batch
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 0 get requests, put_count=1049 evicted_count=1000 eviction_rate=0.953289 and unsatisfied allocation rate=0
+INFO:tensorflow:Step: 8173, Loss: 8.808870, time: 4.250 sec/batch
+INFO:tensorflow:Step: 8179, Loss: 8.973586, time: 3.772 sec/batch
+INFO:tensorflow:Step: 8193, Loss: 8.737262, time: 2.672 sec/batch
+INFO:tensorflow:Step: 8202, Loss: 8.991665, time: 3.676 sec/batch
+INFO:tensorflow:Step: 8216, Loss: 9.291727, time: 6.764 sec/batch
+INFO:tensorflow:Step: 8249, Loss: 9.365513, time: 4.571 sec/batch
+INFO:tensorflow:Step: 8254, Loss: 9.120584, time: 2.437 sec/batch
+INFO:tensorflow:Step: 8258, Loss: 9.789328, time: 2.755 sec/batch
+INFO:tensorflow:Step: 8266, Loss: 10.005366, time: 3.715 sec/batch
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:244] PoolAllocator: After 3767 get requests, put_count=4016 evicted_count=1000 eviction_rate=0.249004 and unsatisfied allocation rate=0.227237
+I tensorflow/core/common_runtime/gpu/pool_allocator.cc:256] Raising pool_size_limit_ from 1158 to 1273
+INFO:tensorflow:Step: 8282, Loss: 9.592200, time: 3.017 sec/batch
+INFO:tensorflow:Step: 8295, Loss: 9.412058, time: 2.960 sec/batch
+INFO:tensorflow:Step: 8303, Loss: 8.960715, time: 8.453 sec/batch
+INFO:tensorflow:Step: 8333, Loss: 8.494108, time: 9.621 sec/batch
+INFO:tensorflow:Step: 8364, Loss: 8.956812, time: 6.396 sec/batch
+INFO:tensorflow:Step: 8380, Loss: 8.867692, time: 5.534 sec/batch
+INFO:tensorflow:Step: 8401, Loss: 9.752982, time: 4.392 sec/batch
+INFO:tensorflow:Step: 8405, Loss: 8.919487, time: 2.792 sec/batch
+INFO:tensorflow:Step: 8414, Loss: 9.519459, time: 2.916 sec/batch
+INFO:tensorflow:Step: 8428, Loss: 8.429642, time: 2.642 sec/batch
+INFO:tensorflow:Step: 8437, Loss: 10.341184, time: 2.866 sec/batch
+INFO:tensorflow:Step: 8448, Loss: 9.306552, time: 2.538 sec/batch
+INFO:tensorflow:Step: 8458, Loss: 8.578237, time: 2.560 sec/batch
+INFO:tensorflow:Step: 8469, Loss: 9.123140, time: 2.494 sec/batch
+INFO:tensorflow:Step: 8478, Loss: 9.837964, time: 2.993 sec/batch
+INFO:tensorflow:Step: 8487, Loss: 9.885085, time: 3.566 sec/batch
+INFO:tensorflow:Step: 8502, Loss: 8.275356, time: 2.705 sec/batch
+INFO:tensorflow:Step: 8511, Loss: 9.020440, time: 2.579 sec/batch
+INFO:tensorflow:Step: 8522, Loss: 8.577841, time: 3.853 sec/batch
+INFO:tensorflow:Step: 8534, Loss: 8.698763, time: 2.583 sec/batch
+INFO:tensorflow:Step: 8545, Loss: 9.228813, time: 2.743 sec/batch
+INFO:tensorflow:Step: 8554, Loss: 9.194755, time: 3.102 sec/batch
+INFO:tensorflow:Step: 8566, Loss: 9.571671, time: 2.607 sec/batch
+INFO:tensorflow:Step: 8576, Loss: 9.647779, time: 2.528 sec/batch
+INFO:tensorflow:Step: 8588, Loss: 10.098725, time: 2.519 sec/batch
+INFO:tensorflow:Step: 8597, Loss: 9.146700, time: 6.254 sec/batch
+INFO:tensorflow:Step: 8620, Loss: 9.491844, time: 8.260 sec/batch
+INFO:tensorflow:Step: 8649, Loss: 8.743139, time: 9.993 sec/batch
+INFO:tensorflow:Step: 8671, Loss: 9.271532, time: 2.733 sec/batch
+INFO:tensorflow:Step: 8679, Loss: 9.094458, time: 5.778 sec/batch
+INFO:tensorflow:Step: 8699, Loss: 9.070786, time: 2.633 sec/batch
+INFO:tensorflow:Step: 8707, Loss: 9.150547, time: 2.679 sec/batch
+INFO:tensorflow:Step: 8715, Loss: 8.503576, time: 3.131 sec/batch
+INFO:tensorflow:Step: 8728, Loss: 7.770809, time: 2.871 sec/batch
+INFO:tensorflow:Step: 8740, Loss: 8.958898, time: 2.548 sec/batch
+INFO:tensorflow:Step: 8749, Loss: 9.750800, time: 2.490 sec/batch
+INFO:tensorflow:Step: 8759, Loss: 8.972246, time: 2.599 sec/batch
+INFO:tensorflow:Step: 8772, Loss: 8.698351, time: 3.126 sec/batch
+INFO:tensorflow:Step: 8782, Loss: 8.697254, time: 2.799 sec/batch
+INFO:tensorflow:Step: 8791, Loss: 9.621909, time: 3.627 sec/batch
+INFO:tensorflow:Step: 8802, Loss: 9.200214, time: 2.911 sec/batch
+INFO:tensorflow:Step: 8811, Loss: 9.335744, time: 7.803 sec/batch
+INFO:tensorflow:Step: 8839, Loss: 9.129869, time: 11.323 sec/batch
+INFO:tensorflow:Step: 8868, Loss: 8.777478, time: 2.676 sec/batch
+INFO:tensorflow:Step: 8880, Loss: 9.037214, time: 5.476 sec/batch
+INFO:tensorflow:Step: 8898, Loss: 9.530029, time: 4.159 sec/batch
+INFO:tensorflow:Step: 8906, Loss: 8.670717, time: 2.864 sec/batch
+INFO:tensorflow:Step: 8919, Loss: 9.465507, time: 3.170 sec/batch
+INFO:tensorflow:Step: 8933, Loss: 9.759886, time: 2.657 sec/batch
+INFO:tensorflow:Step: 8941, Loss: 9.380626, time: 3.433 sec/batch
+INFO:tensorflow:Step: 8955, Loss: 8.518609, time: 2.947 sec/batch
+INFO:tensorflow:Step: 8967, Loss: 8.176450, time: 4.067 sec/batch
+INFO:tensorflow:Step: 8982, Loss: 8.659990, time: 2.837 sec/batch
+INFO:tensorflow:Step: 8992, Loss: 8.581153, time: 2.707 sec/batch
+INFO:tensorflow:Step: 9002, Loss: 9.607356, time: 3.390 sec/batch
+INFO:tensorflow:Step: 9014, Loss: 9.004799, time: 2.544 sec/batch
+INFO:tensorflow:Step: 9022, Loss: 9.454256, time: 2.460 sec/batch
+INFO:tensorflow:Step: 9034, Loss: 9.185947, time: 3.083 sec/batch
+INFO:tensorflow:Step: 9046, Loss: 9.271969, time: 2.538 sec/batch
+INFO:tensorflow:Step: 9058, Loss: 9.396644, time: 2.898 sec/batch
+INFO:tensorflow:Step: 9067, Loss: 8.622951, time: 2.796 sec/batch
+INFO:tensorflow:Step: 9079, Loss: 9.318705, time: 2.646 sec/batch
+INFO:tensorflow:Step: 9087, Loss: 9.107332, time: 3.234 sec/batch
+INFO:tensorflow:Step: 9099, Loss: 8.883192, time: 3.106 sec/batch
+INFO:tensorflow:Step: 9113, Loss: 9.743907, time: 2.679 sec/batch
+INFO:tensorflow:Step: 9120, Loss: 9.861835, time: 2.876 sec/batch
+INFO:tensorflow:Step: 9131, Loss: 10.239589, time: 3.188 sec/batch
+INFO:tensorflow:Step: 9142, Loss: 9.091671, time: 3.412 sec/batch
+INFO:tensorflow:Step: 9158, Loss: 10.019523, time: 2.980 sec/batch
+INFO:tensorflow:Step: 9166, Loss: 9.341961, time: 2.685 sec/batch
+INFO:tensorflow:Step: 9174, Loss: 8.760496, time: 3.784 sec/batch
+INFO:tensorflow:Step: 9188, Loss: 9.045633, time: 2.869 sec/batch
+INFO:tensorflow:Step: 9201, Loss: 8.718790, time: 2.672 sec/batch
+INFO:tensorflow:Step: 9211, Loss: 9.034442, time: 2.826 sec/batch
+INFO:tensorflow:Step: 9220, Loss: 9.340740, time: 2.529 sec/batch
+INFO:tensorflow:Step: 9231, Loss: 8.632674, time: 2.570 sec/batch
+INFO:tensorflow:Step: 9244, Loss: 9.500076, time: 2.519 sec/batch
+INFO:tensorflow:Step: 9254, Loss: 9.402978, time: 2.968 sec/batch
+INFO:tensorflow:Step: 9263, Loss: 9.510777, time: 2.639 sec/batch
+INFO:tensorflow:Step: 9274, Loss: 8.963673, time: 2.557 sec/batch
+INFO:tensorflow:Step: 9285, Loss: 9.038203, time: 2.652 sec/batch
+INFO:tensorflow:Step: 9296, Loss: 9.022008, time: 2.880 sec/batch
+INFO:tensorflow:Step: 9306, Loss: 9.273230, time: 3.199 sec/batch
+INFO:tensorflow:Step: 9317, Loss: 9.149344, time: 2.945 sec/batch
+INFO:tensorflow:Step: 9329, Loss: 8.709081, time: 2.731 sec/batch
+INFO:tensorflow:Step: 9340, Loss: 9.696177, time: 2.745 sec/batch
+INFO:tensorflow:Step: 9348, Loss: 9.145540, time: 2.517 sec/batch
+INFO:tensorflow:Step: 9358, Loss: 8.923957, time: 3.217 sec/batch
+INFO:tensorflow:Step: 9370, Loss: 9.601777, time: 4.300 sec/batch
+INFO:tensorflow:Step: 9388, Loss: 8.767348, time: 4.235 sec/batch
+INFO:tensorflow:Step: 9397, Loss: 9.191952, time: 3.045 sec/batch
+INFO:tensorflow:Step: 9409, Loss: 9.669647, time: 2.776 sec/batch
+INFO:tensorflow:Step: 9420, Loss: 10.070257, time: 2.780 sec/batch
+INFO:tensorflow:Step: 9432, Loss: 8.455760, time: 9.887 sec/batch
+INFO:tensorflow:Step: 9462, Loss: 10.091348, time: 4.478 sec/batch
+INFO:tensorflow:Step: 9472, Loss: 9.111684, time: 7.427 sec/batch
+INFO:tensorflow:Step: 9498, Loss: 8.830603, time: 11.494 sec/batch
+INFO:tensorflow:Step: 9531, Loss: 8.980102, time: 9.473 sec/batch
+INFO:tensorflow:Step: 9556, Loss: 8.774661, time: 11.463 sec/batch
+INFO:tensorflow:Step: 9584, Loss: 8.962340, time: 7.246 sec/batch
+INFO:tensorflow:Step: 9607, Loss: 10.097168, time: 6.040 sec/batch
+INFO:tensorflow:Step: 9621, Loss: 9.377703, time: 4.420 sec/batch
+INFO:tensorflow:Step: 9628, Loss: 10.377028, time: 5.052 sec/batch
+INFO:tensorflow:Step: 9646, Loss: 9.255775, time: 3.293 sec/batch
+INFO:tensorflow:Step: 9657, Loss: 8.459474, time: 3.805 sec/batch
+INFO:tensorflow:Step: 9665, Loss: 8.890753, time: 3.371 sec/batch
+INFO:tensorflow:Step: 9676, Loss: 9.532262, time: 7.183 sec/batch
+INFO:tensorflow:Step: 9701, Loss: 9.450670, time: 6.095 sec/batch
+INFO:tensorflow:Step: 9717, Loss: 9.046426, time: 3.125 sec/batch
+INFO:tensorflow:Step: 9730, Loss: 8.732618, time: 6.854 sec/batch
+INFO:tensorflow:Step: 9752, Loss: 8.499632, time: 3.071 sec/batch
+INFO:tensorflow:Step: 9759, Loss: 8.227758, time: 8.531 sec/batch
+INFO:tensorflow:Step: 9791, Loss: 8.858129, time: 3.416 sec/batch
+INFO:tensorflow:Step: 9800, Loss: 9.067199, time: 2.713 sec/batch
+INFO:tensorflow:Step: 9804, Loss: 8.242396, time: 2.658 sec/batch
+INFO:tensorflow:Step: 9812, Loss: 8.879601, time: 2.999 sec/batch
+INFO:tensorflow:Step: 9826, Loss: 8.357355, time: 2.987 sec/batch
+INFO:tensorflow:Step: 9839, Loss: 8.920738, time: 3.485 sec/batch
+INFO:tensorflow:Step: 9850, Loss: 9.289441, time: 2.590 sec/batch
+INFO:tensorflow:Step: 9861, Loss: 9.044008, time: 2.873 sec/batch
+INFO:tensorflow:Step: 9870, Loss: 8.767208, time: 3.111 sec/batch
+INFO:tensorflow:Step: 9882, Loss: 9.041489, time: 2.924 sec/batch
+INFO:tensorflow:Step: 9891, Loss: 9.479512, time: 2.834 sec/batch
+INFO:tensorflow:Step: 9900, Loss: 9.675841, time: 2.769 sec/batch
+INFO:tensorflow:Step: 9914, Loss: 9.759034, time: 2.666 sec/batch
+INFO:tensorflow:Step: 9921, Loss: 8.690864, time: 8.905 sec/batch
+INFO:tensorflow:Step: 9951, Loss: 8.962097, time: 7.297 sec/batch
+INFO:tensorflow:Step: 9971, Loss: 9.145667, time: 3.366 sec/batch
+INFO:tensorflow:Step: 9981, Loss: 8.560900, time: 6.022 sec/batch
+INFO:tensorflow:Step: 9997, Loss: 8.832582, time: 8.627 sec/batch
+INFO:tensorflow:Step: 10030, Loss: 9.500469, time: 6.162 sec/batch
+INFO:tensorflow:Step: 10040, Loss: 8.833756, time: 3.994 sec/batch
+INFO:tensorflow:Step: 10058, Loss: 9.065433, time: 4.510 sec/batch
+INFO:tensorflow:Step: 10071, Loss: 9.192418, time: 5.221 sec/batch
+INFO:tensorflow:Step: 10086, Loss: 9.007131, time: 3.348 sec/batch
+INFO:tensorflow:Step: 10099, Loss: 9.129531, time: 3.185 sec/batch
+INFO:tensorflow:Step: 10111, Loss: 9.412872, time: 2.952 sec/batch
+INFO:tensorflow:Step: 10120, Loss: 8.980748, time: 2.707 sec/batch
+INFO:tensorflow:Step: 10128, Loss: 10.096601, time: 3.122 sec/batch
+INFO:tensorflow:Step: 10142, Loss: 8.744689, time: 3.071 sec/batch
+INFO:tensorflow:Step: 10153, Loss: 9.199773, time: 3.773 sec/batch
+INFO:tensorflow:Step: 10164, Loss: 9.745747, time: 4.266 sec/batch
+INFO:tensorflow:Step: 10180, Loss: 9.173762, time: 3.000 sec/batch
+INFO:tensorflow:Step: 10186, Loss: 8.721824, time: 3.015 sec/batch
+INFO:tensorflow:Step: 10194, Loss: 9.851483, time: 7.078 sec/batch
+INFO:tensorflow:Step: 10226, Loss: 8.878375, time: 5.182 sec/batch
+INFO:tensorflow:Step: 10235, Loss: 8.869328, time: 5.425 sec/batch
+INFO:tensorflow:Step: 10255, Loss: 8.966035, time: 2.652 sec/batch
+INFO:tensorflow:Step: 10266, Loss: 9.295127, time: 8.870 sec/batch
+INFO:tensorflow:Step: 10293, Loss: 9.449553, time: 3.471 sec/batch
+INFO:tensorflow:Step: 10302, Loss: 9.674549, time: 3.293 sec/batch
+INFO:tensorflow:Step: 10312, Loss: 9.569990, time: 3.158 sec/batch
+INFO:tensorflow:Step: 10323, Loss: 9.511139, time: 2.972 sec/batch
+INFO:tensorflow:Step: 10337, Loss: 8.856254, time: 3.070 sec/batch
+INFO:tensorflow:Step: 10346, Loss: 9.758562, time: 3.792 sec/batch
+INFO:tensorflow:Step: 10357, Loss: 9.191074, time: 2.914 sec/batch
+INFO:tensorflow:Step: 10371, Loss: 8.945961, time: 2.887 sec/batch
+INFO:tensorflow:Step: 10381, Loss: 9.332409, time: 2.955 sec/batch
+INFO:tensorflow:Step: 10391, Loss: 8.470074, time: 2.788 sec/batch
+INFO:tensorflow:Step: 10400, Loss: 9.367116, time: 2.598 sec/batch
+INFO:tensorflow:Step: 10409, Loss: 8.700751, time: 3.717 sec/batch
+INFO:tensorflow:Step: 10422, Loss: 9.625898, time: 2.801 sec/batch
+INFO:tensorflow:Step: 10434, Loss: 8.750934, time: 3.033 sec/batch
+INFO:tensorflow:Step: 10444, Loss: 8.910331, time: 3.868 sec/batch
+INFO:tensorflow:Step: 10455, Loss: 8.239822, time: 3.385 sec/batch
+INFO:tensorflow:Step: 10468, Loss: 9.016370, time: 3.794 sec/batch
+INFO:tensorflow:Step: 10479, Loss: 8.703766, time: 2.654 sec/batch
+INFO:tensorflow:Step: 10490, Loss: 8.546609, time: 2.841 sec/batch
+INFO:tensorflow:Step: 10500, Loss: 8.098237, time: 2.838 sec/batch
+INFO:tensorflow:Step: 10510, Loss: 9.374026, time: 3.026 sec/batch
+INFO:tensorflow:Step: 10521, Loss: 8.831990, time: 3.905 sec/batch
+INFO:tensorflow:Step: 10537, Loss: 8.879133, time: 2.580 sec/batch
+INFO:tensorflow:Step: 10546, Loss: 9.031160, time: 2.786 sec/batch
+INFO:tensorflow:Step: 10557, Loss: 9.293956, time: 3.302 sec/batch
+INFO:tensorflow:Step: 10567, Loss: 9.376255, time: 2.892 sec/batch
+INFO:tensorflow:Step: 10581, Loss: 9.459809, time: 2.792 sec/batch
+INFO:tensorflow:Step: 10592, Loss: 8.556417, time: 3.681 sec/batch
+INFO:tensorflow:Step: 10605, Loss: 8.732968, time: 3.341 sec/batch
+INFO:tensorflow:Step: 10617, Loss: 8.582846, time: 5.547 sec/batch
+INFO:tensorflow:Step: 10640, Loss: 8.358089, time: 5.263 sec/batch
+INFO:tensorflow:Step: 10648, Loss: 9.095912, time: 2.546 sec/batch
+INFO:tensorflow:Step: 10659, Loss: 9.131803, time: 2.682 sec/batch
+INFO:tensorflow:Step: 10666, Loss: 8.507022, time: 3.938 sec/batch
+INFO:tensorflow:Step: 10677, Loss: 9.159869, time: 2.928 sec/batch
+INFO:tensorflow:Step: 10692, Loss: 8.562357, time: 2.910 sec/batch
+INFO:tensorflow:Step: 10703, Loss: 8.412791, time: 2.782 sec/batch
+INFO:tensorflow:Step: 10712, Loss: 8.722754, time: 3.724 sec/batch
+INFO:tensorflow:Step: 10723, Loss: 9.196218, time: 3.504 sec/batch
+INFO:tensorflow:Step: 10733, Loss: 8.825196, time: 2.846 sec/batch
+INFO:tensorflow:Step: 10746, Loss: 8.869864, time: 4.006 sec/batch
+INFO:tensorflow:Step: 10759, Loss: 8.953345, time: 7.837 sec/batch
+INFO:tensorflow:Step: 10789, Loss: 9.266796, time: 5.932 sec/batch
+INFO:tensorflow:Step: 10798, Loss: 8.368928, time: 3.815 sec/batch
+INFO:tensorflow:Step: 10814, Loss: 9.059643, time: 8.714 sec/batch
+INFO:tensorflow:Step: 10840, Loss: 9.126414, time: 4.747 sec/batch
+INFO:tensorflow:Step: 10854, Loss: 9.550580, time: 3.127 sec/batch
+INFO:tensorflow:Step: 10863, Loss: 7.598238, time: 2.907 sec/batch
+INFO:tensorflow:Step: 10876, Loss: 8.955865, time: 2.790 sec/batch
+INFO:tensorflow:Step: 10884, Loss: 8.857669, time: 3.283 sec/batch
+INFO:tensorflow:Step: 10894, Loss: 9.390110, time: 2.631 sec/batch
+INFO:tensorflow:Step: 10906, Loss: 9.739029, time: 2.515 sec/batch
+INFO:tensorflow:Step: 10920, Loss: 8.475543, time: 2.482 sec/batch
+INFO:tensorflow:Step: 10929, Loss: 8.999932, time: 2.474 sec/batch
+INFO:tensorflow:Step: 10936, Loss: 8.770586, time: 2.834 sec/batch
+INFO:tensorflow:Step: 10945, Loss: 9.065687, time: 2.842 sec/batch
+INFO:tensorflow:Step: 10955, Loss: 8.749855, time: 5.545 sec/batch
+INFO:tensorflow:Step: 10976, Loss: 9.086908, time: 2.517 sec/batch
+INFO:tensorflow:Step: 10989, Loss: 9.166969, time: 8.674 sec/batch
+INFO:tensorflow:Step: 11019, Loss: 9.029687, time: 3.122 sec/batch
+INFO:tensorflow:Step: 11027, Loss: 8.968387, time: 12.604 sec/batch
+INFO:tensorflow:Step: 11058, Loss: 8.741611, time: 8.341 sec/batch
+INFO:tensorflow:Step: 11078, Loss: 9.240826, time: 9.224 sec/batch
+INFO:tensorflow:Step: 11108, Loss: 9.703979, time: 7.182 sec/batch
+INFO:tensorflow:Step: 11130, Loss: 9.608596, time: 5.012 sec/batch
+INFO:tensorflow:Step: 11135, Loss: 9.047958, time: 4.192 sec/batch
+INFO:tensorflow:Step: 11149, Loss: 8.621980, time: 3.317 sec/batch
+INFO:tensorflow:Step: 11160, Loss: 9.269475, time: 2.949 sec/batch
+INFO:tensorflow:Step: 11173, Loss: 8.413931, time: 3.688 sec/batch
+INFO:tensorflow:Step: 11183, Loss: 8.864093, time: 2.550 sec/batch
+INFO:tensorflow:Step: 11192, Loss: 9.322879, time: 2.708 sec/batch
+INFO:tensorflow:Step: 11203, Loss: 9.537490, time: 2.523 sec/batch
+INFO:tensorflow:Step: 11214, Loss: 8.836731, time: 2.873 sec/batch
+INFO:tensorflow:Step: 11224, Loss: 8.409282, time: 6.132 sec/batch
+INFO:tensorflow:Step: 11246, Loss: 8.705270, time: 3.653 sec/batch
+INFO:tensorflow:Step: 11258, Loss: 9.289471, time: 3.519 sec/batch
+INFO:tensorflow:Step: 11268, Loss: 9.121125, time: 10.614 sec/batch
+INFO:tensorflow:Step: 11300, Loss: 8.828653, time: 11.663 sec/batch
+INFO:tensorflow:Step: 11332, Loss: 8.566632, time: 6.493 sec/batch
+INFO:tensorflow:Step: 11349, Loss: 8.581203, time: 6.476 sec/batch
+INFO:tensorflow:Step: 11369, Loss: 9.398259, time: 4.790 sec/batch
+INFO:tensorflow:Step: 11378, Loss: 8.822085, time: 2.921 sec/batch
+INFO:tensorflow:Step: 11389, Loss: 9.283350, time: 3.329 sec/batch
+INFO:tensorflow:Step: 11399, Loss: 8.907780, time: 2.802 sec/batch
+INFO:tensorflow:Step: 11408, Loss: 8.987463, time: 2.769 sec/batch
+INFO:tensorflow:Step: 11420, Loss: 8.987656, time: 2.608 sec/batch
+INFO:tensorflow:Step: 11427, Loss: 8.259415, time: 2.741 sec/batch
+INFO:tensorflow:Step: 11438, Loss: 8.703047, time: 3.209 sec/batch
+INFO:tensorflow:Step: 11448, Loss: 9.062305, time: 2.478 sec/batch
+INFO:tensorflow:Step: 11459, Loss: 8.557987, time: 2.699 sec/batch
+INFO:tensorflow:Step: 11468, Loss: 8.967673, time: 2.793 sec/batch
+INFO:tensorflow:Step: 11479, Loss: 9.172241, time: 3.579 sec/batch
+INFO:tensorflow:Step: 11490, Loss: 8.530198, time: 2.569 sec/batch
+run-expr-aws-32node.sh: line 25: 36996 Terminated              CUDA_VISIBLE_DEVICES=$1 bazel-bin/inception/imagenet_distributed_train --batch_size=32 --data_dir=/imagenet/ilsvrc12_train_tfrecord_32_PARTITION/32P_p$2 --job_name='worker' --task_id=$2 --ps_hosts='master:2200' --worker_hosts='master:2201,master:2202,master:2203,master:2204,node001:2205,node001:2206,node001:2207,node001:2208,node002:2209,node002:2210,node002:2211,node002:2212,node003:2213,node003:2214,node003:2215,node003:2216,node004:2217,node004:2218,node004:2219,node004:2220,node005:2221,node005:2222,node005:2223,node005:2224,node006:2225,node006:2226,node006:2227,node006:2228,node007:2229,node007:2230,node007:2231,node007:2232' --initial_learning_rate=$3 --momentum=$4 --sync=True --compute_groups=$5
