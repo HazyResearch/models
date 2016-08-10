@@ -550,8 +550,6 @@ def load_list_of_runs(list_of_runs, data_dir='.'):
                         if line.startswith("INFO:tensorflow:Step:"):
                             parts = line.split(" ")
                             step = int(parts[1][:-1])
-                            if step > 5000:
-                                break
                             #accuracy = float(parts[3][:-1])
                             loss = float(parts[3][:-1])
                             #acc_results[folder].append((step, accuracy))
@@ -600,6 +598,8 @@ def params_from_folder_name(folder):
     elif folderParts[0] == 'CPU2' and folderParts[1] == '4Machine':
         field_zero = 3
     elif 'AWS' in folderParts[0]  and folderParts[1] == 'GPU':
+        field_zero = 3
+    elif 'IMAGENET1000' in folderParts[0]:
         field_zero = 3
     else:
         raise Exception('Experiment name not understood')
