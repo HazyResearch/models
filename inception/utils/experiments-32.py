@@ -7,22 +7,22 @@ import signal
 import sys, os
 
 def kill_exp():
-    call(["pkill", "-u", "daniter", "-f","imagenet_distributed_train"])
-    call(["ssh", "raiders3","pkill -u daniter -f imagenet_distributed_train"])
-    call(["ssh", "raiders8","pkill -u daniter -f imagenet_distributed_train"])
-    call(["ssh", "raiders2","pkill -u daniter -f imagenet_distributed_train"])
+    call(["pkill", "-f","imagenet_distributed_train"])
+    call(["ssh", "node001","pkill -f imagenet_distributed_train"])
+    call(["ssh", "node002","pkill -f imagenet_distributed_train"])
+    call(["ssh", "node003","pkill -f imagenet_distributed_train"])
 
 def signal_handler(signal, frame):
         kill_exp()
         sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
-momentum = [0.3, 0.6, 0.9]
-lr = [ 0.0025, 0.005, 0.001 ]
-cgs = [1,16,4,2]
+momentum = [0.0, 0.3]
+lr = [ 0.025 ]
+cgs = [2,4,8]
 
 exe = "./32node_runner.sh"
-prefix = "CPU2-4Machine-CG-"
+prefix = "AWS2-GPU-CG-"
 
 def isFailed(folder):
     for log in os.listdir(folder):
@@ -57,8 +57,7 @@ def run(m,l, cg):
             call(cmd)
         else:
             break
-                
-    time.sleep(43*60) # 28 + 2 = 30 
+    time.sleep(8*60)
     kill_exp()
 
 if __name__=='__main__':
