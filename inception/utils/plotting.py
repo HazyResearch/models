@@ -8,6 +8,10 @@ import re
 from os import listdir
 
 # PLOTTING
+
+COLOR_SYNC='#255FA7'
+COLOR_ASYNC='#E66826'
+
 def plot_all_runs(results, window=100, two_panels=False,
                   sync_seconds_per_batch=None, async_seconds_per_batch=None,
                   marker_dict=None, mark_every=10, axis=[None,None,None,None],
@@ -244,6 +248,29 @@ def plot_time_hists(list_of_runs, M, data_dir):
 
     return f1
 
+def plot_se_calculation2(loss_results, window):
+    best_sync, best_async, best_sync_name, best_async_name = get_best_for_each_mode(loss_results, window)
+
+    s = best_sync.copy()
+    a = best_async.copy()
+
+    min_s = min(s[window:])
+    min_a = min(a[window:])
+    target = max(min_s, min_a)
+
+    fig = plt.figure()
+
+    plt.plot(s, linewidth=3)
+    plt.plot(a, '--', c='orange', linewidth=3)
+    plt.plot([0,np.max([len(s),len(a)])],2*[target],'--k')
+    plt.xlabel('Number of steps since snapshot')
+    plt.ylabel('Smoothed loss')
+    plt.legend(['Sync: ' + best_sync_name, 'Async: ' + best_async_name, 'Evaluation level'], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0. )
+    plt.title('Best run for each mode, loss used for SE calculation')
+    plt.grid()
+
+    return fig
+
 def plot_se_calculation(loss_results, window):
     best_sync, best_async, best_sync_name, best_async_name = get_best_for_each_mode(loss_results, window)
 
@@ -376,6 +403,71 @@ def plot_se_he(loss_results, window, M, mean_times_dict):
     ax3.set_xlabel('# compute groups')
     ax3.grid()
     ax3.axis([0.9,M+.1, 0, 3]);
+
+
+    return f
+    
+def plot_se_he2(loss_results, window, M, mean_times_dict):
+    best_names, best_avg = get_best_for_each_cg(loss_results,window=window)
+
+    allFinalValues = [np.min(best_avg[k][window:]) for k in best_avg]
+    
+    cgs = [k for k in best_avg ]
+    cgs = np.array(cgs)
+    order = cgs.argsort()
+    cgs.sort()
+
+    target = max(allFinalValues)
+
+    meets = [np.argmax(best_avg[k]<=target) for k in best_avg ]
+    meets = np.array(meets)[order]
+
+#    SE = np.array([sync_meets_target,async_meets_target])/float(sync_meets_target)
+    SE = np.array(meets)/float(meets[0])
+
+    niter = np.array([len(best_avg[k]) for k in best_avg ])
+    niter = niter[order]
+    seconds_per_iter = 15*60.0/niter
+    print seconds_per_iter
+    HE=seconds_per_iter/seconds_per_iter[0]
+
+    f, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12,4))
+    #ax1.plot([1,M],SE, '-s')
+    WIDTH=1
+    ax1.bar([1-WIDTH/2.0], SE[0], width=WIDTH, color=COLOR_SYNC )
+    ax1.bar([M-WIDTH/2.0], SE[1], width=WIDTH, color=COLOR_ASYNC )
+    ax1.set_ylabel('Statistical Penalty')
+    ax1.get_xaxis().set_ticks([])
+ #   ax1.set_xlabel('# compute groups')
+    ax1.grid()
+#    ax1.axis([0.9,M+.1, 0, 2])
+    ax1.axis([0,M+1, 0, 3])
+#    format_axes(ax1)
+
+
+    #ax2.plot([1,M],HE, '-s')
+    ax2.bar([1-WIDTH/2.0], HE[0], width=WIDTH, color=COLOR_SYNC )
+    ax2.bar([M-WIDTH/2.0], HE[1], width=WIDTH, color=COLOR_ASYNC )
+    ax2.set_ylabel('Hardware Penalty')
+#    ax2.set_xlabel('# compute groups')
+    ax2.get_xaxis().set_ticks([])
+    ax2.grid()
+    ax2.axis([0,M+1, 0, 2])
+#    format_axes(ax2)
+
+    #ax3.plot([1,M],np.multiply(HE,SE), '-s')
+    ax3.bar([1-WIDTH/2.0], np.multiply(HE,SE)[0], width=WIDTH, color=COLOR_SYNC )
+    ax3.bar([M-WIDTH/2.0], np.multiply(HE,SE)[1], width=WIDTH, color=COLOR_ASYNC )
+    ax3.set_ylabel('Relative Time')
+    ax3.get_xaxis().set_ticks([])
+#    ax3.set_xlabel('# compute groups')
+    ax3.grid()
+    ax3.axis([0,M+1, 0, 2])
+    leg = ax3.legend(['Synchronous','Asynchronous'], framealpha=0.7)
+    leg.get_frame().set_linewidth(0.0)
+#    format_axes(ax3)
+
+
 
 
     return f
